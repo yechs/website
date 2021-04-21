@@ -1,5 +1,11 @@
 {
   "name": "website",
+  "author": {
+    "name": "Ye Shu",
+    "email": "chshu@protonmail.ch",
+    "url": "https://shuye.dev"
+  },
+  "description": "The Personal Website for Ye Shu",
   "version": "0.0.0",
   "private": true,
   "scripts": {

@@ -1,20 +1,24 @@
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
-  title: 'My Site',
-  tagline: 'Dinosaurs are cool',
-  url: 'https://your-docusaurus-test-site.com',
+  title: 'Ye Shu',
+  tagline: undefined,
+  url: 'https://shuye.dev',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  organizationName: 'yechs', // Usually your GitHub org/user name.
+  projectName: 'yechs.github.io', // Usually your repo name.
   themeConfig: {
+    colorMode: {
+      defaultMode: 'light',
+      // respectPrefersColorScheme: true,
+    },
     navbar: {
-      title: 'My Site',
+      title: '@yechs',
       logo: {
-        alt: 'My Site Logo',
-        src: 'img/logo.svg',
+        alt: 'Ye Shu',
+        src: 'img/yechs.jpeg',
       },
       items: [
         {
@@ -23,13 +27,23 @@ module.exports = {
           position: 'left',
           label: 'Tutorial',
         },
-        {to: '/blog', label: 'Blog', position: 'left'},
         {
-          href: 'https://github.com/facebook/docusaurus',
+          to: '/thoughts',
+          label: 'Thoughts',
+          position: 'left',
+        },
+        {
+          href: 'https://blog.shuye.dev',
+          label: 'Blog',
+          position: 'right',
+        },
+        {
+          href: 'https://github.com/yechs',
           label: 'GitHub',
           position: 'right',
         },
       ],
+      hideOnScroll: true,
     },
     footer: {
       style: 'dark',
@@ -64,17 +78,17 @@ module.exports = {
           title: 'More',
           items: [
             {
-              label: 'Blog',
-              to: '/blog',
+              label: 'Thoughts',
+              to: '/thoughts',
             },
             {
               label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
+              href: 'https://github.com/yechs',
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Ye Shu. Some Rights Reserved.`,
     },
   },
   presets: [
@@ -82,19 +96,30 @@ module.exports = {
       '@docusaurus/preset-classic',
       {
         docs: {
+          path: 'docs',
+          editUrl: 'https://github.com/yechs/website/edit/master/',
+          editLocalizedFiles: false,
+          routeBasePath: 'kb',
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          editUrl:
-            'https://github.com/facebook/docusaurus/edit/master/website/',
+          showLastUpdateTime: true,
         },
         blog: {
+          path: 'blog',
+          editUrl: 'https://github.com/yechs/website/edit/master/blog/',
+          blogTitle: 'Thoughts',
+          blogDescription: 'Some short thoughts of mine',
+          blogSidebarCount: 5,
+          blogSidebarTitle: 'Recent Thoughts',
+          routeBasePath: 'thoughts',
           showReadingTime: true,
-          // Please change this to your repo.
-          editUrl:
-            'https://github.com/facebook/docusaurus/edit/master/website/blog/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
+        },
+        sitemap: {
+          changefreq: 'weekly',
+          priority: 0.5,
+          trailingSlash: false,
         },
       },
     ],

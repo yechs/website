@@ -14,9 +14,7 @@ module.exports = {
   overrides: [
     {
       files: ['**/*.ts?(x)'],
-      extends: [
-        'plugin:@typescript-eslint/recommended',
-      ],
+      extends: ['plugin:@typescript-eslint/recommended'],
       parser: '@typescript-eslint/parser',
       parserOptions: {
         ecmaFeatures: {
@@ -26,6 +24,10 @@ module.exports = {
         sourceType: 'module',
       },
       plugins: ['@typescript-eslint'],
+      rules: {
+        // Docusaurus recommends using require() for static assets
+        '@typescript-eslint/no-var-requires': 'off',
+      },
     },
   ],
 };
