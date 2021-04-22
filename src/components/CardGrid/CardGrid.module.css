@@ -1,0 +1,36 @@
+.grid-container {
+  display: -webkit-box; /* Not needed if autoprefixing */
+  display: -ms-flexbox; /* Not needed if autoprefixing */
+  display: flex;
+  margin-left: -10px; /* gutter size offset */
+  width: auto;
+}
+
+.grid-column {
+  padding-left: 10px; /* gutter size */
+  background-clip: padding-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cardGrid {
+  padding: 2% 8% 4%;
+}
+
+/* In smaller screens reduce the spacing */
+@media only screen and (max-width: 992px) {
+  .grid-column {
+    padding-left: 5px; /* gutter size */
+  }
+
+  .grid-container {
+    margin-left: -5px; /* gutter size offset */
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .cardGrid {
+    padding: 2% 4% 4%;
+  }
+}
