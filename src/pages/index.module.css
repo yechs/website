@@ -18,8 +18,23 @@
   }
 }
 
-.buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/*.buttons {*/
+/*  display: flex;*/
+/*  align-items: center;*/
+/*  justify-content: center;*/
+/*}*/
+
+.avatar {
+  /* margin-top: 20pt; */
+  border-radius: 50%;
+  width: 120pt;
+  padding: 10pt;
+  background: #ffffff;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.sectionTitle {
+  text-align: center;
+  font-size: 2rem;
+  margin: 1em 0 0;
 }

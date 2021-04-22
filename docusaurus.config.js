@@ -25,7 +25,7 @@ module.exports = {
           type: 'doc',
           docId: 'intro',
           position: 'left',
-          label: 'Tutorial',
+          label: 'Knowledge Base',
         },
         {
           to: '/thoughts',
@@ -42,6 +42,11 @@ module.exports = {
           label: 'GitHub',
           position: 'right',
         },
+        {
+          href: 'https://www.linkedin.com/in/yechs/',
+          label: 'LinkedIn',
+          position: 'right',
+        },
       ],
       // hideOnScroll: true,
     },
@@ -49,24 +54,28 @@ module.exports = {
       style: 'dark',
       links: [
         {
-          title: 'Docs',
+          title: 'This Site',
           items: [
             {
-              label: 'Tutorial',
-              to: '/docs/intro',
+              label: 'Knowledge Base',
+              to: '/kb/intro',
+            },
+            {
+              label: 'Thoughts',
+              to: '/thoughts',
             },
           ],
         },
         {
-          title: 'Community',
+          title: 'Connect with Me',
           items: [
             {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+              label: 'GitHub',
+              href: 'https://github.com/yechs',
             },
             {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
+              label: 'LinkedIn',
+              href: 'https://www.linkedin.com/in/yechs/',
             },
             {
               label: 'Twitter',
@@ -78,12 +87,16 @@ module.exports = {
           title: 'More',
           items: [
             {
-              label: 'Thoughts',
-              to: '/thoughts',
+              label: 'Williams Students Online',
+              href: 'https://wso.williams.edu/',
             },
             {
-              label: 'GitHub',
-              href: 'https://github.com/yechs',
+              label: 'Computerization',
+              href: 'https://computerization.io/',
+            },
+            {
+              label: 'Team 0x194',
+              href: 'https://0x194.com',
             },
           ],
         },
@@ -96,7 +109,7 @@ module.exports = {
       '@docusaurus/preset-classic',
       {
         docs: {
-          path: 'docs',
+          path: 'kb',
           editUrl: 'https://github.com/yechs/website/edit/master/',
           editLocalizedFiles: false,
           routeBasePath: 'kb',
@@ -104,10 +117,10 @@ module.exports = {
           showLastUpdateTime: true,
         },
         blog: {
-          path: 'blog',
+          path: 'thoughts',
           editUrl: 'https://github.com/yechs/website/edit/master/blog/',
           blogTitle: 'Thoughts',
-          blogDescription: 'Some short thoughts of mine',
+          blogDescription: 'Some thoughts from Ye Shu',
           blogSidebarCount: 5,
           blogSidebarTitle: 'Recent Thoughts',
           routeBasePath: 'thoughts',

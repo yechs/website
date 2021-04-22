@@ -1,6 +1,6 @@
 .card {
   background: #fff;
-  width: 100%;
+  width: 90%;
   max-width: 28em;
   border-radius: 0.8em;
   margin: 1em;
@@ -33,7 +33,7 @@
 }
 
 .card p {
-  color: #777;
+  color: #4d4d4d;
 }
 
 .card-caption {
