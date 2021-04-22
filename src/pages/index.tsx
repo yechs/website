@@ -35,7 +35,7 @@ function Avatar(): ReactElement {
     <div className="text--center">
       <img
         className={styles.avatar}
-        src={useBaseUrl('static/img/yechs.jpeg')}
+        src={useBaseUrl('img/yechs.jpeg')}
         alt={'Avatar'}
       />
     </div>
