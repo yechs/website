@@ -43,7 +43,7 @@ module.exports = {
           position: 'right',
         },
       ],
-      hideOnScroll: true,
+      // hideOnScroll: true,
     },
     footer: {
       style: 'dark',
