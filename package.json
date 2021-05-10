@@ -21,8 +21,8 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@docusaurus/core": "2.0.0-alpha.73",
-    "@docusaurus/preset-classic": "2.0.0-alpha.73",
+    "@docusaurus/core": "2.0.0-alpha.75",
+    "@docusaurus/preset-classic": "2.0.0-alpha.75",
     "@mdx-js/react": "^1.6.21",
     "clsx": "^1.1.1",
     "react": "^17.0.1",
@@ -42,15 +42,15 @@
     ]
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "^2.0.0-alpha.73",
+    "@docusaurus/module-type-aliases": "^2.0.0-alpha.75",
     "@tsconfig/docusaurus": "^1.0.2",
-    "@types/react": "^17.0.3",
+    "@types/react": "^17.0.5",
     "@types/react-helmet": "^6.1.1",
     "@types/react-router-dom": "^5.1.7",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
     "babel-eslint": "^10.0.0",
-    "eslint": "^7.24.0",
+    "eslint": "^7.26.0",
     "eslint-config-prettier": "^8.2.0",
     "eslint-config-react-app": "^6.0.0",
     "eslint-plugin-flowtype": "^5.2.0",
@@ -59,7 +59,7 @@
     "eslint-plugin-react": "^7.23.2",
     "eslint-plugin-react-hooks": "^4.0.8",
     "husky": ">=6",
-    "lint-staged": ">=10",
+    "lint-staged": ">=11.0.0",
     "prettier": "2.2.1",
     "typescript": "^4.2.4"
   },
