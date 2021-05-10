@@ -1,0 +1,28 @@
+name: Syntax linter
+on:
+  push:
+    branches:
+      - '**' # matches every branch
+      - '!main' # excludes main
+  pull_request:
+env:
+  NODE_VERSION: '14'
+
+jobs:
+  lint:
+    name: Syntax & Format Linter
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Uses Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Install Dependencies
+        run: yarn install --frozen-lockfile
+      - name: Check errors with ESLint
+        run: yarn run lint
+      - name: Check format with Prettier
+        run: yarn run format
+      - name: Test Build
+        run: yarn run build
