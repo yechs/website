@@ -6,7 +6,7 @@ module.exports = {
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.ico',
+  favicon: 'favicon.ico',
   organizationName: 'yechs', // Usually your GitHub org/user name.
   projectName: 'yechs.github.io', // Usually your repo name.
   themeConfig: {
