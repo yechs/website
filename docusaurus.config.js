@@ -78,8 +78,8 @@ module.exports = {
               href: 'https://www.linkedin.com/in/yechs/',
             },
             {
-              label: 'Twitter',
-              href: 'https://twitter.com/docusaurus',
+              label: 'Blog',
+              href: 'https://blog.shuye.dev/',
             },
           ],
         },
