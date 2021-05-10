@@ -6,7 +6,7 @@ module.exports = {
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.ico',
+  favicon: 'favicon.ico',
   organizationName: 'yechs', // Usually your GitHub org/user name.
   projectName: 'yechs.github.io', // Usually your repo name.
   themeConfig: {
@@ -78,8 +78,8 @@ module.exports = {
               href: 'https://www.linkedin.com/in/yechs/',
             },
             {
-              label: 'Twitter',
-              href: 'https://twitter.com/docusaurus',
+              label: 'Blog',
+              href: 'https://blog.shuye.dev/',
             },
           ],
         },
@@ -102,6 +102,9 @@ module.exports = {
         },
       ],
       copyright: `Copyright © ${new Date().getFullYear()} Ye Shu. Some Rights Reserved.`,
+    },
+    gtag: {
+      trackingID: 'G-M3X8PGC98D',
     },
   },
   presets: [
