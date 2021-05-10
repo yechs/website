@@ -103,6 +103,9 @@ module.exports = {
       ],
       copyright: `Copyright © ${new Date().getFullYear()} Ye Shu. Some Rights Reserved.`,
     },
+    gtag: {
+      trackingID: 'G-M3X8PGC98D',
+    },
   },
   presets: [
     [
