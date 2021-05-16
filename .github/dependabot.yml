@@ -3,9 +3,9 @@ updates:
   - package-ecosystem: npm
     directory: '/'
     schedule:
-      interval: weekly
+      interval: monthly
       day: "sunday"
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 3
     reviewers:
       - yechs
     labels:
