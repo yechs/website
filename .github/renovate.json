@@ -1,0 +1,18 @@
+{
+  "extends": ["config:base"],
+  "labels": ["dependencies"],
+  "reviewers": ["yechs"],
+  "bumpVersion": "patch",
+  "packageRules": [
+    {
+      "matchDepTypes": ["devDependencies"],
+      "matchPackagePatterns": ["^eslint", "^@typescript-eslint/"],
+      "matchPackageNames": ["babel-eslint", "@babel/eslint-parser"],
+      "matchUpdateTypes": ["patch", "minor"],
+      "schedule": ["after 4pm on friday"],
+      "groupName": "eslint (non-major)",
+      "groupSlug": "eslint"
+    }
+  ],
+  "prCreation": "not-pending"
+}
