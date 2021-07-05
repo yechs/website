@@ -1,26 +1,38 @@
 {
-  "extends": ["config:base"],
-  "labels": ["dependencies"],
-  "reviewers": ["yechs"],
-  "bumpVersion": "patch",
+  "extends": [
+    "config:base"
+  ],
+  "labels": [
+    "dependencies"
+  ],
+  "reviewers": [
+    "yechs"
+  ],
   "packageRules": [
     {
-      "matchDepTypes": ["devDependencies"],
-      "matchPackagePatterns": ["^eslint", "^@typescript-eslint/"],
-      "matchPackageNames": ["babel-eslint", "@babel/eslint-parser"],
-      "matchUpdateTypes": ["patch", "minor"],
-      "schedule": ["after 4pm on friday"],
-      "groupName": "eslint (non-major)",
-      "groupSlug": "eslint"
-    },
-    {
-      "matchDepTypes": ["devDependencies"],
-      "matchPackagePatterns": ["^@types/"],
-      "matchPackageNames": ["typescript"],
-      "matchUpdateTypes": ["patch", "minor"],
-      "schedule": ["after 4pm on friday"],
-      "groupName": "typescript (non-major)",
-      "groupSlug": "typescript"
+      "matchDepTypes": [
+        "devDependencies"
+      ],
+      "matchPackagePatterns": [
+        "^eslint",
+        "^@typescript-eslint/",
+        "^@types/"
+      ],
+      "matchPackageNames": [
+        "babel-eslint",
+        "@babel/eslint-parser",
+        "prettier",
+        "typescript"
+      ],
+      "matchUpdateTypes": [
+        "patch",
+        "minor"
+      ],
+      "schedule": [
+        "after 4pm on friday"
+      ],
+      "groupName": "dev-dependencies (non-major)",
+      "groupSlug": "dev"
     }
   ]
 }
