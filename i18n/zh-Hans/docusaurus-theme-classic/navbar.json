@@ -1,0 +1,22 @@
+{
+  "title": {
+    "message": "@yechs",
+    "description": "The title in the navbar"
+  },
+  "item.label.Knowledge Base": {
+    "message": "Knowledge Base",
+    "description": "Navbar item with label Knowledge Base"
+  },
+  "item.label.Blog": {
+    "message": "Blog",
+    "description": "Navbar item with label Blog"
+  },
+  "item.label.GitHub": {
+    "message": "GitHub",
+    "description": "Navbar item with label GitHub"
+  },
+  "item.label.LinkedIn": {
+    "message": "LinkedIn",
+    "description": "Navbar item with label LinkedIn"
+  }
+}

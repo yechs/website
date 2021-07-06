@@ -9,6 +9,10 @@ module.exports = {
   favicon: 'favicon.ico',
   organizationName: 'yechs', // Usually your GitHub org/user name.
   projectName: 'yechs.github.io', // Usually your repo name.
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'zh-Hans'],
+  },
   themeConfig: {
     colorMode: {
       defaultMode: 'light',
@@ -40,6 +44,10 @@ module.exports = {
         {
           href: 'https://www.linkedin.com/in/yechs/',
           label: 'LinkedIn',
+          position: 'right',
+        },
+        {
+          type: 'localeDropdown',
           position: 'right',
         },
       ],

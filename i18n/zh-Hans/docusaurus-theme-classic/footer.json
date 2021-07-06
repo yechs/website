@@ -1,0 +1,46 @@
+{
+  "link.title.This Site": {
+    "message": "本站",
+    "description": "The title of the footer links column with title=This Site in the footer"
+  },
+  "link.title.Connect with Me": {
+    "message": "与我联系",
+    "description": "The title of the footer links column with title=Connect with Me in the footer"
+  },
+  "link.title.More": {
+    "message": "更多",
+    "description": "The title of the footer links column with title=More in the footer"
+  },
+  "link.item.label.Knowledge Base": {
+    "message": "Knowledge Base",
+    "description": "The label of footer link with label=Knowledge Base linking to /kb/intro"
+  },
+  "link.item.label.Blog": {
+    "message": "Blog",
+    "description": "The label of footer link with label=Blog linking to /blog"
+  },
+  "link.item.label.GitHub": {
+    "message": "GitHub",
+    "description": "The label of footer link with label=GitHub linking to https://github.com/yechs"
+  },
+  "link.item.label.LinkedIn": {
+    "message": "LinkedIn",
+    "description": "The label of footer link with label=LinkedIn linking to https://www.linkedin.com/in/yechs/"
+  },
+  "link.item.label.Williams Students Online": {
+    "message": "Williams Students Online",
+    "description": "The label of footer link with label=Williams Students Online linking to https://wso.williams.edu/"
+  },
+  "link.item.label.Computerization": {
+    "message": "Computerization",
+    "description": "The label of footer link with label=Computerization linking to https://computerization.io/"
+  },
+  "link.item.label.Team 0x194": {
+    "message": "Team 0x194",
+    "description": "The label of footer link with label=Team 0x194 linking to https://0x194.com"
+  },
+  "copyright": {
+    "message": "权利所有 © 2021 Ye Shu。保留部分权利。",
+    "description": "The footer copyright"
+  }
+}
