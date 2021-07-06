@@ -1,0 +1,14 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.kbSidebar.category.AI Engineering": {
+    "message": "AI 工程化",
+    "description": "The label for category AI Engineering in sidebar kbSidebar"
+  },
+  "sidebar.kbSidebar.category.Software Engineering": {
+    "message": "软件工程",
+    "description": "The label for category Software Engineering in sidebar kbSidebar"
+  }
+}
