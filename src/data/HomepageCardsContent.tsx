@@ -76,9 +76,9 @@ const HomepageCardsContent: CardProps[] = [
     children: (
       <p>
         I&apos;m a seasoned Web developer who started building websites{' '}
-        <Link to="thoughts/welcome">since 2014</Link> and am familiar to both
-        MVC and MMVM. I used to program in PHP Laravel mostly but have
-        transitioned to Go+React in recent years.
+        <Link to="blog/welcome">since 2014</Link> and am familiar to both MVC
+        and MMVM. I used to program in PHP Laravel mostly but have transitioned
+        to Go+React in recent years.
       </p>
     ),
   },

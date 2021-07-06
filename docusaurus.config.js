@@ -28,14 +28,9 @@ module.exports = {
           label: 'Knowledge Base',
         },
         {
-          to: '/thoughts',
-          label: 'Thoughts',
-          position: 'left',
-        },
-        {
-          href: 'https://blog.shuye.dev',
+          to: '/blog',
           label: 'Blog',
-          position: 'right',
+          position: 'left',
         },
         {
           href: 'https://github.com/yechs',
@@ -61,8 +56,8 @@ module.exports = {
               to: '/kb/intro',
             },
             {
-              label: 'Thoughts',
-              to: '/thoughts',
+              label: 'Blog',
+              to: '/blog',
             },
           ],
         },
@@ -76,10 +71,6 @@ module.exports = {
             {
               label: 'LinkedIn',
               href: 'https://www.linkedin.com/in/yechs/',
-            },
-            {
-              label: 'Blog',
-              href: 'https://blog.shuye.dev/',
             },
           ],
         },
@@ -120,13 +111,13 @@ module.exports = {
           showLastUpdateTime: true,
         },
         blog: {
-          path: 'thoughts',
+          path: 'blog',
           editUrl: 'https://github.com/yechs/website/edit/master/blog/',
-          blogTitle: 'Thoughts',
+          blogTitle: 'Blog',
           blogDescription: 'Some thoughts from Ye Shu',
           blogSidebarCount: 5,
-          blogSidebarTitle: 'Recent Thoughts',
-          routeBasePath: 'thoughts',
+          blogSidebarTitle: 'Recent Posts',
+          routeBasePath: 'blog',
           showReadingTime: true,
         },
         theme: {
@@ -135,7 +126,6 @@ module.exports = {
         sitemap: {
           changefreq: 'weekly',
           priority: 0.5,
-          trailingSlash: false,
         },
       },
     ],
