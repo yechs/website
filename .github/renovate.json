@@ -1,38 +1,23 @@
 {
-  "extends": [
-    "config:base"
-  ],
-  "labels": [
-    "dependencies"
-  ],
-  "reviewers": [
-    "yechs"
-  ],
+  "extends": ["config:base"],
+  "labels": ["dependencies"],
+  "reviewers": ["yechs"],
   "packageRules": [
     {
-      "matchDepTypes": [
-        "devDependencies"
-      ],
-      "matchPackagePatterns": [
-        "^eslint",
-        "^@typescript-eslint/",
-        "^@types/"
-      ],
+      "matchDepTypes": ["devDependencies"],
+      "matchPackagePatterns": ["^eslint", "^@typescript-eslint/", "^@types/"],
       "matchPackageNames": [
         "babel-eslint",
         "@babel/eslint-parser",
         "prettier",
-        "typescript"
+        "typescript",
+        "lint-staged",
+        "husky"
       ],
-      "matchUpdateTypes": [
-        "patch",
-        "minor"
-      ],
-      "schedule": [
-        "after 4pm on friday"
-      ],
+      "matchUpdateTypes": ["patch", "minor"],
+      "schedule": ["after 4pm on friday"],
       "groupName": "dev-dependencies (non-major)",
-      "groupSlug": "dev"
+      "groupSlug": "dev-dependencies"
     }
   ]
 }
