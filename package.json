@@ -72,7 +72,7 @@
       "eslint --cache --fix",
       "prettier --write"
     ],
-    "*.{md,mdx,html,css}": [
+    "*.{md,mdx,json,html,css}": [
       "prettier --write"
     ]
   }
