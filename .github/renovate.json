@@ -5,7 +5,12 @@
   "packageRules": [
     {
       "matchDepTypes": ["devDependencies"],
-      "matchPackagePatterns": ["^eslint", "^@typescript-eslint/", "^@types/"],
+      "matchPackagePatterns": [
+        "^eslint",
+        "^@typescript-eslint/",
+        "^@types/",
+        "^@tsconfig/"
+      ],
       "matchPackageNames": [
         "babel-eslint",
         "@babel/eslint-parser",
@@ -15,7 +20,7 @@
         "husky"
       ],
       "matchUpdateTypes": ["patch", "minor"],
-      "schedule": ["after 4pm on friday"],
+      "schedule": ["after 12pm on friday"],
       "groupName": "dev-dependencies (non-major)",
       "groupSlug": "dev-dependencies"
     }
