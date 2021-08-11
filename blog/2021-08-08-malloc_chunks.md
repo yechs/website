@@ -59,7 +59,7 @@ As the `delete[]` statement is commented out, when the function `memory_leak()` 
 
 ### A Deeper Look into the Memory
 
-:::info
+:::note
 Instead of native GDB, I use [GEF](https://github.com/hugsy/gef) (GDB Enhanced Features) for pretiffied output and some extra features like `heap`.
 :::
 
@@ -97,7 +97,7 @@ gef➤  r
 gef➤  info locals
 arr = 0x55555556aeb0 "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
-gef➤  x/8wx 0x55555556aeb0
+gef➤  x/8xw 0x55555556aeb0
 0x55555556aeb0: 0x44434241      0x48474645      0x4c4b4a49      0x504f4e4d
 0x55555556aec0: 0x54535251      0x58575655      0x00005a59      0x00000000
 ```
@@ -126,7 +126,7 @@ gef➤  finish
 gef➤  info locals
 No locals.
 
-gef➤  x/8wx 0x55555556aeb0
+gef➤  x/8xw 0x55555556aeb0
 0x55555556aeb0: 0x44434241      0x48474645      0x4c4b4a49      0x504f4e4d
 0x55555556aec0: 0x54535251      0x58575655      0x00005a59      0x00000000
 ```
@@ -292,9 +292,10 @@ The following content comes from the comments in `malloc/malloc.c` of glibc ([so
 > Chunks always begin on even word boundaries, so the mem portion
 > (which is returned to the user) is also on an even word boundary, and
 > thus at least double-word aligned.
-
-<!-- > Free chunks are stored in circular doubly-linked lists, and look like this:
->```
+>
+> Free chunks are stored in circular doubly-linked lists, and look like this:
+>
+> ```
 >     chunk-> +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 >             |             Size of previous chunk, if unallocated (P clear)  |
 >             +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -312,13 +313,78 @@ The following content comes from the comments in `malloc/malloc.c` of glibc ([so
 >             +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 >             |             Size of next chunk, in bytes                |A|0|0|
 >             +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
->``` -->
-
+> ```
+>
+> The P (`PREV_INUSE`) bit, stored in the unused low-order bit of the
+> chunk size (which is always a multiple of two words), is an in-use
+> bit for the _previous_ chunk. If that bit is _clear_, then the
+> word before the current chunk size contains the previous chunk
+> size, and can be used to find the front of the previous chunk.
+> The very first chunk allocated always has this bit set,
+> preventing access to non-existent (or non-owned) memory. If
+> `prev_inuse` is set for any given chunk, then you CANNOT determine
+> the size of the previous chunk, and might even get a memory
+> addressing fault when trying to do so.
+>
+> [...]
+>
+> Note that the \`foot' of the current chunk is actually represented
+> as the `prev_size` of the NEXT chunk. This makes it easier to
+> deal with alignments etc but can be very confusing when trying
+> to extend or adapt this code.
+>
 > [...]
 
 ### A verification using PoC
 
+Now we can use `gdb` to actually print out the memory area and see how the explanation above applies to our case. Here I used the `heap` feature introduced by [GEF](https://gef.readthedocs.io/en/master/commands/heap/#heap-chunk-command) to better visualize the `malloc`-ed chunk's properties.
+
+```
+gef➤  heap chunk arr
+Chunk(addr=0x55555556aeb0, size=0x30, flags=PREV_INUSE)
+Chunk size: 48 (0x30)
+Usable size: 40 (0x28)
+Previous chunk size: 0 (0x0)
+PREV_INUSE flag: On
+IS_MMAPPED flag: Off
+NON_MAIN_ARENA flag: Off
+
+gef➤  x/16xw 0x55555556aeb0-16
+0x55555556aea0:	0x00000000	0x00000000	0x00000031	0x00000000
+0x55555556aeb0:	0x44434241	0x48474645	0x4c4b4a49	0x504f4e4d
+0x55555556aec0:	0x54535251	0x58575655	0x00005a59	0x00000000
+0x55555556aed0:	0x00000000	0x00000000	0x0000f131	0x00000000
+```
+
+Note that here the chunk size is 48 bytes, with the usable size (size of actual user memory area) being 40, which is much higher than what we requested (an array of 26 chars, which should be 26 bytes). This is because "chunks always begin on even word boundaries ... and thus at least double-word aligned." (from the blockquote above).
+
+:::info
+The size of a [word](<https://en.wikipedia.org/wiki/Word_(computer_architecture)>) varies by architecture. For a normal 64 bit system, the word is 64 bit long, and thus takes up 8 bytes in size. However, a word in `gdb` `x/w` command has fixed length of 32 bits (4 bytes), which is a bit confusing. I'll use "word" to refer to an actual variable-size word, and "32-bit word" to refer to the `gdb` word.
+:::
+
+Since the chunk in memory is always double-word aligned, we should minus the address by $2\times8=16$ bytes to obtain the `chunk` pointer address. Here the first word (represented by 2 32-bit words as in gdb) is filled with `0x00`, and will be filled with the area of the previous chunk, if the `P` flag in unset.
+
+The second word `0x31` (or `0b110001`) stores the chunk size and 3 flags. The least significant bit `0b1` indicates that the flag `P` (PREV_INUSE) is set, so the previous chunk has not been freed. Since all chunks must have size of multiples of 8, the 3 least significant bits of the size field is always 0. That's why they can be used as flags. To calculate the chunk size, we simply discard the 3 LSBs and obtain `0b110000` (`0x30`, or 48) bytes.
+
+:::note
+
+If you are cautious enough, you might have noticed that the usable size for the chunk is 40, which is only 8 bytes (not 16), _i.e._ one word, less than the chunk size.
+
+This is because the `chunk` pointer ["does not point to the beginning of the chunk, but to the last word in the previous chunk"](https://sourceware.org/glibc/wiki/MallocInternals#What_is_a_Chunk.3F). The actual chunk starts at the next word of `chunk` pointer (which stores the sizes).
+
+:::
+
+So, our "actual" chunk starts at the address `0x55555556aea8` and ends at `0x55555556aec8`. The data area starts from `0x55555556aeb0` and ends in `0x55555556aec8`. Similarly, the next `chunk` pointer points to the last word in our chunk's data area (`0x55555556aec8`).
+
+Then, why does the chunk pointer confusingly points to the last word in the previous chunk? This is related to the `free` design machanism.
+
+Because when the previous chunk is freed, it'll fill its last word with its size and clear the `P` flag in its next chunk (ours). Hence, our chunk can use this size "to find the front of the previous chunk" after it has been freed.
+
 ### How does `free` work?
+
+By now, you should already have the answer to "how does `delete[]` know which area of memory to be freed"—because the size of the chunk is stored in its metadata.
+
+However, there are still some intricacies to be solved: why does the chunk pointer points to the last word in the previous chunk? Why do we need the `PREV_INUSE` (P) flag? To do so, we shall look into how `free` works.
 
 ## How can we prevent memory leaks?
 
