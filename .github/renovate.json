@@ -23,6 +23,14 @@
       "schedule": ["after 12pm on friday"],
       "groupName": "dev-dependencies (non-major)",
       "groupSlug": "dev-dependencies"
+    },
+    {
+      "matchPackageNames": [
+        "hast-util-is-element",
+        "rehype-katex",
+        "remark-math"
+      ],
+      "groupName": "katex"
     }
   ]
 }
