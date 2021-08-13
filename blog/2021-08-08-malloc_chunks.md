@@ -24,7 +24,7 @@ After some research & experiments, I wrote this blog post, which addresses three
 
 While the Stack Overflow question ["How does delete[] “know” the size of the operand array?"](https://stackoverflow.com/questions/197675/how-does-delete-know-the-size-of-the-operand-array) sort of answers the second question, I decide to dig deeper into the actual memory area.
 
-Coincidentally, I have worked on a heap exploitation problem with my friend @Guozhen in a past CTF event. Thanks to the experience, I learned how to use `gdb` to dump the heap memory and thus gain some insight into the problem.
+Coincidentally, I have worked on a heap exploitation problem with my friend [@gzhding](https://guozhen.dev) in a past CTF event. Thanks to the experience, I learned how to use `gdb` to dump the heap memory and thus gain some insight into the problem.
 
 ## What are Memory Leaks?
 
@@ -328,7 +328,7 @@ The following content comes from the comments in `malloc/malloc.c` of glibc ([so
 >
 > [...]
 >
-> Note that the \`foot' of the current chunk is actually represented
+> Note that the `foot` of the current chunk is actually represented
 > as the `prev_size` of the NEXT chunk. This makes it easier to
 > deal with alignments etc but can be very confusing when trying
 > to extend or adapt this code.
@@ -386,8 +386,44 @@ By now, you should already have the answer to "how does `delete[]` know which ar
 
 However, there are still some intricacies to be solved: why does the chunk pointer points to the last word in the previous chunk? Why do we need the `PREV_INUSE` (P) flag? To do so, we shall look into how `free` works.
 
+:::note
+While reading this section, you can refer back to the section [How are malloc_chunks structured?
+](#how-are-malloc_chunks-structured) to see how memory chunks look like before and after `free`.
+:::
+
+Long story short, `free` works like the following. When it is called ([source](https://sourceware.org/git/?p=glibc.git;a=blob;f=malloc/malloc.c;h=e065785af77af72c17c773517c15b248b067b4ad;hb=ae37d06c7d127817ba43850f0f898b793d42aea7#l3237)), the user would pass a pointer to the memory area to it, `free` would then call `mem2chunk` ([source](https://sourceware.org/git/?p=glibc.git;a=blob;f=malloc/malloc.c;h=e065785af77af72c17c773517c15b248b067b4ad;hb=ae37d06c7d127817ba43850f0f898b793d42aea7#l1310)) to convert the pointer to point to the chunk header. Then, if the chunk is allocated by `mmap` indicated by the M flag, `free` calls `munmap` ([man 3p](https://man.archlinux.org/man/munmap.3p.en) | [man 2](https://man.archlinux.org/man/munmap.2.en)); if not, it passes the chunk pointer to `_int_free` ([source](https://sourceware.org/git/?p=glibc.git;a=blob;f=malloc/malloc.c;h=e065785af77af72c17c773517c15b248b067b4ad;hb=ae37d06c7d127817ba43850f0f898b793d42aea7#l4302)) to continue freeing.
+
+However, an important thing is that `free`-ing a memory chunk "does not actually return it to the operating system for other applications to use. The `free()` call marks a chunk of memory as 'free to be reused' by the application, but from the operating system's point of view, the memory still 'belongs' to the application" ([source](https://sourceware.org/glibc/wiki/MallocInternals#Free_Algorithm)) heap, meaning that the heap manager is still responsible to keep track of them and to reuse them when necessary.
+
+That is why we use a circular linked list, with each chunk storing pointers to the previous and after, to organize the `free`-d chunks. Moreover, the size of the chunk is stored as the end of its memory area, _i.e._ the `chunk` pointer of the next chunk. Hence, the next chunk can use the size to access this `free`-d chunk and its header. When the next chunk is also `free`-d, we can use this property to [coalesce](https://cs.stackexchange.com/a/18234) the two chunks.
+
+Of course, the actual `free`-ing is much more complicated and the chunks will be put into different bins for efficient reallocation. You can read the official [glibc wiki](https://sourceware.org/glibc/wiki/MallocInternals), this more detailed [blog post](https://azeria-labs.com/heap-exploitation-part-2-glibc-heap-free-bins/), or the [source code for `_int_free`](https://sourceware.org/git/?p=glibc.git;a=blob;f=malloc/malloc.c;h=e065785af77af72c17c773517c15b248b067b4ad;hb=ae37d06c7d127817ba43850f0f898b793d42aea7#l4302) for more information.
+
 ## How can we prevent memory leaks?
 
-<!-- TODO -->
+It's probably time to come back to where we started: now that we've known what memory leaks are, and how they happened, how do we effectively prevent them?
 
-## References
+1. Always `delete` (`delete[]`) objects created with `new` (`new[]`).
+   - The simplest thing to do, if you insist using `new`.
+2. Avoid calling `new` and `delete` explicitly
+   - [Explanation](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#r11-avoid-calling-new-and-delete-explicitly)
+   - **TL;DR**: Use a resource handle instead of naked pointer, which can be leaked.
+   - Solution: use a smart pointer like `unique_ptr` or `shared_ptr`.
+3. Never transfer ownership by a raw pointer (T\*) or reference (T&)
+   - [Explanation](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#i11-never-transfer-ownership-by-a-raw-pointer-t-or-reference-t)
+   - **TL;DR**: it is unclear who should delete the pointer
+   - Instead: return the object itself, or use a smart pointer
+
+In general, requiring the programmer to manually free the resources is error-prone. You should consider [managing resources automatically using resource handles and RAII](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rr-raii) (Resource Acquisition is Initialization).
+
+## References & Further Readings
+
+- Stroustrup, Bjarne and Sutter, Herb. ["C++ Core Guidelines"](<(https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines)>). Updated Jun 17, 2021. Accessed Aug 08, 2021.
+- glibc wiki. ["MallocInternals"](https://sourceware.org/glibc/wiki/MallocInternals). Updated May 20, 2019. Accessed Aug 08, 2021.
+- Azeria Labs. ["Heap Exploitation Part 2: Understanding the Glibc Heap Implementation"](https://azeria-labs.com/heap-exploitation-part-2-glibc-heap-free-bins/). Accessed Aug 08, 2021.
+- CTF Wiki. ["堆相关数据结构"](https://ctf-wiki.org/pwn/linux/user-mode/heap/ptmalloc2/heap-structure/) (in Chinese). Accessed Aug 10, 2021.
+- glibc Contributors. [glibc v2.34 source code](https://sourceware.org/git/?p=glibc.git;a=tree;h=6eb9f63e6c9197e967a8cc12a8b235335e5a873d;hb=ae37d06c7d127817ba43850f0f898b793d42aea7). Aug 2, 2021. Accessed Aug 8, 2021.
+- gcc Contributors. [gcc v11.2.0 source code](https://github.com/gcc-mirror/gcc/tree/releases/gcc-11.2.0). Jul 28, 2021. Accessed Aug 8, 2021.
+- StackOverflow. ["How does delete[] know the size of the operand array?"](https://stackoverflow.com/questions/197675/how-does-delete-know-the-size-of-the-operand-array)
+
+BTW, while Googling memory leaks, I found a wiki page ["Dealing With Memory Leaks"](https://wiki.bnl.gov/dayabay/index.php?title=Dealing_With_Memory_Leaks) from Daya Bay Reactor Neutrono Experiment project hosted under Brookhaven National Lab's domain. I didn't know that Daya Bay Reactor also hosted a multinational research project 😂.
