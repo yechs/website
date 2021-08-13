@@ -1,4 +1,7 @@
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
+const math = require('remark-math');
+const katex = require('rehype-katex');
+
 module.exports = {
   title: 'Ye Shu',
   tagline: undefined,
@@ -117,6 +120,8 @@ module.exports = {
           routeBasePath: 'kb',
           sidebarPath: require.resolve('./sidebars.js'),
           showLastUpdateTime: true,
+          remarkPlugins: [math],
+          rehypePlugins: [katex],
         },
         blog: {
           path: 'blog',
@@ -127,6 +132,8 @@ module.exports = {
           blogSidebarTitle: 'Recent Posts',
           routeBasePath: 'blog',
           showReadingTime: true,
+          remarkPlugins: [math],
+          rehypePlugins: [katex],
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -137,5 +144,13 @@ module.exports = {
         },
       },
     ],
+  ],
+  stylesheets: [
+    {
+      href: 'https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css',
+      integrity:
+        'sha384-Um5gpz1odJg5Z4HAmzPtgZKdTBHZdw8S29IecapCSB31ligYPhHQZMIlWLYQGVoc',
+      crossorigin: 'anonymous',
+    },
   ],
 };
