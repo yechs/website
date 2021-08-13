@@ -10,7 +10,7 @@ tags: [c++, pwn]
 
 # 内存泄漏 与 malloc chunk
 
-## 我为什么要写这篇文章 {#how-it-all-started}
+## 我为什么写这篇文章 {#how-it-all-started}
 
 在我暑期实习期间 debug 一个内存泄漏的问题时，我发现我使用的其中一个 API return 了一个裸指针，从而把这个目标的 ownership 转移给了调用者（我）。换言之，我现在需要负责在代码运行完毕之后手动 `delete` 掉这个指针。尽管这是一个 [非常糟糕的工程实践](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#i11-never-transfer-ownership-by-a-raw-pointer-t-or-reference-t)，我开始对内存泄漏是如何产生的，以及 `delete[]` 是如何删除内存的产生了兴趣。
 
@@ -27,8 +27,14 @@ Stack Overflow 上的问题 ["How does delete[] 'know' the size of the operand a
 巧合的是，我和朋友 [@gzhding](https://guozhen.dev) 刚好在最近的一次 CTF 比赛中合作了一道 堆利用 (heap exploitation) 的题目。因为这份经历，我学会了如何使用 `gdb` 调试并查看堆上的内存，以借其管中窥豹。
 
 :::info
-注：我先写成了本文的英文版，之后才试图将其译回中文。因此如有可能的话，请以英文阅读本文，以避免一些因为翻译质量导致的语句不顺与理解困难。
+注：我先写成了本文的英文版，之后才试图将其译回中文。因此如有可能的话，请[以英文阅读本文](https://shuye.dev/blog/malloc_chunk/)，以避免一些因为翻译质量导致的语句不顺与理解困难。
 :::
+
+## 目录 {#table-of-contents}
+
+import TOCInline from '@theme/TOCInline';
+
+<TOCInline toc={toc} />
 
 ## 什么是内存泄漏 {#what-are-memory-leaks}
 
