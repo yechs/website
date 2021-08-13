@@ -10,11 +10,11 @@ tags: [c++, pwn]
 
 # Memory Leak & malloc chunks
 
-## How it all started
+## How it all started {#how-it-all-started}
 
-While debugging a memory leak bug during my summer internship, I found out that one of our APIs returned a raw pointer and thus transferred its ownership to the caller (me). While this is [a terrible engineering practice](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#i11-never-transfer-ownership-by-a-raw-pointer-t-or-reference-t), I grew interested in how memory leaks happen, and why using `delete[]` solves the problem.
+While debugging a memory leak bug during my summer internship, I found out that one of our APIs returned a raw pointer and thus transferred its ownership to the caller (me). In other words, I'm now responsible of `delete`-ing the pointer after my code finishes. While this is [a terrible engineering practice](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#i11-never-transfer-ownership-by-a-raw-pointer-t-or-reference-t), I grew interested in how memory leaks happen, and how `delete[]` solves the problem.
 
-After some research & experiments, I wrote this blog post, which addresses three sets of questions
+After some research & experiments, I wrote this blog post, which hopefully addresses three sets of questions
 
 1. What are memory leaks?
 2. How are objects allocated on the heap? How does `delete[]` know which area of memory to be freed?
@@ -26,13 +26,13 @@ While the Stack Overflow question ["How does delete[] 'know' the size of the ope
 
 Coincidentally, I have worked on a heap exploitation problem with my friend [@gzhding](https://guozhen.dev) in a past CTF event. Thanks to the experience, I learned how to use `gdb` to dump the heap memory and gain some insight into the problem.
 
-## What are Memory Leaks?
+## What are Memory Leaks? {#what-are-memory-leaks}
 
 We know that [C++ can dynamically allocate memory on the heap](https://www.cplusplus.com/doc/tutorial/dynamic/). A common example is to use `new[]` to create an array and `delete[]` to remove it.
 
 [Memory leaks](https://en.wikipedia.org/wiki/Memory_leak) happens when we create an array in the memory (_i.e._ "allocates" a segment of memory to store the object) and forget to delete it. When the pointer to the memory goes out of scope, the running code becomes ignorant of the allocated memory area. In worst cases, when the leakage happens in a loop, newly allocated memory will continue to pile up without being released, potentially slowing down or crash the computer.
 
-### PoC
+### PoC {#poc}
 
 Here is a short Proof of Concept (PoC) code. The `main()` function calls the `memory_leak()` function, which allocates an array of 26 `char`s and fills them with capital English alphabets.
 
@@ -57,10 +57,10 @@ int main() {
 
 As the `delete[]` statement is commented out, when the function `memory_leak()` returns, the pointer `arr` goes out of scope and results in the memory area leaked.
 
-### A Deeper Look into the Memory
+### A Deeper Look into the Memory {#a-deeper-look-into-the-memory}
 
 :::note
-Instead of native GDB, I use [GEF](https://github.com/hugsy/gef) (GDB Enhanced Features) for prettiffied output and some extra features like `heap`.
+Instead of native GDB, I use [GEF](https://github.com/hugsy/gef) (GDB Enhanced Features) for prettified output and some extra features like `heap`.
 :::
 
 Let us compile the program with `g++ -g3 memory_leak.cpp -o memory_leak` (the `-g3` flag preserves debug information during compilation) and use `gdb` to verify the memory leak.
@@ -102,7 +102,7 @@ gef➤  x/8xw 0x55555556aeb0
 0x55555556aec0: 0x54535251      0x58575655      0x00005a59      0x00000000
 ```
 
-After the program hits the breakpoint, we print out the address of pointer `arr` and the memory it points to. Note that the memory is stored in [little endian](https://en.wikipedia.org/wiki/Little-endian) order, so `0x44` (D) comes before `0x43` (C), `0x42` (B), and finally `0x41` (A).
+After the program hits the breakpoint, we print out the address of pointer `arr` and the content of that memory. Note that the memory is stored in [little endian](https://en.wikipedia.org/wiki/Little-endian) order, so `0x44` (D) comes before `0x43` (C), `0x42` (B), and finally `0x41` (A).
 
 Now, let us continue running the program until `memory_leak()` returns back to `main()`.
 
@@ -142,7 +142,7 @@ Chunk(addr=0x55555556aee0, size=0xf130, flags=PREV_INUSE)  ←  top chunk -->
 
 Now that `memory_leak()` returns, we have lost the pointer `arr` pointing to the memory address `0x55555556aeb0`. However, as we print out the memory area, the data is still stored in the memory without being released, leading to a memory leak.
 
-### Verification with Valgrind
+### Verification with Valgrind {#verification-with-valgrind}
 
 Furthermore, we can use automated tools like [Valgrind](https://valgrind.org) to check for memory leaks.
 
@@ -174,17 +174,17 @@ $ valgrind --leak-check=full ./memory_leak
 ==382643== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
 ```
 
-## How are objects allocated on the heap?
+## How are objects allocated on the heap? {#how-are-objects-allocated-on-the-heap}
 
 To understand better the mechanisms behind memory leaks, we need to know how C++ allocates and frees memories, _i.e._ how `new` and `delete` works. Let us dig deeper into the source code of GNU's `libstdc++` implementation (the library used by g++ by default).
 
-### How `new` and `delete` works
+### How `new` and `delete` works {#how-new-and-delete-works}
 
 :::info
 As `new` and `delete` operators are merely interfaces defined by the C++ standard and have different implementations, here I'll use the [source code](https://github.com/gcc-mirror/gcc/tree/releases/gcc-11.2.0) of GNU's `libstdc++` that ships with gcc version 11.2.0 for reference.
 :::
 
-#### `new[]` and `delete[]` are just wrappers of `new` and `delete`
+#### `new[]` and `delete[]` are just wrappers of `new` and `delete` {#new-and-delete-are-just-wrappers-of-new-and-delete}
 
 Interestingly, from the implementation of `operator new[]` ([source](https://github.com/gcc-mirror/gcc/blob/releases/gcc-11.2.0/libstdc++-v3/libsupc++/new_opv.cc#L29-L33)), it seems that in `stdlibc++`, `new[]` is just an alias for `new`.
 
@@ -204,7 +204,7 @@ From the implementation of GNU stdlibc++, it seems perfectly ok to mix the use o
 However, you should never do this, because this behavior is implementation-specific. Using `new` and `delete` instead of `new[]` and `delete[]` leads to undefined behavior (according to [C++ Working Paper](https://timsong-cpp.github.io/cppwp/expr.delete#2)) and will make your life painful.
 :::
 
-#### And `new` & `delete` are wrappers of `malloc` and `free`
+#### And `new` & `delete` are wrappers of `malloc` and `free` {#and-new--delete-are-wrappers-of-malloc-and-free}
 
 Now let us take a look at the [source code](https://github.com/gcc-mirror/gcc/blob/releases/gcc-11.2.0/libstdc++-v3/libsupc++/new_op.cc#L41-L59) of `new`. It's just a wrapper around C's `malloc` plus some error handling and returns the `malloc`-ed raw pointer to the caller.
 
@@ -244,9 +244,9 @@ operator delete(void* ptr) noexcept
 
 Hence it seems that we should dive all the way into C standard library's implementation of `malloc` and `free` and see what exactly is happening behind the creation and deletion of arrays.
 
-However, instead of covering the full picture of `malloc` (which could fill another blog post), we'll be mainly focusing on how `malloc` structures the allocated memory area (answer: using `memory_chunk`s on the heap) and how `free` knows which area of memory to be released.
+However, instead of covering the full picture of `malloc` (which could fill another blog post), we'll be mainly focusing on how `malloc` structures the allocated memory area (answer: using `malloc_chunk`s on the heap) and how `free` knows which area of memory to be released.
 
-### How are `malloc_chunk`s structured?
+### How are `malloc_chunk`s structured? {#how-are-malloc_chunks-structured}
 
 :::info
 Like in the previous section, I will use GNU's implementation of C standard library, _i.e._ `glibc`.
@@ -335,7 +335,7 @@ The following content comes from the comments in `malloc/malloc.c` of glibc ([so
 >
 > [...]
 
-### A verification using PoC
+### A verification using PoC {#a-verification-using-poc}
 
 Now we can use `gdb` to actually print out the memory area and see how the explanation above applies to our case. Here I used the `heap` feature introduced by [GEF](https://gef.readthedocs.io/en/master/commands/heap/#heap-chunk-command) to better visualize the `malloc`-ed chunk's properties.
 
@@ -364,7 +364,7 @@ The size of a [word](<https://en.wikipedia.org/wiki/Word_(computer_architecture)
 
 Since the chunk in memory is always double-word aligned, we should minus the address by $2\times8=16$ bytes to obtain the `chunk` pointer address. Here the first word (represented by 2 32-bit words as in gdb) is filled with `0x00`, and will be filled with the area of the previous chunk, if the `P` flag in unset.
 
-The second word `0x31` (or `0b110001`) stores the chunk size and 3 flags. The least significant bit `0b1` indicates that the flag `P` (PREV_INUSE) is set, so the previous chunk has not been freed. Since all chunks must have size of multiples of 8, the 3 least significant bits of the size field is always 0, which is why the 3 LSBs can be used as flags. To calculate the chunk size, we can discard the 3 LSBs and obtain `0b110000` (`0x30`, or 48) bytes.
+The second word `0x31` (or `0b110001`) stores the chunk size and 3 flags. The least significant bit `0b1` indicates that the flag `P` (PREV_INUSE) is set, so the previous chunk has not been freed. Since all chunks must have size at least of multiples of 8, the 3 least significant bits of the size field is always 0, which is why the 3 LSBs can be used as flags. To calculate the chunk size, we can discard the 3 LSBs and obtain `0b110000` (`0x30`, or 48) bytes.
 
 :::note
 
@@ -380,7 +380,7 @@ Then, why does the chunk pointer confusingly points to the last word in the prev
 
 Because when the previous chunk is freed, it'll fill its last word with its size and clear the `P` flag in its next chunk (ours). Hence, our chunk can use this size "to find the front of the previous chunk" after the previous chunk has been freed.
 
-### How does `free` work?
+### How does `free` work? {#how-does-free-work}
 
 By now, you should already have the answer to "how does `delete[]` know which area of memory to be freed"—because the size of the chunk is stored in its metadata.
 
@@ -391,7 +391,7 @@ While reading this section, you can refer back to the section [How are malloc_ch
 ](#how-are-malloc_chunks-structured) to see how memory chunks look like before and after `free`.
 :::
 
-Long story short, `free` works like the following. When it is called ([source](https://sourceware.org/git/?p=glibc.git;a=blob;f=malloc/malloc.c;h=e065785af77af72c17c773517c15b248b067b4ad;hb=ae37d06c7d127817ba43850f0f898b793d42aea7#l3237)), the user would pass a pointer to the memory area to it, `free` would then call `mem2chunk` ([source](https://sourceware.org/git/?p=glibc.git;a=blob;f=malloc/malloc.c;h=e065785af77af72c17c773517c15b248b067b4ad;hb=ae37d06c7d127817ba43850f0f898b793d42aea7#l1310)) to convert the pointer to point to the chunk header. Then, if the chunk is allocated by `mmap` indicated by the M flag, `free` calls `munmap` ([man 3p](https://man.archlinux.org/man/munmap.3p.en) | [man 2](https://man.archlinux.org/man/munmap.2.en)); if not, it passes the chunk pointer to `_int_free` ([source](https://sourceware.org/git/?p=glibc.git;a=blob;f=malloc/malloc.c;h=e065785af77af72c17c773517c15b248b067b4ad;hb=ae37d06c7d127817ba43850f0f898b793d42aea7#l4302)) to continue freeing.
+Long story short, `free` works like the following. When it is called ([source](https://sourceware.org/git/?p=glibc.git;a=blob;f=malloc/malloc.c;h=e065785af77af72c17c773517c15b248b067b4ad;hb=ae37d06c7d127817ba43850f0f898b793d42aea7#l3237)), the user would pass a pointer to the memory area to it, `free` would then call `mem2chunk` ([source](https://sourceware.org/git/?p=glibc.git;a=blob;f=malloc/malloc.c;h=e065785af77af72c17c773517c15b248b067b4ad;hb=ae37d06c7d127817ba43850f0f898b793d42aea7#l1310)) to convert the pointer to point to the chunk header. Then, if the chunk is allocated by `mmap` indicated by the M flag, `free` calls `munmap` ([man 3p](https://man.archlinux.org/man/munmap.3p.en) | [man 2](https://man.archlinux.org/man/munmap.2.en)) to release the chunk; if not, it passes the chunk pointer to `_int_free` ([source](https://sourceware.org/git/?p=glibc.git;a=blob;f=malloc/malloc.c;h=e065785af77af72c17c773517c15b248b067b4ad;hb=ae37d06c7d127817ba43850f0f898b793d42aea7#l4302)) for the actual freeing process.
 
 However, `free`-ing a memory chunk "does not actually return it to the operating system for other applications to use. The `free()` call marks a chunk of memory as 'free to be reused' by the application, but from the operating system's point of view, the memory still 'belongs' to the application" ([source](https://sourceware.org/glibc/wiki/MallocInternals#Free_Algorithm)) heap, meaning that the heap manager is still responsible of keeping track of the memory and reusing them when necessary.
 
@@ -399,7 +399,7 @@ That is why we use a circular linked list, with each chunk storing pointers to t
 
 Of course, the actual `free`-ing is much more complicated and the chunks will be put into different bins for efficient reallocation. You can read the official [glibc wiki](https://sourceware.org/glibc/wiki/MallocInternals), this more detailed [blog post](https://azeria-labs.com/heap-exploitation-part-2-glibc-heap-free-bins/), or the [source code for `_int_free`](https://sourceware.org/git/?p=glibc.git;a=blob;f=malloc/malloc.c;h=e065785af77af72c17c773517c15b248b067b4ad;hb=ae37d06c7d127817ba43850f0f898b793d42aea7#l4302) for more information.
 
-## How can we prevent memory leaks?
+## How can we prevent memory leaks? {#how-can-we-prevent-memory-leaks}
 
 It's probably time to come back to where we started: now that we've known what memory leaks are, and how they happened, how do we effectively prevent them?
 
@@ -416,9 +416,9 @@ It's probably time to come back to where we started: now that we've known what m
 
 In general, requiring the programmer to manually free the resources is error-prone. You should consider [managing resources automatically using resource handles and RAII](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rr-raii) (Resource Acquisition is Initialization).
 
-## References & Further Readings
+## References & Further Readings {#references--further-readings}
 
-- Stroustrup, Bjarne and Sutter, Herb. ["C++ Core Guidelines"](<(https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines)>). Updated Jun 17, 2021. Accessed Aug 08, 2021.
+- Stroustrup, Bjarne and Sutter, Herb. ["C++ Core Guidelines"](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines). Updated Jun 17, 2021. Accessed Aug 08, 2021.
 - glibc wiki. ["MallocInternals"](https://sourceware.org/glibc/wiki/MallocInternals). Updated May 20, 2019. Accessed Aug 08, 2021.
 - Azeria Labs. ["Heap Exploitation Part 2: Understanding the Glibc Heap Implementation"](https://azeria-labs.com/heap-exploitation-part-2-glibc-heap-free-bins/). Accessed Aug 08, 2021.
 - CTF Wiki. ["堆相关数据结构"](https://ctf-wiki.org/pwn/linux/user-mode/heap/ptmalloc2/heap-structure/) (in Chinese). Accessed Aug 10, 2021.
