@@ -5,6 +5,7 @@ author: Ye Shu
 author_title: Studying how C++ allocates and frees chunks in memory
 author_url: https://github.com/yechs
 author_image_url: https://avatars.githubusercontent.com/u/49149993
+image: https://shuye.dev/img/yechs.jpeg
 tags: [c++, pwn]
 ---
 
@@ -26,11 +27,9 @@ While the Stack Overflow question ["How does delete[] 'know' the size of the ope
 
 Coincidentally, I have worked on a heap exploitation problem with my friend [@gzhding](https://guozhen.dev) in a past CTF event. Thanks to the experience, I learned how to use `gdb` to dump the heap memory and gain some insight into the problem.
 
-## Table of Contents {#table-of-contents}
+import TOCCollapsible from '@theme/TOCCollapsible';
 
-import TOCInline from '@theme/TOCInline';
-
-<TOCInline toc={toc} />
+<TOCCollapsible toc={toc} />
 
 ## What are Memory Leaks? {#what-are-memory-leaks}
 

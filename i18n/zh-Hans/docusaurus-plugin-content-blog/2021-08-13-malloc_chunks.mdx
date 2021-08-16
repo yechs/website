@@ -5,6 +5,7 @@ author: Ye Shu
 author_title: Studying how C++ allocates and frees chunks in memory
 author_url: https://github.com/yechs
 author_image_url: https://avatars.githubusercontent.com/u/49149993
+image: https://shuye.dev/img/yechs.jpeg
 tags: [c++, pwn]
 ---
 
@@ -30,11 +31,9 @@ Stack Overflow 上的问题 ["How does delete[] 'know' the size of the operand a
 注：我先写成了本文的英文版，之后才试图将其译回中文。因此如有可能的话，请[以英文阅读本文](https://shuye.dev/blog/malloc_chunk/)，以避免一些因为翻译质量导致的语句不顺与理解困难。
 :::
 
-## 目录 {#table-of-contents}
+import TOCCollapsible from '@theme/TOCCollapsible';
 
-import TOCInline from '@theme/TOCInline';
-
-<TOCInline toc={toc} />
+<TOCCollapsible toc={toc} />
 
 ## 什么是内存泄漏 {#what-are-memory-leaks}
 
@@ -192,6 +191,7 @@ $ valgrind --leak-check=full ./memory_leak
 
 :::info
 因为 `new` 与 `delete` 操作符仅仅是 C++ 标准中定义的 interface，它们拥有不同的实现。我在此处将使用 GNU 在 gcc 11.2 版本中提供的 `libstdc++` 的 [源码](https://github.com/gcc-mirror/gcc/tree/releases/gcc-11.2.0)。
+:::
 
 #### `new[]` 和 `delete[]` 只是对 `new` 和 `delete` 的封装 {#new-and-delete-are-just-wrappers-of-new-and-delete}
 
