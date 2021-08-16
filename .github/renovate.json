@@ -30,7 +30,9 @@
         "rehype-katex",
         "remark-math"
       ],
-      "groupName": "katex"
+      "groupName": "katex",
+      "matchUpdateTypes": ["major"],
+      "enabled": false
     }
   ]
 }
