@@ -9,11 +9,11 @@
         "^eslint",
         "^@typescript-eslint/",
         "^@types/",
-        "^@tsconfig/"
+        "^@tsconfig/",
+        "^@babel/"
       ],
       "matchPackageNames": [
-        "babel-eslint",
-        "@babel/eslint-parser",
+        "eslint-plugin-flowtype",
         "prettier",
         "typescript",
         "lint-staged",
