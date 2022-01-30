@@ -39,12 +39,12 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=armv7-a -mcpu=cortex-a9")
 If there are still errors produced at the linking stage, check if the linked libraries are also compiled in the wanted architecture (i.e. armhf). You may also need to cross-compile them from source.
 :::
 
-### References {#references}
+#### References {#references}
 
 - [cmake-toolchains(7)](https://cmake.org/cmake/help/latest/manual/cmake-toolchains.7.html#cross-compiling-for-linux)
 - [Cross-Compiling from x86_64 to ARM - How To Cross-Compile Clang/LLVM using Clang/LLVM](https://llvm.org/docs/HowToCrossCompileLLVM.html#cross-compiling-from-x86-64-to-arm)
 
-## Using CMake + LLVM Toolchain {#using-cmake--llvm-toolchain}
+### Using CMake + LLVM Toolchain {#using-cmake--llvm-toolchain}
 
 Clang in the LLVM Toolchain is inherently a cross compiler, so it _should_ _theoretically_ be easier to work (while in reality...I gave up while compiling on a Ubuntu 18.04)
 
@@ -66,7 +66,7 @@ set(CMAKE_CXX_COMPILER clang++)
 set(CMAKE_CXX_COMPILER_TARGET ${triple})
 ```
 
-### Reference {#reference}
+#### Reference {#reference}
 
 - [Cross-compilation using Clang - Clang documentation](https://clang.llvm.org/docs/CrossCompilation.html)
 - [Cross Compiling using Clang - cmake-toolchains(7)](https://cmake.org/cmake/help/latest/manual/cmake-toolchains.7.html#cross-compiling-using-clang)
