@@ -31,11 +31,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Uses Node.js ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v2
         with:
           # fetch all commit history so "Last Updated" field will be accurate
           fetch-depth: 0
+      - name: Uses Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v2
+        with:
           node-version: ${{ env.NODE_VERSION }}
       - uses: webfactory/ssh-agent@v0.5.4
         with:
