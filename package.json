@@ -2,11 +2,11 @@
   "name": "website",
   "author": {
     "name": "Ye Shu",
-    "email": "chshu@protonmail.ch",
+    "email": "hello@shuye.dev",
     "url": "https://shuye.dev"
   },
   "description": "The Personal Website for Ye Shu",
-  "version": "0.0.10",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
@@ -27,7 +27,6 @@
   "dependencies": {
     "@docusaurus/core": "2.0.0-beta.21",
     "@docusaurus/preset-classic": "2.0.0-beta.21",
-    "clsx": "1.1.1",
     "hast-util-is-element": "1.1.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
@@ -51,13 +50,14 @@
     "@docusaurus/module-type-aliases": "2.0.0-beta.21",
     "@tsconfig/docusaurus": "1.0.6",
     "@types/react": "17.0.47",
-    "@types/react-helmet": "6.1.5",
-    "@types/react-router-dom": "5.3.3",
+    "@typescript-eslint/eslint-plugin": "5.30.5",
+    "@typescript-eslint/parser": "5.30.5",
     "eslint": "8.19.0",
     "eslint-config-prettier": "8.5.0",
-    "eslint-config-react-app": "7.0.1",
+    "eslint-plugin-jsx-a11y": "6.6.0",
+    "eslint-plugin-react": "7.30.1",
     "husky": "8.0.1",
-    "lint-staged": "12.5.0",
+    "lint-staged": "13.0.3",
     "prettier": "2.7.1",
     "typescript": "4.7.4"
   },

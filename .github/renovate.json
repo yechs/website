@@ -20,7 +20,7 @@
         "husky"
       ],
       "matchUpdateTypes": ["patch", "minor"],
-      "schedule": ["after 12pm on friday"],
+      "schedule": ["before 3am on the first day of the month"],
       "groupName": "dev-dependencies (non-major)",
       "groupSlug": "dev-dependencies"
     },
