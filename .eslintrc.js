@@ -1,29 +1,34 @@
 module.exports = {
-  parser: '@babel/eslint-parser',
+  root: true,
   env: {
-    browser: true,
+    node: true,
     es2021: true,
   },
   extends: [
-    'react-app',
     'eslint:recommended',
     'plugin:react/recommended',
+    'plugin:jsx-a11y/recommended',
     'prettier',
   ],
-  plugins: ['react'],
+  plugins: ['react', 'jsx-a11y'],
+  settings: {
+    react: {
+      version: 'detect',
+    },
+  },
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
+    },
+    ecmaVersion: 12,
+    sourceType: 'module',
+  },
   rules: {},
   overrides: [
     {
       files: ['**/*.ts?(x)'],
-      extends: ['plugin:@typescript-eslint/recommended'],
       parser: '@typescript-eslint/parser',
-      parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
-        },
-        ecmaVersion: 12,
-        sourceType: 'module',
-      },
+      extends: ['plugin:@typescript-eslint/recommended'],
       plugins: ['@typescript-eslint'],
       rules: {
         // Docusaurus recommends using require() for static assets
