@@ -1,0 +1,11 @@
+.mainContainer {
+  padding: 0 4rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 966px) {
+  .mainContainer {
+    padding: 2rem;
+  }
+}
