@@ -6774,6 +6774,11 @@ react-masonry-css@1.0.16:
   resolved "https://registry.yarnpkg.com/react-masonry-css/-/react-masonry-css-1.0.16.tgz#72b28b4ae3484e250534700860597553a10f1a2c"
   integrity sha512-KSW0hR2VQmltt/qAa3eXOctQDyOu7+ZBevtKgpNDSzT7k5LA/0XntNa9z9HKCdz3QlxmJHglTZ18e4sX4V8zZQ==
 
+react-photo-album@1.14.0:
+  version "1.14.0"
+  resolved "https://registry.yarnpkg.com/react-photo-album/-/react-photo-album-1.14.0.tgz#3802dd66b6fa40d1339ee8713d12ff81c46eb8f8"
+  integrity sha512-MGuKvWZ5926GFmtWDq08giwjlH3s2G+8Aqmzw653weldDPxDFhGZCx6M9pMDUFo4KKs9mDRBDXEu6nk8fpiW6A==
+
 react-router-config@^5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/react-router-config/-/react-router-config-5.1.1.tgz#0f4263d1a80c6b2dc7b9c1902c9526478194a988"
@@ -8516,6 +8521,11 @@ yaml@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/yaml/-/yaml-2.1.1.tgz#1e06fb4ca46e60d9da07e4f786ea370ed3c3cfec"
   integrity sha512-o96x3OPo8GjWeSLF+wOAbrPfhFOGY0W00GNaxCDv+9hkcDJEnev1yh8S7pgHF0ik6zc8sQLuL8hjHjJULZp8bw==
+
+yet-another-react-lightbox@^1.9.5:
+  version "1.9.5"
+  resolved "https://registry.yarnpkg.com/yet-another-react-lightbox/-/yet-another-react-lightbox-1.9.5.tgz#111cafcf25786dd9753f374eff4545b599813882"
+  integrity sha512-L30wVqsuLBkaoJooYlJLV0skSCz7sPCzlaAt4S+ai06C/DlU1S2v24KdR+NjUicB1HY+qopOB8sbHuCCNJPPNw==
 
 yocto-queue@^0.1.0:
   version "0.1.0"
