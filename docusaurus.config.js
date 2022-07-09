@@ -1,7 +1,8 @@
-/** @type {import('@docusaurus/types').DocusaurusConfig} */
+// @ts-check
 const math = require('remark-math');
 const katex = require('rehype-katex');
 
+/** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
   title: 'Ye Shu',
   tagline: undefined,
@@ -16,99 +17,102 @@ module.exports = {
     defaultLocale: 'en',
     locales: ['en', 'zh-Hans'],
   },
-  themeConfig: {
-    colorMode: {
-      defaultMode: 'light',
-      // respectPrefersColorScheme: true,
-    },
-    navbar: {
-      title: '@yechs',
-      logo: {
-        alt: 'Ye Shu',
-        src: 'img/yechs.jpeg',
+  themeConfig:
+    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
+    ({
+      colorMode: {
+        defaultMode: 'light',
+        // respectPrefersColorScheme: true,
       },
-      items: [
-        {
-          type: 'doc',
-          docId: 'intro',
-          position: 'left',
-          label: 'Knowledge Base',
+      navbar: {
+        title: '@yechs',
+        logo: {
+          alt: 'Ye Shu',
+          src: 'img/yechs.jpeg',
         },
-        {
-          to: '/blog',
-          label: 'Blog',
-          position: 'left',
-        },
-        {
-          href: 'https://github.com/yechs',
-          label: 'GitHub',
-          position: 'right',
-        },
-        {
-          href: 'https://www.linkedin.com/in/yechs/',
-          label: 'LinkedIn',
-          position: 'right',
-        },
-        {
-          type: 'localeDropdown',
-          position: 'right',
-        },
-      ],
-      // hideOnScroll: true,
-    },
-    footer: {
-      style: 'dark',
-      links: [
-        {
-          title: 'This Site',
-          items: [
-            {
-              label: 'Knowledge Base',
-              to: '/kb/intro',
-            },
-            {
-              label: 'Blog',
-              to: '/blog',
-            },
-          ],
-        },
-        {
-          title: 'Connect with Me',
-          items: [
-            {
-              label: 'GitHub',
-              href: 'https://github.com/yechs',
-            },
-            {
-              label: 'LinkedIn',
-              href: 'https://www.linkedin.com/in/yechs/',
-            },
-          ],
-        },
-        {
-          title: 'More',
-          items: [
-            {
-              label: 'Williams Students Online',
-              href: 'https://wso.williams.edu/',
-            },
-            {
-              label: 'Computerization',
-              href: 'https://computerization.io/',
-            },
-            {
-              label: 'Team 0x194',
-              href: 'https://0x194.com',
-            },
-          ],
-        },
-      ],
-      copyright: `Copyright © ${new Date().getFullYear()} Ye Shu. Some Rights Reserved.`,
-    },
-  },
+        items: [
+          {
+            type: 'doc',
+            docId: 'intro',
+            position: 'left',
+            label: 'Knowledge Base',
+          },
+          {
+            to: '/blog',
+            label: 'Blog',
+            position: 'left',
+          },
+          {
+            href: 'https://github.com/yechs',
+            label: 'GitHub',
+            position: 'right',
+          },
+          {
+            href: 'https://www.linkedin.com/in/yechs/',
+            label: 'LinkedIn',
+            position: 'right',
+          },
+          {
+            type: 'localeDropdown',
+            position: 'right',
+          },
+        ],
+        // hideOnScroll: true,
+      },
+      footer: {
+        style: 'dark',
+        links: [
+          {
+            title: 'This Site',
+            items: [
+              {
+                label: 'Knowledge Base',
+                to: '/kb/intro',
+              },
+              {
+                label: 'Blog',
+                to: '/blog',
+              },
+            ],
+          },
+          {
+            title: 'Connect with Me',
+            items: [
+              {
+                label: 'GitHub',
+                href: 'https://github.com/yechs',
+              },
+              {
+                label: 'LinkedIn',
+                href: 'https://www.linkedin.com/in/yechs/',
+              },
+            ],
+          },
+          {
+            title: 'More',
+            items: [
+              {
+                label: 'Williams Students Online',
+                href: 'https://wso.williams.edu/',
+              },
+              {
+                label: 'Computerization',
+                href: 'https://computerization.io/',
+              },
+              {
+                label: 'Team 0x194',
+                href: 'https://0x194.com',
+              },
+            ],
+          },
+        ],
+        copyright: `Copyright © ${new Date().getFullYear()} Ye Shu. Some Rights Reserved.`,
+      },
+    }),
   presets: [
     [
       '@docusaurus/preset-classic',
+      /** @type {import('@docusaurus/preset-classic').Options} */
       {
         docs: {
           path: 'kb',

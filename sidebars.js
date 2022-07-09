@@ -9,7 +9,10 @@
  Create as many sidebars as you want.
  */
 
-module.exports = {
+// @ts-check
+
+/** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
+const sidebars = {
   kbSidebar: [
     'intro',
     {
@@ -34,3 +37,5 @@ module.exports = {
     },
   ],
 };
+
+module.exports = sidebars;
