@@ -2,10 +2,7 @@ import React, { useState } from 'react';
 
 import PhotoAlbum from 'react-photo-album';
 import Lightbox from 'yet-another-react-lightbox';
-
-// Note: the line below does not work (as if the CSS has never been imported). However, I can copy the CSS file to a local directory `/src/css/yarl.css`. Importing from the local file will work as expected.
 import 'yet-another-react-lightbox/styles.css';
-// import '../../css/yarl.css';
 
 export interface GalleryProps {
   images: Image[];
