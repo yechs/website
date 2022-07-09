@@ -1,0 +1,66 @@
+# Yarn Version Manager
+
+## `@types/... *` version resolution
+
+### TL;DR
+
+Add the following lines, and replace "17.0.47" with your expected version, to your package.json. Normally you should keep `@types/react` at the same major version with `react`. So, consider using [`^` specifier](https://docs.npmjs.com/about-semantic-versioning#using-semantic-versioning-to-specify-update-types-your-package-can-accept).
+
+```json title="package.json"
+"resolutions": {
+    "@types/react": "17.0.47"
+},
+```
+
+### Explanation
+
+Many typescript packages may depend on `"@types/react" "*"` for React typing. However, without further specification, the `*` will be resolved to the latest version.
+
+This will be problematic if the latest React version introduces a breaking change to the current version. For example, I once experienced an error message shown below:
+
+```shell-session
+$ <REDACTED>/node_modules/.bin/tsc
+src/components/Gallery/index.tsx:13:6 - error TS2786: 'Masonry' cannot be used as a JSX component.
+  Its instance type 'Component<MasonryPropTypes, any, any>' is not a valid JSX element.
+    The types returned by 'render()' are incompatible between these types.
+      Type 'React.ReactNode' is not assignable to type 'import("<REDACTED>/node_modules/@types/react-router-config/node_modules/@types/react/index").ReactNode'.
+        Type '{}' is not assignable to type 'ReactNode'.
+
+13     <Masonry options={masonryOptions}>
+        ~~~~~~~
+```
+
+It turns out that I have multiple `@types/react` installed. Even though I have explicitly required `@types/react 17.0.47` in devDependencies, the `@types/react *` required by other dependencies (such as `@types/react-router-config` in this case) is still resolved to the latest v18.0.14.
+
+import CodeBlock from '@theme/CodeBlock';
+
+<details>
+  <summary>See the <code>yarn.lock</code> file</summary>
+  {/** I'm now inside JSX, so must use this ugly syntax and escape everything with {``} **/}
+<CodeBlock
+  language="lock"
+  title="yarn.lock"
+>
+{`"@types/react@*":
+  version "18.0.14"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.0.14.tgz#e016616ffff51dba01b04945610fe3671fdbe06d"
+  integrity sha512-x4gGuASSiWmo0xjDLpm5mPb52syZHJx02VKbqUKdLmKtAwIh63XClGsiTI1K6DO5q7ox4xAsQrU+Gl3+gGXF9Q==
+  dependencies:
+    "@types/prop-types" "*"
+    "@types/scheduler" "*"
+    csstype "^3.0.2"
+`}{`
+"@types/react@17.0.47":
+  version "17.0.47"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.47.tgz#4ee71aaf4c5a9e290e03aa4d0d313c5d666b3b78"
+  integrity sha512-mk0BL8zBinf2ozNr3qPnlu1oyVTYq+4V7WA76RgxUAtf0Em/Wbid38KN6n4abEkvO4xMTBWmnP1FtQzgkEiJoA==
+  dependencies:
+    "@types/prop-types" "*"
+    "@types/scheduler" "*"
+    csstype "^3.0.2"
+`}
+</CodeBlock>
+
+</details>
+
+By adding the `resolutions` configuration to package.json, the `@types/react` package is pointing correctly to the React version used (v17), resolving this error message.
