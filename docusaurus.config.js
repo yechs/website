@@ -43,6 +43,11 @@ module.exports = {
             position: 'left',
           },
           {
+            to: '/gallery',
+            label: 'Gallery',
+            position: 'left',
+          },
+          {
             href: 'https://github.com/yechs',
             label: 'GitHub',
             position: 'right',
