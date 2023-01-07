@@ -30,7 +30,7 @@ function Gallery({ images }: GalleryProps): JSX.Element {
           if (containerWidth < 1200) return 3;
           return 4;
         }}
-        onClick={(_event, _photo, index) => setPhotoIndex(index)}
+        onClick={({ index }) => setPhotoIndex(index)}
       />
 
       <Lightbox
