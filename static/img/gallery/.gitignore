@@ -1,0 +1,2 @@
+# only include processed jpg
+**/*[^w].jpg

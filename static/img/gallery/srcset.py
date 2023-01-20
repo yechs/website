@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 
-IMAGE_PREFIXES = ('.jpg', '.jpeg', '.png')
-# TARGET_WIDTHS = [1920, 1440, 1024, 768, 640, 320]
-TARGET_WIDTHS = [1920, 1440, 1024, 640, 320]
-BASE_DIR = '/img/gallery/'
-
 import argparse
 import os
 import json
 from PIL import Image
+
+IMAGE_PREFIXES = ('.jpg', '.jpeg', '.png')
+# TARGET_WIDTHS = [1920, 1440, 1024, 768, 640, 320]
+TARGET_WIDTHS = [1920, 1440, 1024, 640, 320]
+BASE_DIR = '/img/gallery/'
 
 parser = argparse.ArgumentParser(
     prog='srcset',
@@ -83,4 +83,5 @@ print("JSON Configuration:")
 print(json.dumps(outputs)[1:-1])  # remove the [ and ] at the beginning and end
 print("")
 print("Don't forget to run jpegoptim on the images.")
-print(f"jpegoptim -s {args.dirname}/*.jpg")
+print(f"jpegoptim -s --all-progressive {args.dirname}/*.jpg")
+print(f"jpegoptim -s --all-normal {args.dirname}/*.jpg")
