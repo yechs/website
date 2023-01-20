@@ -34,7 +34,7 @@
     "react-photo-album": "2.0.0",
     "rehype-katex": "4.0.0",
     "remark-math": "3.0.1",
-    "yet-another-react-lightbox": "2.2.5"
+    "yet-another-react-lightbox": "2.2.7"
   },
   "browserslist": {
     "production": [
@@ -63,7 +63,7 @@
     "typescript": "4.9.3"
   },
   "resolutions": {
-    "@types/react": "17.0.52"
+    "@types/react": "17.0.53"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
