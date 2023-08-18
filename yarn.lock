@@ -7060,10 +7060,10 @@ react-masonry-css@1.0.16:
   resolved "https://registry.yarnpkg.com/react-masonry-css/-/react-masonry-css-1.0.16.tgz#72b28b4ae3484e250534700860597553a10f1a2c"
   integrity sha512-KSW0hR2VQmltt/qAa3eXOctQDyOu7+ZBevtKgpNDSzT7k5LA/0XntNa9z9HKCdz3QlxmJHglTZ18e4sX4V8zZQ==
 
-react-photo-album@2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/react-photo-album/-/react-photo-album-2.0.0.tgz#5c93bbbe6818019b31788bdc93d741f10f8a69dd"
-  integrity sha512-kmtHZ5XOMF6dozMlyM8/NhK9PQbEkvZVryCYqB1L9JavZNGGx5bUT7SBw401HeGO9xY1MI1+49l5l+7xok4zRA==
+react-photo-album@2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/react-photo-album/-/react-photo-album-2.3.0.tgz#262afa60691d8ed5e25b8c8a73cec339ec515652"
+  integrity sha512-CU+UMK4ZQHIoPZ672TSst9loKE5bxy6w0+bf7bY4XOw1g1C7+VdDWCW+wD8wPpbg2ve38QBTS73HVe6xYLAQ3w==
 
 react-router-config@^5.1.1:
   version "5.1.1"
