@@ -7,14 +7,17 @@
   overflow: hidden;
   /*cursor: pointer;*/
   transition: all ease 400ms;
-  box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3),
+  box-shadow:
+    0 1px 2px 0 rgba(60, 64, 67, 0.3),
     0 1px 3px 1px rgba(60, 64, 67, 0.15);
 }
 
 .card:hover {
   /*transform: scale(1.02);*/
-  box-shadow: 0 13px 27px -5px rgba(50, 50, 93, 0.25),
-    0 8px 16px -8px rgba(0, 0, 0, 0.3), 0 -6px 16px -6px rgba(0, 0, 0, 0.03);
+  box-shadow:
+    0 13px 27px -5px rgba(50, 50, 93, 0.25),
+    0 8px 16px -8px rgba(0, 0, 0, 0.3),
+    0 -6px 16px -6px rgba(0, 0, 0, 0.03);
 }
 
 .card img {
