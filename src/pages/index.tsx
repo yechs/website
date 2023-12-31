@@ -1,13 +1,18 @@
 import React, { ReactElement } from 'react';
 import clsx from 'clsx';
 import Layout from '@theme/Layout';
+
 // import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './index.module.css';
 import useBaseUrl from '@docusaurus/useBaseUrl';
+
 import Card from '../components/Card';
 import type { CardProps } from '../components/Card';
 import CardGrid from '../components/CardGrid';
 import HomepageCardsContent from '../data/HomepageCardsContent';
+
+import News from '../components/News';
+import HomepageNewsContent from '../data/HomepageNews';
 
 function HomepageHeader() {
   // const { siteConfig } = useDocusaurusContext();
@@ -122,10 +127,84 @@ function AboutMe(): ReactElement {
   );
 }
 
+function RecentNews(): ReactElement {
+  return (
+    <section className={styles.sectionContainer}>
+      <h2 className={styles.sectionTitle}>Recent News</h2>
+      <div>
+        <News news={HomepageNewsContent} />
+      </div>
+    </section>
+  );
+}
+
+function Publications(): ReactElement {
+  return (
+    <section className={styles.sectionContainer}>
+      <h2 className={styles.sectionTitle}>Publications</h2>
+      <ul className={styles.paperListing}>
+        <li>
+          <h3 className={styles.paperTitle}>
+            3 Other Manuscripts In Preparation
+          </h3>
+          <div className={styles.paperInfo}>
+            <small>
+              Respectively on the topics of network data plane verification,
+              formal verification of RESTful APIs, and censorship resistance.
+            </small>
+            <br />
+            Contact me for details if you are interested.
+          </div>
+        </li>
+        <li>
+          <h3 className={styles.paperTitle}>
+            SureVeyor: A Language for High-Quality Online Surveys
+          </h3>
+          <div className={styles.paperInfo}>
+            <small>
+              <u>
+                <b>Ye Shu</b>
+              </u>
+              , Emmie Hine, Hugo Hua, Emery Berger, Daniel Barowy.
+            </small>
+            <br />
+            <b>
+              <i>To Appear:</i>
+            </b>{' '}
+            PLATEAU 2024. [Contact me for preprint]
+          </div>
+        </li>
+        <li>
+          <h3 className={styles.paperTitle}>
+            Binary Reed-Solomon Coding Based Distributed Storage Scheme in
+            Information-Centric Fog Networks
+          </h3>
+          <div className={styles.paperInfo}>
+            <small>
+              <u>
+                <b>Ye Shu</b>
+              </u>
+              , Mianxiong Dong, Kaoru Ota, Jun Wu, Siyi Liao.
+            </small>
+            <br />
+            <b>
+              <i>In:</i>
+            </b>{' '}
+            IEEE CAMAD 2018.{' '}
+            <a href="https://ieeexplore.ieee.org/document/8514998">
+              [PDF (IEEE Xplore)]
+            </a>
+          </div>
+        </li>
+      </ul>
+    </section>
+  );
+}
+
 function HomepageCardGrid(): ReactElement {
   return (
     <section className={styles.sectionContainer}>
-      <h2 className={styles.sectionTitle}>Trivia</h2>
+      <h2 className={styles.sectionTitle}>Miscellaneous</h2>
       <CardGrid>
         {HomepageCardsContent.map((props: CardProps, idx) => (
           <Card
@@ -153,6 +232,8 @@ export default function Home(): ReactElement {
       <HomepageHeader />
       <main>
         <AboutMe />
+        <RecentNews />
+        <Publications />
         <HomepageCardGrid />
       </main>
     </Layout>

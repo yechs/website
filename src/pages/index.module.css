@@ -51,3 +51,20 @@
     margin: 3rem 4% 2rem;
   }
 }
+
+.paperListing li {
+  margin: 0 0 1rem;
+}
+
+.paperTitle {
+  font-size: 1.2rem;
+  margin: 0 0 0.3em 0;
+}
+
+.paperInfo {
+  color: #666666;
+}
+
+.paperInfo small {
+  font-size: 1rem;
+}
