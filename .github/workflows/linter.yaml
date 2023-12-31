@@ -6,16 +6,16 @@ on:
       - '!main' # excludes main
   pull_request:
 env:
-  NODE_VERSION: '16'
+  NODE_VERSION: '20'
 
 jobs:
   lint:
     name: Syntax & Format Linter
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Uses Node.js ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
       - name: Install Dependencies
