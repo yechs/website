@@ -1,0 +1,9 @@
+{
+  "position": 20,
+  "label": "Software Programming",
+  "collapsible": true,
+  "collapsed": false,
+  "customProps": {
+    "description": "Miscellaneous software programming knowledge."
+  }
+}

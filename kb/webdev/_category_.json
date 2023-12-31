@@ -1,0 +1,9 @@
+{
+  "position": 35,
+  "label": "Web Development",
+  "collapsible": true,
+  "collapsed": false,
+  "customProps": {
+    "description": "Practical Web Development knowledge."
+  }
+}
