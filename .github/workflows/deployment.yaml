@@ -30,7 +30,7 @@ jobs:
     needs: lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           # fetch all commit history so "Last Updated" field will be accurate
           fetch-depth: 0
