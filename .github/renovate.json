@@ -12,25 +12,47 @@
         "^@tsconfig/",
         "^@babel/"
       ],
-      "matchPackageNames": [
-        "eslint-plugin-flowtype",
-        "prettier",
-        "typescript",
-        "lint-staged",
-        "husky"
-      ],
+      "matchPackageNames": ["prettier", "typescript", "lint-staged", "husky"],
       "matchUpdateTypes": ["patch", "minor"],
       "schedule": ["before 3am on the first day of the month"],
       "groupName": "dev-dependencies (non-major)",
       "groupSlug": "dev-dependencies"
     },
     {
-      "matchPackageNames": [
-        "hast-util-is-element",
-        "rehype-katex",
-        "remark-math"
+      "matchDepTypes": ["devDependencies"],
+      "matchPackagePatterns": [
+        "^eslint",
+        "^@typescript-eslint/",
+        "^@types/",
+        "^@tsconfig/",
+        "^@babel/"
       ],
-      "groupName": "katex",
+      "matchPackageNames": ["prettier", "typescript", "lint-staged", "husky"],
+      "matchUpdateTypes": ["major"],
+      "schedule": ["before 3am on the first day of the month"],
+      "groupName": "dev-dependencies (major)",
+      "groupSlug": "dev-dependencies-major"
+    },
+    {
+      "matchPackageNames": [
+        "react-masonry-css",
+        "react-photo-album",
+        "yet-another-react-lightbox"
+      ],
+      "schedule": ["before 3am on the first day of the month"],
+      "groupName": "masonry-dependencies",
+      "groupSlug": "masonry-dependencies"
+    },
+    {
+      "matchPackageNames": ["rehype-katex", "remark-math"],
+      "matchUpdateTypes": ["patch", "minor"],
+      "schedule": ["before 3am on the first day of the month"],
+      "groupName": "docusaurus-math",
+      "groupSlug": "docusaurus-math"
+    },
+    {
+      "matchPackageNames": ["rehype-katex", "remark-math"],
+      "groupName": "docusaurus-math",
       "matchUpdateTypes": ["major"],
       "enabled": false
     }
