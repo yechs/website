@@ -14,10 +14,6 @@
   align-items: center;
 }
 
-.cardGrid {
-  padding: 2% 8% 4%;
-}
-
 /* In smaller screens reduce the spacing */
 @media only screen and (max-width: 992px) {
   .grid-column {
@@ -26,11 +22,5 @@
 
   .grid-container {
     margin-left: -5px; /* gutter size offset */
-  }
-}
-
-@media only screen and (max-width: 1200px) {
-  .cardGrid {
-    padding: 2% 4% 4%;
   }
 }

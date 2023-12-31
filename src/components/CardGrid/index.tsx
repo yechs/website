@@ -4,7 +4,10 @@ import Masonry from 'react-masonry-css';
 
 import styles from './CardGrid.module.css';
 
-function CardGrid(props: { children: React.ReactNode }): ReactElement {
+function CardGrid(props: {
+  children: React.ReactNode;
+  className?: string;
+}): ReactElement {
   const breakpointColumnsObj = {
     default: 4,
     1400: 3,
@@ -13,7 +16,7 @@ function CardGrid(props: { children: React.ReactNode }): ReactElement {
   };
 
   return (
-    <div className={styles.cardGrid}>
+    <div className={props.className}>
       <Masonry
         breakpointCols={breakpointColumnsObj}
         className={styles['grid-container']}
