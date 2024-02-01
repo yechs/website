@@ -12,7 +12,13 @@
         "^@tsconfig/",
         "^@babel/"
       ],
-      "matchPackageNames": ["prettier", "typescript", "lint-staged", "husky"],
+      "matchPackageNames": [
+        "prettier",
+        "typescript",
+        "lint-staged",
+        "husky",
+        "yarn"
+      ],
       "matchUpdateTypes": ["patch", "minor"],
       "schedule": ["before 3am on the first day of the month"],
       "groupName": "dev-dependencies (non-major)",
@@ -54,12 +60,6 @@
       "matchPackageNames": ["rehype-katex", "remark-math"],
       "groupName": "docusaurus-math",
       "matchUpdateTypes": ["major"],
-      "enabled": false
-    },
-    {
-      "matchPackageNames": ["yarn"],
-      "groupName": "yarn",
-      "matchUpdateTypes": ["major", "minor", "patch"],
       "enabled": false
     }
   ]
