@@ -55,6 +55,12 @@
       "groupName": "docusaurus-math",
       "matchUpdateTypes": ["major"],
       "enabled": false
+    },
+    {
+      "matchPackageNames": ["yarn"],
+      "groupName": "yarn",
+      "matchUpdateTypes": ["major", "minor", "patch"],
+      "enabled": false
     }
   ]
 }
