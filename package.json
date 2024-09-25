@@ -37,8 +37,8 @@
   "dependencies": {
     "@docusaurus/core": "3.5.2",
     "@docusaurus/preset-classic": "3.5.2",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
     "react-masonry-css": "1.0.16",
     "react-photo-album": "2.4.1",
     "rehype-katex": "7.0.0",
@@ -61,7 +61,7 @@
     "typescript": "5.3.3"
   },
   "resolutions": {
-    "@types/react": "18.2.62"
+    "@types/react": "18.3.9"
   },
   "browserslist": {
     "production": [
