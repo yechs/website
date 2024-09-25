@@ -12690,12 +12690,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-photo-album@npm:2.3.1":
-  version: 2.3.1
-  resolution: "react-photo-album@npm:2.3.1"
+"react-photo-album@npm:2.4.1":
+  version: 2.4.1
+  resolution: "react-photo-album@npm:2.4.1"
   peerDependencies:
     react: ">=16.8.0"
-  checksum: 10c0/3acc1775c2f4f3680b994b381b897e6ebb1b772f9d25582a54697336940423083f33b7f9afbf3a97a0585f338e0b0623df2a2e5d08478d1c60d5a8f1ba1883d2
+  checksum: 10c0/8342eebe24d4eadf62a099edf13ade02618556d189c3c5c7ef537deb3ba518342ac7322753b3ac23749a8af52830dd40d9aba6391d0df8ff419979a8eecfa5a8
   languageName: node
   linkType: hard
 
@@ -15037,11 +15037,11 @@ __metadata:
     react: "npm:18.2.0"
     react-dom: "npm:18.2.0"
     react-masonry-css: "npm:1.0.16"
-    react-photo-album: "npm:2.3.1"
+    react-photo-album: "npm:2.4.1"
     rehype-katex: "npm:7.0.0"
     remark-math: "npm:6.0.0"
     typescript: "npm:5.3.3"
-    yet-another-react-lightbox: "npm:3.17.0"
+    yet-another-react-lightbox: "npm:3.21.6"
   languageName: unknown
   linkType: soft
 
@@ -15311,13 +15311,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yet-another-react-lightbox@npm:3.17.0":
-  version: 3.17.0
-  resolution: "yet-another-react-lightbox@npm:3.17.0"
+"yet-another-react-lightbox@npm:3.21.6":
+  version: 3.21.6
+  resolution: "yet-another-react-lightbox@npm:3.21.6"
   peerDependencies:
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
-  checksum: 10c0/2bb8ae37f40f25b58a19d73d0eb1f03b8fb9e8f9d5a0083b6868a81bbb1161a033787db350ecf85a2fd19270eb3edc1c9586add290521812d9ac03ea40bc4aa1
+  checksum: 10c0/5488949baf3a03a78a450a50b1e490f1d9baa1ccc79e95bdff35e1dc781121889cfff6a2087da1396547003b7bf22d46050375e58bbb840d86350677a8d4fe93
   languageName: node
   linkType: hard
 
