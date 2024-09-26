@@ -5,6 +5,10 @@ import type { CardProps } from '../components/Card';
 
 const HomepageCardsContent: CardProps[] = [
   {
+    title: 'Outdated Contents 🚧',
+    children: <p>These cards haven&apos;t been updated since 2020.</p>,
+  },
+  {
     title: 'Hello 👋',
     children: (
       <p>

@@ -3,6 +3,45 @@ import { NewsItem } from '../components/News';
 
 const HomepageNewsContent: NewsItem[] = [
   {
+    date: '2024/09/23',
+    content: <>I started my PhD studies at UCSD!</>,
+  },
+  {
+    date: '2024/06/02',
+    content: (
+      <>
+        I graudated{' '}
+        <a href="https://commencement.williams.edu/commencement-2024/program-2024/latin-honors-2024/">
+          cum laude
+        </a>{' '}
+        from Williams College with{' '}
+        <a href="https://commencement.williams.edu/commencement-2024/program-2024/departmental-honors-2024/">
+          <b>highest honors</b>
+        </a>{' '}
+        in Computer Science! I am also{' '}
+        <a href="https://commencement.williams.edu/commencement-2024/program-2024/sigma-xi-2024/">
+          inducted to Sigma Xi
+        </a>
+        , the Scientific Research Honor Society.
+      </>
+    ),
+  },
+  {
+    date: '2024/05/14',
+    content: (
+      <>
+        I defended my <a href="https://doi.org/10.36934/TR2024_234">thesis</a>,
+        in which I used symbolic execution to formally verify conformance of
+        Express.JS programs to OpenAPI specifications. The presentation was
+        awarded{' '}
+        <a href="https://commencement.williams.edu/fellowships-and-prizes-2024/">
+          Sam Goldberg Colloquium Prize in Computer Science
+        </a>{' '}
+        for <b>best thesis defense</b>.
+      </>
+    ),
+  },
+  {
     date: '2023/12/20',
     content: (
       <>

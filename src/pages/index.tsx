@@ -46,61 +46,44 @@ function AboutMe(): ReactElement {
         <h2 className={styles.sectionTitle}>About Me</h2>
         <div>
           <p>
-            I am a senior at <a href="https://williams.edu">Williams College</a>
-            , majoring in{' '}
+            I am a first-year Computer Science PhD student advised by Prof.{' '}
+            <a href="https://cseweb.ucsd.edu/~savage/">Stefan Savage</a> and
+            Prof. <a href="https://cseweb.ucsd.edu/~voelker/">Geoff Voelker</a>{' '}
+            at University of California, San Diego. I am broadly interested in
+            Security, Network Systems, and Programming Languages. I seek to
+            combine formal and empirical methods to combat network security
+            issues.
+          </p>
+          <p>
+            Before joining UCSD, I was a{' '}
             <a href="https://csci.williams.edu/">Computer Science</a> and{' '}
-            <a href="https://philosophy.williams.edu">Philosophy</a>. I am
-            broadly interested in Computer Security, Network Systems, and
-            Programming Languages. I seek to combine formal and empirical
-            methods to combat network and software security issues. I am
-            currently looking for PhD opportunities in these areas. If you want
-            to talk, feel free to reach out at{' '}
-            <code>ys5 [at] williams [dot] edu</code>!
+            <a href="https://philosophy.williams.edu">Philosophy</a> double
+            major at <a href="https://williams.edu">Williams College</a>, where
+            I worked with Prof.{' '}
+            <a href="https://www.cs.williams.edu/~dbarowy/">Daniel Barowy</a> on
+            various Programming Language topics. We used symbolic execution to
+            formally verify conformance to OpenAPI specifications and also
+            developed a domain specific language for online surveys (in
+            collaboration with Prof.{' '}
+            <a href="https://emeryberger.com/">Emery Berger</a>). In addition, I
+            have spent a summer working with Prof.{' '}
+            <a href="https://ensa.fi">Roya Ensafi</a> at{' '}
+            <a href="https://umich.edu">University of Michigan</a>, where we
+            proposed a novel censorship-resistant bootstrapping methods for
+            network proxies.
           </p>
           <p>
-            Currently I am working on my thesis, which explores formal
-            guarantees on Web API-related codes. For the past summer, I have
-            been working on novel censorship-resistant bootstrapping methods for
-            network proxies with <a href="https://ensa.fi">Prof. Roya Ensafi</a>{' '}
-            at <a href="https://umich.edu">University of Michigan</a>. Before
-            that, I worked with{' '}
-            <a href="https://www.cs.williams.edu/~dbarowy/">
-              Prof. Daniel Barowy
-            </a>{' '}
-            and{' '}
-            <a href="https://https://emeryberger.com/">Prof. Emery Berger</a> on
-            SureVeyor—a domain specific language and runtime system that
-            constructs randomized, replicable, confound-controlling behavioral
-            surveys and returns noise-free responses.
-          </p>
-          <p>
-            I am a Linuxer and{' '}
-            <a href="https://wiki.archlinux.org/title/arch_is_the_best">
-              &quot;BTW I Use Arch&quot;
-            </a>{' '}
-            (XD). I went distro-hopping for a long time, before getting into{' '}
-            <a href="https://wiki.archlinux.org/title/Arch_Linux#Principles">
-              the Arch philosophy
-            </a>
-            . It is now my invaluable partner in various open source
-            contributions, which you can find on{' '}
-            <a href="https://github.com/yechs">my GitHub profile</a>. I am also
-            a security and privacy paranoid.
-          </p>
-          <p>
-            Within the philosophical domain, I am fascinated about epistemology
-            and philosophy of science. I am heavily influenced by the
-            philosophical traditions of{' '}
+            Within the philosophical domain, I am fascinated about epistemology,
+            philosophy of science, and philosophy of mind. In English, they are
+            just fancy terms for what we know, how our beliefs are justified,
+            and whether we can build cognizant machines (read: AI). I am heavily
+            influenced by the philosophical traditions of{' '}
             <a href="https://plato.stanford.edu/entries/skepticism/">
               skepticism
-            </a>
-            ,{' '}
+            </a>{' '}
+            and{' '}
             <a href="https://plato.stanford.edu/entries/relativism/">
               relativism
-            </a>
-            , and{' '}
-            <a href="https://plato.stanford.edu/entries/pragmatism/">
-              pragmatism
             </a>
             . Some of my favorite philosophers are{' '}
             <a href="https://plato.stanford.edu/entries/hume/">David Hume</a>,{' '}
@@ -115,11 +98,7 @@ function AboutMe(): ReactElement {
             <a href="https://en.wikipedia.org/wiki/Daniel_Dennett">
               Daniel Dennett
             </a>
-            . Many have also nudged me to read{' '}
-            <a href="https://plato.stanford.edu/entries/dewey/">John Dewey</a>,
-            which I have yet to do. Generally speaking, I am always curious in
-            what we know, how our beliefs are justified, and whether we can
-            build cognizant machines (read: AI).
+            .
           </p>
         </div>
       </section>
@@ -150,12 +129,39 @@ function Publications(): ReactElement {
           <div className={styles.paperInfo}>
             <small>
               Respectively on the topics of network data plane verification,
-              formal verification of RESTful APIs, and censorship resistance.
+              domain specific language for online surveys, and censorship
+              resistance.
             </small>
             <br />
             Contact me for details if you are interested.
           </div>
         </li>
+        <li>
+          <h3 className={styles.paperTitle}>
+            RESTAssured: Formally Verifying RESTful API Specification
+            Conformance in Server-side Web Applications
+          </h3>
+          <div className={styles.paperInfo}>
+            <small>
+              <u>
+                <b>Ye Shu</b>
+              </u>
+              . Advised by Daniel Barowy.
+            </small>
+            <br />
+            <b>
+              <i>Undergraduate Honor Thesis.</i>
+            </b>{' '}
+            Williams College. 2024. Won <b>Heighest Honors</b> and{' '}
+            <b>Goldberg Colloquium Prize for Best CS Thesis Defense.</b>{' '}
+            <span className={styles.paperLinks}>
+              <a href="https://doi.org/10.36934/TR2024_234">
+                [PDF (Williams College)]
+              </a>
+            </span>
+          </div>
+        </li>
+
         <li>
           <h3 className={styles.paperTitle}>
             SureVeyor: A Language for High-Quality Online Surveys
@@ -169,9 +175,15 @@ function Publications(): ReactElement {
             </small>
             <br />
             <b>
-              <i>To Appear:</i>
+              <i>Presented At:</i>
             </b>{' '}
-            PLATEAU 2024. [Contact me for preprint]
+            PLATEAU 2024.{' '}
+            <span className={styles.paperLinks}>
+              <a href="https://2024.plateau-workshop.org/program">
+                [Conference]
+              </a>{' '}
+              [Contact me for paper]
+            </span>
           </div>
         </li>
         <li>
@@ -191,9 +203,14 @@ function Publications(): ReactElement {
               <i>In:</i>
             </b>{' '}
             IEEE CAMAD 2018.{' '}
-            <a href="https://ieeexplore.ieee.org/document/8514998">
-              [PDF (IEEE Xplore)]
-            </a>
+            <span className={styles.paperLinks}>
+              <a href="https://camad2018.ieee-camad.org/program/index.html">
+                [Conference]
+              </a>{' '}
+              <a href="https://ieeexplore.ieee.org/document/8514998">
+                [PDF (IEEE Xplore)]
+              </a>
+            </span>
           </div>
         </li>
       </ul>

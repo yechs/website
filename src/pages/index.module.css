@@ -68,3 +68,13 @@
 .paperInfo small {
   font-size: 1rem;
 }
+
+.paperLinks {
+  display: inline;
+}
+
+@media only screen and (max-width: 1200px) {
+  .paperLinks {
+    display: block;
+  }
+}
