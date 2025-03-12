@@ -15349,7 +15349,7 @@ __metadata:
     rehype-katex: "npm:7.0.1"
     remark-math: "npm:6.0.0"
     typescript: "npm:5.6.2"
-    yet-another-react-lightbox: "npm:3.21.6"
+    yet-another-react-lightbox: "npm:3.21.8"
   languageName: unknown
   linkType: soft
 
@@ -15634,13 +15634,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yet-another-react-lightbox@npm:3.21.6":
-  version: 3.21.6
-  resolution: "yet-another-react-lightbox@npm:3.21.6"
+"yet-another-react-lightbox@npm:3.21.8":
+  version: 3.21.8
+  resolution: "yet-another-react-lightbox@npm:3.21.8"
   peerDependencies:
-    react: ">=16.8.0"
-    react-dom: ">=16.8.0"
-  checksum: 10c0/5488949baf3a03a78a450a50b1e490f1d9baa1ccc79e95bdff35e1dc781121889cfff6a2087da1396547003b7bf22d46050375e58bbb840d86350677a8d4fe93
+    "@types/react": ^16 || ^17 || ^18 || ^19
+    "@types/react-dom": ^16 || ^17 || ^18 || ^19
+    react: ^16.8.0 || ^17 || ^18 || ^19
+    react-dom: ^16.8.0 || ^17 || ^18 || ^19
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    "@types/react-dom":
+      optional: true
+  checksum: 10c0/0f04440324f08013a9b62d60bda1569abbb7e2197fa5d64cf7e0c3f652d5b675b1b67320261f721dbc45416bd8ab83a8542ec7122bed71440636f16d51a9f620
   languageName: node
   linkType: hard
 
