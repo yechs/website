@@ -43,7 +43,7 @@
     "react-photo-album": "2.4.1",
     "rehype-katex": "7.0.1",
     "remark-math": "6.0.0",
-    "yet-another-react-lightbox": "3.21.6"
+    "yet-another-react-lightbox": "3.21.8"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.5.2",
