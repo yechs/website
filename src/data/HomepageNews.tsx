@@ -3,6 +3,19 @@ import { NewsItem } from '../components/News';
 
 const HomepageNewsContent: NewsItem[] = [
   {
+    date: '2025/03/05',
+    content: (
+      <>
+        I am featured in this{' '}
+        <a href="https://sparc.cra.org/helping-computer-science-research-by-improving-online-surveys/">
+          CRA-E Undergraduate Research Highlights article
+        </a>{' '}
+        where I talk about my undergrad research experience and my SureVeyor
+        project.
+      </>
+    ),
+  },
+  {
     date: '2024/09/23',
     content: <>I started my PhD studies at UCSD!</>,
   },
