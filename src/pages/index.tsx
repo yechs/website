@@ -124,16 +124,24 @@ function Publications(): ReactElement {
       <ul className={styles.paperListing}>
         <li>
           <h3 className={styles.paperTitle}>
-            3 Other Manuscripts In Preparation
+            Poster: When Blocks Go Missing: The Timeliness and Trustworthiness
+            of Blockchain RPC Providers
           </h3>
           <div className={styles.paperInfo}>
             <small>
-              Respectively on the topics of network data plane verification,
-              domain specific language for online surveys, and censorship
-              resistance.
+              <u>
+                <b>Ye Shu</b>
+              </u>
+              , Deian Stefan, Stefan Savage, Geoffrey M. Voelker, Enze Liu.
             </small>
             <br />
-            Contact me for details if you are interested.
+            <b>
+              <i>At:</i>
+            </b>{' '}
+            IMC 2025.{' '}
+            <span className={styles.paperLinks}>
+              <a href="papers/bsc-rpc-imc25.pdf">[Extended Abstract (PDF)]</a>
+            </span>
           </div>
         </li>
         <li>
@@ -155,8 +163,9 @@ function Publications(): ReactElement {
             Williams College. 2024. Won <b>Heighest Honors</b> and{' '}
             <b>Goldberg Colloquium Prize for Best CS Thesis Defense.</b>{' '}
             <span className={styles.paperLinks}>
+              <a href="papers/RESTAssured-thesis.pdf">[PDF]</a>{' '}
               <a href="https://doi.org/10.36934/TR2024_234">
-                [PDF (Williams College)]
+                [Williams College Library]
               </a>
             </span>
           </div>
