@@ -12889,12 +12889,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-photo-album@npm:2.4.1":
-  version: 2.4.1
-  resolution: "react-photo-album@npm:2.4.1"
+"react-photo-album@npm:3.6.1":
+  version: 3.6.1
+  resolution: "react-photo-album@npm:3.6.1"
   peerDependencies:
-    react: ">=16.8.0"
-  checksum: 10c0/8342eebe24d4eadf62a099edf13ade02618556d189c3c5c7ef537deb3ba518342ac7322753b3ac23749a8af52830dd40d9aba6391d0df8ff419979a8eecfa5a8
+    "@types/react": ^18 || ^19
+    react: ^18 || ^19
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: 10c0/5ed800975a7e752af8c506590d81e4ae126c0fa7508c7ce9e9e7e0dc61c877080411f84c172b1bc6178ed69cc70613ba983cbd6e5afb0fcdea8e6d6eccb1aeba
   languageName: node
   linkType: hard
 
@@ -15345,7 +15349,7 @@ __metadata:
     react: "npm:18.3.1"
     react-dom: "npm:18.3.1"
     react-masonry-css: "npm:1.0.16"
-    react-photo-album: "npm:2.4.1"
+    react-photo-album: "npm:3.6.1"
     rehype-katex: "npm:7.0.1"
     remark-math: "npm:6.0.0"
     typescript: "npm:5.6.2"
