@@ -1,26 +1,25 @@
 .grid-container {
-  display: -webkit-box; /* Not needed if autoprefixing */
-  display: -ms-flexbox; /* Not needed if autoprefixing */
-  display: flex;
-  margin-left: -10px; /* gutter size offset */
-  width: auto;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  align-items: start;
 }
 
-.grid-column {
-  padding-left: 10px; /* gutter size */
-  background-clip: padding-box;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* In smaller screens reduce the spacing */
-@media only screen and (max-width: 992px) {
-  .grid-column {
-    padding-left: 5px; /* gutter size */
-  }
-
+@media (max-width: 87.5rem) {
   .grid-container {
-    margin-left: -5px; /* gutter size offset */
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 48rem) {
+  .grid-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 36rem) {
+  .grid-container {
+    grid-template-columns: 1fr;
   }
 }

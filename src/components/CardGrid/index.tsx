@@ -1,29 +1,16 @@
-import React, { ReactElement } from 'react';
-// import clsx from 'clsx';
-import Masonry from 'react-masonry-css';
+import type { ReactNode } from 'react';
 
 import styles from './CardGrid.module.css';
 
-function CardGrid(props: {
-  children: React.ReactNode;
-  className?: string;
-}): ReactElement {
-  const breakpointColumnsObj = {
-    default: 4,
-    1400: 3,
-    768: 2,
-    576: 1,
-  };
+interface CardGridProps {
+  readonly children: ReactNode;
+  readonly className?: string;
+}
 
+function CardGrid({ children, className }: CardGridProps) {
   return (
-    <div className={props.className}>
-      <Masonry
-        breakpointCols={breakpointColumnsObj}
-        className={styles['grid-container']}
-        columnClassName={styles['grid-column']}
-      >
-        {props.children}
-      </Masonry>
+    <div className={className}>
+      <div className={styles['grid-container']}>{children}</div>
     </div>
   );
 }

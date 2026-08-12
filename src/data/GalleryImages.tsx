@@ -1,7 +1,6 @@
-import React from 'react';
 import type { Image } from '../components/Gallery';
 
-const images: Image[] = [
+const images: readonly Image[] = [
   {
     src: '/img/gallery/2022-06/20220602_162412-srcw.jpg',
     title: 'Inside High Museum of Art',

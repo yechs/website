@@ -1,14 +1,15 @@
-import React from 'react';
 import Link from '@docusaurus/Link';
 
 import type { CardProps } from '../components/Card';
 
-const HomepageCardsContent: CardProps[] = [
+const HomepageCardsContent: readonly CardProps[] = [
   {
+    id: 'outdated-contents',
     title: 'Outdated Contents 🚧',
     children: <p>These cards haven&apos;t been updated since 2020.</p>,
   },
   {
+    id: 'hello',
     title: 'Hello 👋',
     children: (
       <p>
@@ -19,6 +20,7 @@ const HomepageCardsContent: CardProps[] = [
     ),
   },
   {
+    id: 'education',
     title: 'Education',
     children: (
       <p>
@@ -31,6 +33,7 @@ const HomepageCardsContent: CardProps[] = [
     ),
   },
   {
+    id: 'tech-stack',
     title: 'Tech Stack',
     children: (
       <p>
@@ -42,6 +45,7 @@ const HomepageCardsContent: CardProps[] = [
     ),
   },
   {
+    id: 'open-source',
     title: 'Open Source',
     children: (
       <p>
@@ -53,6 +57,7 @@ const HomepageCardsContent: CardProps[] = [
     ),
   },
   {
+    id: 'ctf-and-hackathons',
     title: 'CTF & Hackathons',
     children: (
       <p>
@@ -65,6 +70,7 @@ const HomepageCardsContent: CardProps[] = [
     ),
   },
   {
+    id: 'machine-learning',
     title: 'Machine Learning',
     children: (
       <p>
@@ -76,6 +82,7 @@ const HomepageCardsContent: CardProps[] = [
     ),
   },
   {
+    id: 'web-developing',
     title: 'Web Developing',
     children: (
       <p>
@@ -87,6 +94,7 @@ const HomepageCardsContent: CardProps[] = [
     ),
   },
   {
+    id: 'port-scanners',
     title: 'Port Scanners',
     children: (
       <p>
@@ -101,6 +109,7 @@ const HomepageCardsContent: CardProps[] = [
     ),
   },
   {
+    id: 'whats-up',
     title: "What's up?",
     children: (
       <p>
@@ -110,6 +119,7 @@ const HomepageCardsContent: CardProps[] = [
     ),
   },
   {
+    id: 'contact-me',
     title: 'Contact Me',
     children: (
       <>

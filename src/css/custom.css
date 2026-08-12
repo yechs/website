@@ -1,11 +1,5 @@
-/* stylelint-disable docusaurus/copyright-header */
-/**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
- */
+@import 'katex/dist/katex.min.css';
 
-/* You can override the default Infima variables here. */
 :root {
   --ifm-color-primary: #25c2a0;
   --ifm-color-primary-dark: rgb(33, 175, 144);
@@ -15,6 +9,33 @@
   --ifm-color-primary-lighter: rgb(102, 212, 189);
   --ifm-color-primary-lightest: rgb(146, 224, 208);
   --ifm-code-font-size: 95%;
+  --site-card-background: #fff;
+  --site-card-text-color: #4d4d4d;
+  --site-metadata-color: #5f6368;
+  --site-focus-color: #12634f;
+  --site-content-max: 80rem;
+}
+
+[data-theme='dark'] {
+  --site-card-background: var(--ifm-background-surface-color);
+  --site-card-text-color: #d7d7d7;
+  --site-metadata-color: #bfc2c5;
+  --site-focus-color: #61e6c5;
+}
+
+:where(a, button, [tabindex]):focus-visible {
+  outline: 0.2rem solid var(--site-focus-color);
+  outline-offset: 0.2rem;
+}
+
+.galleryPage {
+  width: min(100%, calc(var(--site-content-max) + 8rem));
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 4rem);
+}
+
+.galleryPage__title {
+  text-align: center;
 }
 
 .docusaurus-highlight-code-line {
@@ -22,4 +43,15 @@
   display: block;
   margin: 0 calc(-1 * var(--ifm-pre-padding));
   padding: 0 var(--ifm-pre-padding);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }

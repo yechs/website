@@ -1,6 +1,5 @@
 import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
-import type { EnumChangefreq } from 'sitemap'; // for changefreq settings in sitemap plugin
 
 import { themes as prismThemes } from 'prism-react-renderer';
 
@@ -16,7 +15,11 @@ const config: Config = {
   baseUrl: '/',
 
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+  markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: 'warn',
+    },
+  },
 
   // cross-repo deployment
   organizationName: 'yechs',
@@ -135,7 +138,7 @@ const config: Config = {
       {
         docs: {
           path: 'kb',
-          editUrl: 'https://github.com/yechs/website/edit/master/',
+          editUrl: 'https://github.com/yechs/website/edit/main/',
           editLocalizedFiles: false,
           routeBasePath: 'kb',
           sidebarPath: './sidebars.ts',
@@ -145,7 +148,7 @@ const config: Config = {
         },
         blog: {
           path: 'blog',
-          editUrl: 'https://github.com/yechs/website/edit/master/blog/',
+          editUrl: 'https://github.com/yechs/website/edit/main/blog/',
           blogTitle: 'Blog',
           blogDescription: 'Some thoughts from Ye Shu',
           blogSidebarCount: 5,
@@ -159,7 +162,7 @@ const config: Config = {
           customCss: './src/css/custom.css',
         },
         sitemap: {
-          changefreq: 'weekly' as EnumChangefreq,
+          changefreq: 'weekly',
           priority: 0.5,
         },
         gtag: {
@@ -167,18 +170,6 @@ const config: Config = {
         },
       } satisfies Preset.Options,
     ],
-  ],
-
-  // docusaurus math support
-  // https://docusaurus.io/docs/markdown-features/math-equations
-  stylesheets: [
-    {
-      href: 'https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css',
-      type: 'text/css',
-      integrity:
-        'sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM',
-      crossorigin: 'anonymous',
-    },
   ],
 };
 

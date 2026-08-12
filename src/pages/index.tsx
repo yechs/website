@@ -1,23 +1,16 @@
-import React, { ReactElement } from 'react';
-import clsx from 'clsx';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 import Layout from '@theme/Layout';
 
-// import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import styles from './index.module.css';
-import useBaseUrl from '@docusaurus/useBaseUrl';
-
 import Card from '../components/Card';
-import type { CardProps } from '../components/Card';
 import CardGrid from '../components/CardGrid';
-import HomepageCardsContent from '../data/HomepageCardsContent';
-
 import News from '../components/News';
+import HomepageCardsContent from '../data/HomepageCardsContent';
 import HomepageNewsContent from '../data/HomepageNews';
+import styles from './index.module.css';
 
 function HomepageHeader() {
-  // const { siteConfig } = useDocusaurusContext();
   return (
-    <header className={clsx('hero hero--primary', styles.heroBanner)}>
+    <header className={`hero hero--primary ${styles.heroBanner}`}>
       <div className="container">
         <h1 className="hero__title">Ye Shu (@yechs)</h1>
         <p className="hero__subtitle">Welcome to my website!</p>
@@ -27,19 +20,21 @@ function HomepageHeader() {
   );
 }
 
-function Avatar(): ReactElement {
+function Avatar() {
   return (
     <div className="text--center">
       <img
         className={styles.avatar}
         src={useBaseUrl('img/yechs.jpeg')}
-        alt={'Avatar'}
+        alt="Avatar"
+        width="160"
+        height="160"
       />
     </div>
   );
 }
 
-function AboutMe(): ReactElement {
+function AboutMe() {
   return (
     <>
       <section className={styles.sectionContainer}>
@@ -106,7 +101,7 @@ function AboutMe(): ReactElement {
   );
 }
 
-function RecentNews(): ReactElement {
+function RecentNews() {
   return (
     <section className={styles.sectionContainer}>
       <h2 className={styles.sectionTitle}>Recent News</h2>
@@ -117,7 +112,10 @@ function RecentNews(): ReactElement {
   );
 }
 
-function Publications(): ReactElement {
+function Publications() {
+  const bscRpcPdfUrl = useBaseUrl('papers/bsc-rpc-imc25.pdf');
+  const restAssuredPdfUrl = useBaseUrl('papers/RESTAssured-thesis.pdf');
+
   return (
     <section className={styles.sectionContainer}>
       <h2 className={styles.sectionTitle}>Publications</h2>
@@ -140,7 +138,7 @@ function Publications(): ReactElement {
             </b>{' '}
             IMC 2025.{' '}
             <span className={styles.paperLinks}>
-              <a href="papers/bsc-rpc-imc25.pdf">[Extended Abstract (PDF)]</a>
+              <a href={bscRpcPdfUrl}>[Extended Abstract (PDF)]</a>
             </span>
           </div>
         </li>
@@ -163,7 +161,7 @@ function Publications(): ReactElement {
             Williams College. 2024. Won <b>Heighest Honors</b> and{' '}
             <b>Goldberg Colloquium Prize for Best CS Thesis Defense.</b>{' '}
             <span className={styles.paperLinks}>
-              <a href="papers/RESTAssured-thesis.pdf">[PDF]</a>{' '}
+              <a href={restAssuredPdfUrl}>[PDF]</a>{' '}
               <a href="https://doi.org/10.36934/TR2024_234">
                 [Williams College Library]
               </a>
@@ -227,32 +225,23 @@ function Publications(): ReactElement {
   );
 }
 
-function HomepageCardGrid(): ReactElement {
+function HomepageCardGrid() {
   return (
     <section className={styles.sectionContainer}>
       <h2 className={styles.sectionTitle}>Miscellaneous</h2>
       <CardGrid>
-        {HomepageCardsContent.map((props: CardProps, idx) => (
-          <Card
-            key={idx}
-            title={props.title}
-            img={props.img}
-            imgAlt={props.imgAlt}
-            caption={props.caption}
-          >
-            {props.children}
-          </Card>
+        {HomepageCardsContent.map((card) => (
+          <Card key={card.id} {...card} />
         ))}
       </CardGrid>
     </section>
   );
 }
 
-export default function Home(): ReactElement {
-  // const { siteConfig } = useDocusaurusContext();
+export default function Home() {
   return (
     <Layout
-      title={`Ye Shu (@yechs)`}
+      title="Ye Shu (@yechs)"
       description="The personal website of Ye Shu, an undergraduate at Williams College who is enthusiastic in Computer Science, especially in Information Security and Communications"
     >
       <HomepageHeader />

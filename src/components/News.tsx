@@ -1,18 +1,23 @@
-import React, { ReactElement } from 'react';
+import type { ReactNode } from 'react';
 
 export interface NewsItem {
-  date?: string;
-  content: React.ReactNode;
+  readonly id: string;
+  readonly date?: string;
+  readonly content: ReactNode;
 }
 
-export default function News(props: { news: NewsItem[] }): ReactElement {
+export default function News({ news }: { news: readonly NewsItem[] }) {
   return (
     <ul>
-      {props.news.map((item: NewsItem, idx) => (
-        <li key={idx}>
+      {news.map((item) => (
+        <li key={item.id}>
           {item.date ? (
             <>
-              [<strong>{item.date}</strong>]{' '}
+              [
+              <time dateTime={item.date.replaceAll('/', '-')}>
+                <strong>{item.date}</strong>
+              </time>
+              ]{' '}
             </>
           ) : null}
           {item.content}
