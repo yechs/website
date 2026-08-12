@@ -1,43 +1,63 @@
 {
-  "extends": ["config:base", ":disableDependencyDashboard"],
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended", ":disableDependencyDashboard"],
   "labels": ["dependencies"],
   "reviewers": ["yechs"],
   "packageRules": [
     {
-      "matchDepTypes": ["devDependencies"],
-      "matchPackagePatterns": [
-        "^eslint",
-        "^@typescript-eslint/",
-        "^@types/",
-        "^@tsconfig/",
-        "^@babel/"
-      ],
       "matchPackageNames": [
-        "prettier",
-        "typescript",
-        "lint-staged",
+        "/^@babel\\//",
+        "/^@eslint\\//",
+        "/^@tsconfig\\//",
+        "/^@types\\//",
+        "/^eslint(?:-|$)/",
+        "/^typescript(?:-eslint)?$/",
+        "globals",
         "husky",
-        "yarn"
+        "lint-staged",
+        "prettier"
       ],
+      "matchDepTypes": ["devDependencies"],
       "matchUpdateTypes": ["patch", "minor"],
       "schedule": ["before 3am on the first day of the month"],
-      "groupName": "dev-dependencies (non-major)",
+      "groupName": "dev dependencies (non-major)",
       "groupSlug": "dev-dependencies"
     },
     {
-      "matchDepTypes": ["devDependencies"],
-      "matchPackagePatterns": [
-        "^eslint",
-        "^@typescript-eslint/",
-        "^@types/",
-        "^@tsconfig/",
-        "^@babel/"
+      "matchPackageNames": [
+        "/^@babel\\//",
+        "/^@eslint\\//",
+        "/^@tsconfig\\//",
+        "/^@types\\//",
+        "/^eslint(?:-|$)/",
+        "/^typescript(?:-eslint)?$/",
+        "globals",
+        "husky",
+        "lint-staged",
+        "prettier"
       ],
-      "matchPackageNames": ["prettier", "typescript", "lint-staged", "husky"],
+      "matchDepTypes": ["devDependencies"],
       "matchUpdateTypes": ["major"],
       "schedule": ["before 3am on the first day of the month"],
-      "groupName": "dev-dependencies (major)",
+      "groupName": "dev dependencies (major)",
       "groupSlug": "dev-dependencies-major"
+    },
+    {
+      "matchPackageNames": ["@docusaurus/**"],
+      "schedule": ["before 3am on the first day of the month"],
+      "groupName": "Docusaurus monorepo",
+      "groupSlug": "docusaurus"
+    },
+    {
+      "matchPackageNames": [
+        "react",
+        "react-dom",
+        "@types/react",
+        "@types/react-dom"
+      ],
+      "schedule": ["before 3am on the first day of the month"],
+      "groupName": "React monorepo",
+      "groupSlug": "react"
     },
     {
       "matchPackageNames": [
@@ -46,21 +66,26 @@
         "yet-another-react-lightbox"
       ],
       "schedule": ["before 3am on the first day of the month"],
-      "groupName": "masonry-dependencies",
-      "groupSlug": "masonry-dependencies"
+      "groupName": "gallery dependencies",
+      "groupSlug": "gallery-dependencies"
     },
     {
-      "matchPackageNames": ["rehype-katex", "remark-math"],
-      "matchUpdateTypes": ["patch", "minor"],
+      "matchPackageNames": ["katex", "rehype-katex", "remark-math"],
       "schedule": ["before 3am on the first day of the month"],
-      "groupName": "docusaurus-math",
+      "groupName": "Docusaurus math",
       "groupSlug": "docusaurus-math"
     },
     {
-      "matchPackageNames": ["rehype-katex", "remark-math"],
-      "groupName": "docusaurus-math",
-      "matchUpdateTypes": ["major"],
-      "enabled": false
+      "matchPackageNames": ["eslint"],
+      "allowedVersions": "<10.0.0"
+    },
+    {
+      "matchPackageNames": ["typescript"],
+      "allowedVersions": "<6.1.0"
+    },
+    {
+      "matchPackageNames": ["katex"],
+      "allowedVersions": "<0.17.0"
     }
   ]
 }
