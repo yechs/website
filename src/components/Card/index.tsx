@@ -1,26 +1,32 @@
-import React, { ReactElement } from 'react';
+import type { ReactNode } from 'react';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 import styles from './Card.module.css';
 
 interface CardProps {
-  img?: string;
-  imgAlt?: string;
-  title: string;
-  caption?: string;
-  children?: React.ReactNode;
+  readonly id: string;
+  readonly img?: string;
+  readonly imgAlt?: string;
+  readonly title: string;
+  readonly caption?: string;
+  readonly children?: ReactNode;
 }
 
-function Card(props: CardProps): ReactElement {
+function Card({ id, img, imgAlt, title, caption, children }: CardProps) {
+  const titleId = `card-${id}-title`;
+  const imageUrl = useBaseUrl(img);
+
   return (
-    <div className={styles.card}>
-      {props.img && <img src={props.img} alt={props.imgAlt} />}
+    <article className={styles.card} aria-labelledby={titleId}>
+      {imageUrl && <img src={imageUrl} alt={imgAlt ?? ''} loading="lazy" />}
       <div className={styles['card-body']}>
-        <h2 className={styles['card-title']}>{props.title}</h2>
-        {props.children}
-        {props.caption && (
-          <h5 className={styles['card-caption']}>{props.caption}</h5>
-        )}
+        <h3 id={titleId} className={styles['card-title']}>
+          {title}
+        </h3>
+        {children}
+        {caption && <p className={styles['card-caption']}>{caption}</p>}
       </div>
-    </div>
+    </article>
   );
 }
 

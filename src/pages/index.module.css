@@ -1,68 +1,49 @@
-/* stylelint-disable docusaurus/copyright-header */
-
-/**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
- */
-
 .heroBanner {
-  padding: 4rem 0;
+  padding-block: 4rem;
   text-align: center;
   position: relative;
   overflow: hidden;
 }
 
-@media screen and (max-width: 966px) {
+@media (max-width: 60.375rem) {
   .heroBanner {
     padding: 2rem;
   }
 }
 
-/*.buttons {*/
-/*  display: flex;*/
-/*  align-items: center;*/
-/*  justify-content: center;*/
-/*}*/
-
 .avatar {
-  /* margin-top: 20pt; */
   border-radius: 50%;
-  width: 120pt;
-  padding: 10pt;
-  background: #ffffff;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  width: 10rem;
+  height: 10rem;
+  padding: 0.75rem;
+  background: var(--site-card-background);
+  box-shadow: 0 0.25rem 0.5rem rgb(0 0 0 / 20%);
 }
 
 .sectionTitle {
   text-align: center;
   font-size: 2rem;
-  margin: 2rem 0 1rem;
+  margin-block: 2rem 1rem;
 }
 
 .sectionContainer {
-  margin: 3rem 8% 2rem;
+  width: min(calc(100% - 2rem), var(--site-content-max));
+  margin: 3rem auto 2rem;
   font-size: 1rem;
   position: relative;
 }
 
-@media only screen and (max-width: 1200px) {
-  .sectionContainer {
-    /* TODO */
-    margin: 3rem 4% 2rem;
-  }
-}
-
 .paperListing li {
-  margin: 0 0 1rem;
+  margin-block-end: 1rem;
 }
 
 .paperTitle {
   font-size: 1.2rem;
-  margin: 0 0 0.3em 0;
+  margin-block: 0 0.3rem;
 }
 
 .paperInfo {
-  color: #666666;
+  color: var(--site-metadata-color);
 }
 
 .paperInfo small {
@@ -73,7 +54,7 @@
   display: inline;
 }
 
-@media only screen and (max-width: 1200px) {
+@media (max-width: 75rem) {
   .paperLinks {
     display: block;
   }

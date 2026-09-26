@@ -1,33 +1,32 @@
-# Website
+# Ye Shu's Website
 
-This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
+This repository contains Ye Shu's personal academic and technical website: a
+profile of his work as a computer science PhD student at UC San Diego,
+publications and news, a blog, a knowledge base, and a photo gallery. The site
+is built with [Docusaurus](https://docusaurus.io/).
 
-## Installation
+## Prerequisites
 
-```console
-yarn install
-```
+- Node.js 24 LTS or newer
+- npm 11 or newer (included with Node.js 24)
 
-## Local Development
-
-```console
-yarn start
-```
-
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
-
-## Build
+## Install
 
 ```console
-yarn build
+npm ci
 ```
 
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
-
-## Deployment
+## Develop and validate
 
 ```console
-GIT_USER=<Your GitHub username> USE_SSH=true yarn deploy
+npm start          # Run the local development server
+npm run build      # Create the production site in build/
+npm run serve      # Serve an existing production build
+npm run typecheck  # Check TypeScript
+npm run lint       # Check JavaScript and TypeScript
+npm run format     # Check Prettier formatting
 ```
 
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+Use `npm run format:fix` to apply Prettier formatting. Profile and publication
+content lives in `src/`, blog posts in `blog/`, the knowledge base in `kb/`,
+translated content in `i18n/`, and static assets in `static/`.

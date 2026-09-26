@@ -1,21 +1,17 @@
-import React from 'react';
 import Layout from '@theme/Layout';
+
 import Gallery from '../components/Gallery';
 import images from '../data/GalleryImages';
 
-import '../css/page.css';
-
-export default function GalleryPage(): JSX.Element {
+export default function GalleryPage() {
   return (
     <Layout
-      title={`Gallery`}
-      description="The personal website of Ye Shu, an undergraduate at Williams College who is enthusiastic in Computer Science, especially in Information Security and Communications"
+      title="Gallery"
+      description="The photo gallery of Ye Shu, a computer science PhD student and researcher at UC San Diego"
     >
-      <main className={`mainContainer`}>
+      <main className="galleryPage">
         <div className="container margin-vert--lg">
-          <h1 className="hero__title" style={{ textAlign: 'center' }}>
-            Gallery
-          </h1>
+          <h1 className="hero__title galleryPage__title">Gallery</h1>
           <p>
             Welcome to my photo gallery. It includes some of the pictures I have
             taken in the past and occasionally some taken by my friends. Most
@@ -41,14 +37,16 @@ export default function GalleryPage(): JSX.Element {
             commercial use, please contact me or the copyright holder for
             permission.
           </p>
-          <p>
-            This page is still a work in progress. I plan to include the
-            following features in the future:
+          <>
+            <p>
+              This page is still a work in progress. I plan to include the
+              following features in the future:
+            </p>
             <ul>
               <li>Group and collapse photos by year</li>
               <li>Select the number of columns for display</li>
             </ul>
-          </p>
+          </>
 
           <Gallery images={images} />
         </div>

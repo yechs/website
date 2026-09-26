@@ -1,8 +1,8 @@
-import React from 'react';
-import { NewsItem } from '../components/News';
+import type { NewsItem } from '../components/News';
 
-const HomepageNewsContent: NewsItem[] = [
+const HomepageNewsContent: readonly NewsItem[] = [
   {
+    id: 'cra-e-research-highlights-2025',
     date: '2025/03/05',
     content: (
       <>
@@ -16,10 +16,12 @@ const HomepageNewsContent: NewsItem[] = [
     ),
   },
   {
+    id: 'ucsd-phd-start-2024',
     date: '2024/09/23',
     content: <>I started my PhD studies at UCSD!</>,
   },
   {
+    id: 'williams-graduation-2024',
     date: '2024/06/02',
     content: (
       <>
@@ -40,6 +42,7 @@ const HomepageNewsContent: NewsItem[] = [
     ),
   },
   {
+    id: 'thesis-defense-2024',
     date: '2024/05/14',
     content: (
       <>
@@ -55,6 +58,7 @@ const HomepageNewsContent: NewsItem[] = [
     ),
   },
   {
+    id: 'cra-honorable-mention-2023',
     date: '2023/12/20',
     content: (
       <>
@@ -68,6 +72,7 @@ const HomepageNewsContent: NewsItem[] = [
     ),
   },
   {
+    id: 'sureveyor-plateau-acceptance-2023',
     date: '2023/12/13',
     content: (
       <>
