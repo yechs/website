@@ -38,7 +38,7 @@ const config: Config = {
       // respectPrefersColorScheme: true,
     },
     navbar: {
-      title: '@yechs',
+      title: 'Ye Shu',
       logo: {
         alt: 'Ye Shu',
         src: 'img/yechs.jpeg',

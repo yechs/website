@@ -46,12 +46,20 @@
   color: var(--site-metadata-color);
 }
 
+.award {
+  color: #a67c00;
+}
+
 .paperInfo small {
   font-size: 1rem;
 }
 
 .paperLinks {
   display: inline;
+}
+
+.paperResourceLinks {
+  display: block;
 }
 
 @media (max-width: 75rem) {

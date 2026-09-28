@@ -2,6 +2,30 @@ import type { NewsItem } from '../components/News';
 
 const HomepageNewsContent: readonly NewsItem[] = [
   {
+    id: 'amazon-spi-internship',
+    date: '2026/09/18',
+    content: (
+      <>
+        I am interning as an Applied Scientist at Amazon with the Special
+        Projects and Investigations (SPI) team to help detect fraud and abuse at
+        scale on <a href="https://www.amazon.com/">Amazon.com</a>.
+      </>
+    ),
+  },
+  {
+    id: 'ucsd-cse-127-ta-2025',
+    date: '2025/09/22',
+    content: (
+      <>
+        I am TAing for{' '}
+        <a href="https://cseweb.ucsd.edu/classes/fa25/cse127-a/">
+          CSE 127: Computer Security
+        </a>{' '}
+        this fall.
+      </>
+    ),
+  },
+  {
     id: 'cra-e-research-highlights-2025',
     date: '2025/03/05',
     content: (
@@ -10,8 +34,8 @@ const HomepageNewsContent: readonly NewsItem[] = [
         <a href="https://sparc.cra.org/helping-computer-science-research-by-improving-online-surveys/">
           CRA-E Undergraduate Research Highlights article
         </a>{' '}
-        where I talk about my undergrad research experience and my SureVeyor
-        project.
+        in which I talk about my undergraduate research experience and my
+        SureVeyor project.
       </>
     ),
   },
@@ -25,7 +49,7 @@ const HomepageNewsContent: readonly NewsItem[] = [
     date: '2024/06/02',
     content: (
       <>
-        I graudated{' '}
+        I graduated{' '}
         <a href="https://commencement.williams.edu/commencement-2024/program-2024/latin-honors-2024/">
           cum laude
         </a>{' '}
@@ -33,9 +57,9 @@ const HomepageNewsContent: readonly NewsItem[] = [
         <a href="https://commencement.williams.edu/commencement-2024/program-2024/departmental-honors-2024/">
           <b>highest honors</b>
         </a>{' '}
-        in Computer Science! I am also{' '}
+        in Computer Science! I was also{' '}
         <a href="https://commencement.williams.edu/commencement-2024/program-2024/sigma-xi-2024/">
-          inducted to Sigma Xi
+          inducted into Sigma Xi
         </a>
         , the Scientific Research Honor Society.
       </>
@@ -62,7 +86,7 @@ const HomepageNewsContent: readonly NewsItem[] = [
     date: '2023/12/20',
     content: (
       <>
-        I am selected for <b>Honorable Mention</b> of the 2024 Computing
+        I was selected for an <b>Honorable Mention</b> in the 2024 Computing
         Research Association (CRA)&apos;s{' '}
         <a href="https://cra.org/crae/awards/cra-outstanding-undergraduate-researchers/">
           <b>Outstanding Undergraduate Researcher Award (URA)</b>

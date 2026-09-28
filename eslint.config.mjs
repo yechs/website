@@ -1,5 +1,6 @@
 import js from '@eslint/js';
 import eslintConfigPrettier from 'eslint-config-prettier';
+import { defineConfig } from 'eslint/config';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import react from 'eslint-plugin-react';
 import globals from 'globals';
@@ -7,7 +8,7 @@ import tseslint from 'typescript-eslint';
 
 const sourceFiles = ['**/*.{js,jsx,ts,tsx}'];
 
-export default tseslint.config(
+export default defineConfig(
   {
     ignores: ['**/.docusaurus/**', '**/build/**', '**/node_modules/**'],
   },
@@ -51,6 +52,7 @@ export default tseslint.config(
     rules: {
       // Docusaurus supports require() for static assets.
       '@typescript-eslint/no-require-imports': 'off',
+      '@typescript-eslint/no-unused-vars': 'warn',
     },
   },
   eslintConfigPrettier,

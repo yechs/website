@@ -8,6 +8,8 @@
   --ifm-color-primary-light: rgb(70, 203, 174);
   --ifm-color-primary-lighter: rgb(102, 212, 189);
   --ifm-color-primary-lightest: rgb(146, 224, 208);
+  --ifm-link-color: #005ea8;
+  --ifm-link-hover-color: #004b87;
   --ifm-code-font-size: 95%;
   --site-card-background: #fff;
   --site-card-text-color: #4d4d4d;
@@ -17,6 +19,8 @@
 }
 
 [data-theme='dark'] {
+  --ifm-link-color: #66b3ff;
+  --ifm-link-hover-color: #8ac7ff;
   --site-card-background: var(--ifm-background-surface-color);
   --site-card-text-color: #d7d7d7;
   --site-metadata-color: #bfc2c5;
