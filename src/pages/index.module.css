@@ -50,6 +50,11 @@
   color: #a67c00;
 }
 
+.awardIcon {
+  width: 1em;
+  height: 1em;
+}
+
 .paperInfo small {
   font-size: 1rem;
 }

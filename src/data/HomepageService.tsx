@@ -2,7 +2,6 @@ import type { ServiceItem } from '../components/Service';
 
 const HomepageServiceContent: readonly ServiceItem[] = [
   {
-    id: 'imc-stpc',
     content: (
       <>
         ACM Internet Measurement Conference/IMC (Shadow Technical Program
@@ -11,19 +10,15 @@ const HomepageServiceContent: readonly ServiceItem[] = [
     ),
   },
   {
-    id: 'usenix-aec',
     content: <>USENIX Security (Artifact Evaluation Committee): 2026</>,
   },
   {
-    id: 'conext-aec',
     content: <>ACM CoNext (Artifact Evaluation Committee): 2026</>,
   },
   {
-    id: 'pldi-volunteer',
     content: <>ACM PLDI (Student Volunteer): 2022</>,
   },
   {
-    id: 'gpsa',
     content: (
       <>
         CSE Department Representative to UCSD{' '}
@@ -35,13 +30,11 @@ const HomepageServiceContent: readonly ServiceItem[] = [
     ),
   },
   {
-    id: 'gsc',
     content: (
       <>Member of UCSD CSE Graduate Student Council (GSC) : 2025-Present</>
     ),
   },
   {
-    id: 'cossac',
     content: (
       <>
         Elected Member of{' '}
@@ -53,7 +46,6 @@ const HomepageServiceContent: readonly ServiceItem[] = [
     ),
   },
   {
-    id: 'unics-mentor',
     content: (
       <>
         Mentor for{' '}
@@ -65,11 +57,9 @@ const HomepageServiceContent: readonly ServiceItem[] = [
     ),
   },
   // {
-  //   id: 'ucsd-ta',
   //   content: <>UC San Diego (Teaching Assistant): CSE 127 Security Fall 2025</>,
   // },
   // {
-  //   id: 'williams-ta',
   //   content: (
   //     <>
   //       Williams College (Teaching Assistant):

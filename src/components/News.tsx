@@ -1,7 +1,6 @@
 import type { ReactNode } from 'react';
 
 export interface NewsItem {
-  readonly id: string;
   readonly date?: string;
   readonly content: ReactNode;
 }
@@ -16,8 +15,8 @@ export default function News({
   const visibleNews = news.slice(0, visibleCount);
   const olderNews = news.slice(visibleCount);
 
-  const renderNewsItem = (item: NewsItem) => (
-    <li key={item.id}>
+  const renderNewsItem = (item: NewsItem, index: number) => (
+    <li key={index}>
       {item.date ? (
         <>
           [
