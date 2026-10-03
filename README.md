@@ -1,32 +1,36 @@
 # Ye Shu's Website
 
-This repository contains Ye Shu's personal academic and technical website: a
-profile of his work as a computer science PhD student at UC San Diego,
-publications and news, a blog, a knowledge base, and a photo gallery. The site
-is built with [Docusaurus](https://docusaurus.io/).
+This repository contains Ye Shu's personal academic website: research,
+publications, occasional writing, service, photography, and an archived
+collection of technical notes. It is a statically generated
+[Astro](https://astro.build/) site.
 
 ## Prerequisites
 
-- Node.js 24 LTS or newer
-- npm 11 or newer (included with Node.js 24)
+- Node.js 24 or newer
+- npm 11 or newer
 
-## Install
+## Development
 
 ```console
 npm ci
+npm start
 ```
 
-## Develop and validate
+The primary commands are:
 
 ```console
-npm start          # Run the local development server
-npm run build      # Create the production site in build/
-npm run serve      # Serve an existing production build
-npm run typecheck  # Check TypeScript
+npm run typecheck  # Validate Astro and TypeScript
 npm run lint       # Check JavaScript and TypeScript
-npm run format     # Check Prettier formatting
+npm run format     # Check formatting
+npm run build      # Build the static site into dist/
+npm run serve      # Preview an existing production build
 ```
 
-Use `npm run format:fix` to apply Prettier formatting. Profile and publication
-content lives in `src/`, blog posts in `blog/`, the knowledge base in `kb/`,
-translated content in `i18n/`, and static assets in `static/`.
+Homepage data is in `src/data/`, writing in `blog/`, archived technical notes
+in `kb/`, and public images and PDFs in `static/`. Astro reads the writing and
+notes directly through content collections, so those Markdown files remain the
+single source of truth.
+
+The production workflow builds `dist/` and publishes it to the `master` branch
+of `yechs/yechs.github.io`.
