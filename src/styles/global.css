@@ -520,6 +520,11 @@ pre {
   display: none;
 }
 
+.writing-entry,
+.writing-entry .page-heading {
+  max-width: var(--content-wide);
+}
+
 .admonition {
   margin-block: 1.5rem;
   padding: 1rem 1.15rem;
