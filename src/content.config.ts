@@ -23,15 +23,7 @@ const knowledgeBaseSchema = z.looseObject({
 
 const writing = defineCollection({
   loader: glob({
-    base: './src/content/writing/en',
-    pattern: '**/*.{md,mdx}',
-  }),
-  schema: writingSchema,
-});
-
-const writingZh = defineCollection({
-  loader: glob({
-    base: './src/content/writing/zh-Hans',
+    base: './src/content/writing',
     pattern: '**/*.{md,mdx}',
   }),
   schema: writingSchema,
@@ -39,23 +31,10 @@ const writingZh = defineCollection({
 
 const knowledgeBase = defineCollection({
   loader: glob({
-    base: './src/content/knowledge-base/en',
+    base: './src/content/knowledge-base',
     pattern: '**/*.{md,mdx}',
   }),
   schema: knowledgeBaseSchema,
 });
 
-const knowledgeBaseZh = defineCollection({
-  loader: glob({
-    base: './src/content/knowledge-base/zh-Hans',
-    pattern: '**/*.{md,mdx}',
-  }),
-  schema: knowledgeBaseSchema,
-});
-
-export const collections = {
-  knowledgeBase,
-  knowledgeBaseZh,
-  writing,
-  writingZh,
-};
+export const collections = { knowledgeBase, writing };

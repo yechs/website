@@ -28,9 +28,9 @@ npm run serve      # Preview an existing production build
 ```
 
 Homepage data is in `src/data/`. Writing and archived technical notes are in
-language-specific directories under `src/content/`, and static images and PDFs
-are in `public/`. Astro reads the Markdown directly through content
-collections, so those files remain the single source of truth.
+`src/content/`, and static images and PDFs are in `public/`. Astro reads the
+Markdown directly through content collections, so those files remain the
+single source of truth.
 
 ```text
 src/

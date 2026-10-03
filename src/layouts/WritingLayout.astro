@@ -5,23 +5,19 @@ interface Props {
   title: string;
   description: string;
   date: Date;
-  lang?: string;
 }
 
-const { title, description, date, lang = 'en' } = Astro.props;
-const formattedDate = new Intl.DateTimeFormat(
-  lang === 'zh-Hans' ? 'zh-CN' : 'en-US',
-  {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    timeZone: 'UTC',
-  },
-).format(date);
+const { title, description, date } = Astro.props;
+const formattedDate = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  timeZone: 'UTC',
+}).format(date);
 ---
 
 <BaseLayout title={title} description={description}>
-  <article class="prose page-shell writing-entry" lang={lang}>
+  <article class="prose page-shell writing-entry">
     <header class="page-heading">
       <p class="eyebrow">Writing</p>
       <h1>{title}</h1>

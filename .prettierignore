@@ -19,5 +19,5 @@ npm-debug.log*
 
 # Local planning and notes with intentionally preserved formatting
 shuye-astro-redesign-spec.md
-src/content/knowledge-base/en/sysadmin/ipykernel_venv.md
-src/content/knowledge-base/en/sysadmin/Windows_Thin_PC.md
+src/content/knowledge-base/sysadmin/ipykernel_venv.md
+src/content/knowledge-base/sysadmin/Windows_Thin_PC.md
