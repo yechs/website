@@ -1,10 +1,7 @@
 ---
 slug: malloc_chunk
 title: 内存泄漏 与 malloc chunk
-author: Ye Shu
-author_title: Studying how C++ allocates and frees chunks in memory
-author_url: https://github.com/yechs
-author_image_url: https://avatars.githubusercontent.com/u/49149993
+authors: [ye-shu]
 image: https://shuye.dev/img/yechs.jpeg
 tags: [c++, pwn]
 ---
@@ -21,8 +18,6 @@ tags: [c++, pwn]
 2. 对象是如何在 堆 (heap) 上被分配的？`delete[]` 如何知道它需要释放哪块内存？
 3. 我们如何预防内存泄漏？
 
-<!--truncate-->
-
 Stack Overflow 上的问题 ["How does delete[] 'know' the size of the operand array?"](https://stackoverflow.com/questions/197675/how-does-delete-know-the-size-of-the-operand-array) 其实已经大致回答了我们的第二个问题，但我还是决定更深入地探讨一下实际的内存空间是什么样的。
 
 巧合的是，我和朋友 [@gzhding](https://guozhen.dev) 刚好在最近的一次 CTF 比赛中合作了一道 堆利用 (heap exploitation) 的题目。因为这份经历，我学会了如何使用 `gdb` 调试并查看堆上的内存，以借其管中窥豹。
@@ -30,10 +25,6 @@ Stack Overflow 上的问题 ["How does delete[] 'know' the size of the operand a
 :::info
 注：我先写成了本文的英文版，之后才试图将其译回中文。因此如有可能的话，请[以英文阅读本文](https://shuye.dev/blog/malloc_chunk/)，以避免一些因为翻译质量导致的语句不顺与理解困难。
 :::
-
-import TOCCollapsible from '@theme/TOCCollapsible';
-
-<TOCCollapsible toc={toc} />
 
 ## 什么是内存泄漏 {#what-are-memory-leaks}
 
@@ -140,15 +131,6 @@ gef➤  x/8xw 0x55555556aeb0
 0x55555556aec0: 0x54535251      0x58575655      0x00005a59      0x00000000
 ```
 
-<!-- gef➤  heap chunks
-Chunk(addr=0x555555559010, size=0x290, flags=PREV_INUSE)
-    [0x0000555555559010     00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................]
-Chunk(addr=0x5555555592a0, size=0x11c10, flags=PREV_INUSE)
-    [0x00005555555592a0     00 1c 01 00 00 00 00 00 00 00 00 00 00 00 00 00    ................]
-Chunk(addr=0x55555556aeb0, size=0x30, flags=PREV_INUSE)
-    [0x000055555556aeb0     41 42 43 44 45 46 47 48 49 4a 4b 4c 4d 4e 4f 50    ABCDEFGHIJKLMNOP]
-Chunk(addr=0x55555556aee0, size=0xf130, flags=PREV_INUSE)  ←  top chunk -->
-
 既然 `memory_leak()` return 了，我们就丢失了指向内存地址 `0x55555556aeb0` 的指针 `arr`。但当我们打印出内存区域时，发现这些数据仍然存储在内存中，没有（也不会）被释放。这就是内存泄漏。
 
 ### 利用 Valgrind 进行验证 {#verification-with-valgrind}
@@ -248,8 +230,6 @@ operator delete(void* ptr) noexcept
   std::free(ptr);
 }
 ```
-
-<!-- ### How `malloc` and `free` works -->
 
 这样一来，我们似乎需要一路深入到 C 标准库中对 `malloc` 与 `free` 的实现才能知道在数组的创建与销毁背后究竟发生了什么。
 
