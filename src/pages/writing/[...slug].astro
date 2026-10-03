@@ -1,0 +1,31 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+
+import WritingLayout from '../../layouts/WritingLayout.astro';
+import { writingDate, writingSlug } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('writing', ({ data }) => !data.draft);
+  return entries.map((entry) => ({
+    params: { slug: writingSlug(entry) },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<'writing'>;
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const description =
+  entry.data.description || `An article by Ye Shu: ${entry.data.title}.`;
+---
+
+<WritingLayout
+  title={entry.data.title}
+  description={description}
+  date={writingDate(entry)}
+>
+  <Content />
+</WritingLayout>

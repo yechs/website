@@ -1,0 +1,27 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+
+import KnowledgeBaseLayout from '../../layouts/KnowledgeBaseLayout.astro';
+import { kbSlug, kbTitle } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('kb');
+  return entries.map((entry) => ({
+    params: { slug: kbSlug(entry) },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<'kb'>;
+}
+
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+const title = kbTitle(entry);
+const showTitle = !headings.some((heading) => heading.depth === 1);
+---
+
+<KnowledgeBaseLayout title={title} headings={headings} showTitle={showTitle}>
+  <Content />
+</KnowledgeBaseLayout>

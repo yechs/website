@@ -1,0 +1,155 @@
+---
+import { getCollection } from 'astro:content';
+
+import ExternalLinks from '../components/ExternalLinks.astro';
+import PublicationList from '../components/PublicationList.astro';
+import ResearchProject from '../components/ResearchProject.astro';
+import ServiceList from '../components/ServiceList.astro';
+import WritingList from '../components/WritingList.astro';
+import { publications } from '../data/publications';
+import { researchProjects, researchThemes } from '../data/research';
+import { service } from '../data/service';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { writingDate } from '../lib/content';
+
+const recentWriting = (
+  await getCollection('writing', ({ data }) => !data.draft)
+)
+  .sort((a, b) => writingDate(b).valueOf() - writingDate(a).valueOf())
+  .slice(0, 4);
+const selectedPublications = publications.filter(
+  (publication) => publication.selected,
+);
+---
+
+<BaseLayout
+  title="Ye Shu"
+  description="Ye Shu is a computer science PhD student at UC San Diego researching network security, Internet measurement, fingerprinting, and online abuse."
+>
+  <section class="profile" aria-labelledby="profile-name">
+    <div class="profile__identity">
+      <h1 id="profile-name">Ye Shu</h1>
+      <p class="profile__role">
+        PhD Student in Computer Science
+        <br />
+        University of California, San Diego
+      </p>
+    </div>
+    <img
+      class="profile__portrait"
+      src="/img/yechs.jpeg"
+      alt="Portrait of Ye Shu"
+      width="200"
+      height="200"
+      decoding="async"
+      fetchpriority="high"
+    />
+    <div class="profile__summary">
+      <p>
+        I am a computer science researcher working on network security and
+        Internet measurement. I build measurement and analysis systems that
+        extract useful evidence about security, abuse, and other
+        difficult-to-observe phenomena from incomplete or indirect data. My
+        current interests include browser and network fingerprinting,
+        anti-detect systems, online abuse, and security-critical Internet
+        infrastructure.
+      </p>
+      <p>
+        I am advised by{' '}
+        <a href="https://cseweb.ucsd.edu/~savage/">Stefan Savage</a> and{' '}
+        <a href="https://cseweb.ucsd.edu/~voelker/">Geoffrey Voelker</a>, and am
+        affiliated with <a href="https://cseweb.ucsd.edu/~sysnet/">Sysnet</a>,{' '}
+        <a href="https://cryptosec.ucsd.edu/">CryptoSec</a>, and the{' '}
+        <a href="https://cns.ucsd.edu/">Center for Networked Systems</a>.
+      </p>
+      <ExternalLinks />
+    </div>
+  </section>
+
+  <section class="home-section" aria-labelledby="research-heading">
+    <header class="home-section__heading">
+      <p class="eyebrow">Research</p>
+      <h2 id="research-heading">Measuring systems that resist observation</h2>
+      <p>
+        My work combines systems building, empirical measurement, and careful
+        validation to reason about behavior that is hidden, distributed, or
+        difficult to measure directly.
+      </p>
+    </header>
+    <div class="theme-grid">
+      {researchThemes.map((theme) => (
+        <article>
+          <h3>{theme.title}</h3>
+          <p>{theme.description}</p>
+        </article>
+      ))}
+    </div>
+    <div
+      class="research-projects"
+      aria-label="Representative research projects"
+    >
+      {researchProjects.map((project) => (
+        <ResearchProject project={project} />
+      ))}
+    </div>
+  </section>
+
+  <section class="home-section" aria-labelledby="publications-heading">
+    <header class="home-section__heading">
+      <p class="eyebrow">Selected work</p>
+      <h2 id="publications-heading">Publications</h2>
+    </header>
+    <PublicationList publications={selectedPublications} />
+    <a class="section-action" href="/publications/">
+      All publications →
+    </a>
+  </section>
+
+  <section class="home-section" aria-labelledby="writing-heading">
+    <header class="home-section__heading">
+      <p class="eyebrow">Occasional notes</p>
+      <h2 id="writing-heading">Recent writing</h2>
+    </header>
+    <WritingList entries={recentWriting} />
+    <a class="section-action" href="/writing/">
+      All writing →
+    </a>
+  </section>
+
+  <section class="home-section" aria-labelledby="service-heading">
+    <header class="home-section__heading">
+      <p class="eyebrow">Community</p>
+      <h2 id="service-heading">Service</h2>
+    </header>
+    <ServiceList items={service} />
+  </section>
+
+  <section class="home-section" aria-labelledby="beyond-heading">
+    <header class="home-section__heading">
+      <p class="eyebrow">Beyond research</p>
+      <h2 id="beyond-heading">Ideas and images</h2>
+    </header>
+    <div class="beyond-grid">
+      <article>
+        <h3>Philosophy</h3>
+        <p>
+          I studied Computer Science and Philosophy at Williams College. I am
+          especially interested in epistemology, philosophy of science, and
+          philosophy of mind, including the skeptical and relativist traditions
+          of Hume, Kuhn, Feyerabend, and Dennett.
+        </p>
+      </article>
+      <article>
+        <h3>Photography</h3>
+        <p>
+          Photography gives me a quieter way to record places, people, and
+          fragments of everyday life. The gallery collects images and stories
+          from travel, conferences, and time outdoors.
+        </p>
+        <a class="section-action" href="/gallery/">
+          See photographs →
+        </a>
+      </article>
+    </div>
+  </section>
+</BaseLayout>

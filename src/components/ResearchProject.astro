@@ -1,0 +1,24 @@
+---
+import type { ResearchProject as ResearchProjectData } from '../data/research';
+
+interface Props {
+  project: ResearchProjectData;
+}
+
+const { project } = Astro.props;
+---
+
+<article class="research-project">
+  <h3>{project.title}</h3>
+  <p>{project.description}</p>
+  {project.links && (
+    <p class="resource-links">
+      {project.links.map((link, index) => (
+        <>
+          {index > 0 && <span aria-hidden="true"> · </span>}
+          <a href={link.href}>{link.label}</a>
+        </>
+      ))}
+    </p>
+  )}
+</article>

@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+
+import WritingList from '../../components/WritingList.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { writingDate } from '../../lib/content';
+
+const entries = (
+  await getCollection('writing', ({ data }) => !data.draft)
+).sort((a, b) => writingDate(b).valueOf() - writingDate(a).valueOf());
+const years = [
+  ...new Set(entries.map((entry) => writingDate(entry).getUTCFullYear())),
+].sort((a, b) => b - a);
+---
+
+<BaseLayout
+  title="Writing"
+  description="Occasional notes by Ye Shu on security, systems, measurement, software, and other interests."
+>
+  <div class="page-shell">
+    <header class="page-heading">
+      <p class="eyebrow">Notes and essays</p>
+      <h1>Writing</h1>
+      <p>
+        Occasional notes on security, systems, measurement, software, and other
+        things I find interesting.
+      </p>
+    </header>
+    {years.map((year) => (
+      <section class="year-group" aria-labelledby={`writing-${year}`}>
+        <h2 id={`writing-${year}`}>{year}</h2>
+        <WritingList
+          entries={entries.filter(
+            (entry) => writingDate(entry).getUTCFullYear() === year,
+          )}
+        />
+      </section>
+    ))}
+  </div>
+</BaseLayout>

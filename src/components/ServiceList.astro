@@ -1,0 +1,30 @@
+---
+import type { ServiceItem } from '../data/service';
+
+interface Props {
+  items: readonly ServiceItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<dl class="service-list">
+  {items.map((item) => (
+    <div>
+      <dt>{item.years}</dt>
+      <dd>
+        <strong>{item.role}</strong>
+        {item.organization && (
+          <>
+            <span aria-hidden="true">, </span>
+            {item.href ? (
+              <a href={item.href}>{item.organization}</a>
+            ) : (
+              item.organization
+            )}
+          </>
+        )}
+      </dd>
+    </div>
+  ))}
+</dl>

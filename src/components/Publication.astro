@@ -1,0 +1,50 @@
+---
+import type { Publication } from '../data/publications';
+
+interface Props {
+  publication: Publication;
+  annotated?: boolean;
+}
+
+const { publication, annotated = false } = Astro.props;
+---
+
+<article class="publication">
+  <h3>{publication.title}</h3>
+  <p class="publication__authors">
+    {publication.authors.map((author, index) => (
+      <>
+        {index > 0 && ', '}
+        {author === 'Ye Shu' ? <strong>{author}</strong> : author}
+      </>
+    ))}
+  </p>
+  <p class="publication__venue">
+    {publication.venue}, {publication.year}.
+    {publication.award && (
+      <span class="publication__award"> {publication.award}</span>
+    )}
+  </p>
+  {publication.links.length > 0 && (
+    <p class="resource-links" aria-label={`Resources for ${publication.title}`}>
+      {publication.links.map((link, index) => (
+        <>
+          {index > 0 && <span aria-hidden="true"> · </span>}
+          <a href={link.href}>{link.label}</a>
+        </>
+      ))}
+    </p>
+  )}
+  {annotated && publication.tldr && (
+    <div class="publication__annotation">
+      <h4>TL;DR</h4>
+      <p>{publication.tldr}</p>
+    </div>
+  )}
+  {annotated && publication.highlight && (
+    <div class="publication__annotation">
+      <h4>Why it’s interesting</h4>
+      <p>{publication.highlight}</p>
+    </div>
+  )}
+</article>

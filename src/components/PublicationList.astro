@@ -1,0 +1,17 @@
+---
+import type { Publication as PublicationData } from '../data/publications';
+import Publication from './Publication.astro';
+
+interface Props {
+  publications: readonly PublicationData[];
+  annotated?: boolean;
+}
+
+const { publications, annotated = false } = Astro.props;
+---
+
+<div class="publication-list">
+  {publications.map((publication) => (
+    <Publication publication={publication} annotated={annotated} />
+  ))}
+</div>
