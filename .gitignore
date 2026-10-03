@@ -6,9 +6,11 @@ static/ignored
 
 # Production
 /build
+/dist
 
 # Generated files
 .docusaurus
+.astro
 .cache-loader
 .eslintcache
 
