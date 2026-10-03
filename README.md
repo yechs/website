@@ -27,10 +27,21 @@ npm run build      # Build the static site into dist/
 npm run serve      # Preview an existing production build
 ```
 
-Homepage data is in `src/data/`, writing in `blog/`, archived technical notes
-in `kb/`, and public images and PDFs in `static/`. Astro reads the writing and
-notes directly through content collections, so those Markdown files remain the
-single source of truth.
+Homepage data is in `src/data/`. Writing and archived technical notes are in
+language-specific directories under `src/content/`, and static images and PDFs
+are in `public/`. Astro reads the Markdown directly through content
+collections, so those files remain the single source of truth.
+
+```text
+src/
+├── components/        Reusable Astro components
+├── content/           Writing and knowledge-base Markdown
+├── data/              Research, publication, service, and gallery data
+├── layouts/           Shared page layouts
+├── pages/             File-based routes
+└── styles/            Global design system
+public/                 Static images, papers, and site metadata
+```
 
 The production workflow builds `dist/` and publishes it to the `master` branch
 of `yechs/yechs.github.io`.

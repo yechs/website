@@ -14,7 +14,6 @@ import {
 export default defineConfig({
   site: 'https://shuye.dev',
   output: 'static',
-  publicDir: './static',
   trailingSlash: 'always',
   integrations: [mdx(), sitemap()],
   markdown: {

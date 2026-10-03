@@ -22,29 +22,40 @@ const knowledgeBaseSchema = z.looseObject({
 });
 
 const writing = defineCollection({
-  loader: glob({ base: './blog', pattern: '**/*.{md,mdx}' }),
+  loader: glob({
+    base: './src/content/writing/en',
+    pattern: '**/*.{md,mdx}',
+  }),
   schema: writingSchema,
 });
 
 const writingZh = defineCollection({
   loader: glob({
-    base: './i18n/zh-Hans/docusaurus-plugin-content-blog',
+    base: './src/content/writing/zh-Hans',
     pattern: '**/*.{md,mdx}',
   }),
   schema: writingSchema,
 });
 
-const kb = defineCollection({
-  loader: glob({ base: './kb', pattern: '**/*.{md,mdx}' }),
-  schema: knowledgeBaseSchema,
-});
-
-const kbZh = defineCollection({
+const knowledgeBase = defineCollection({
   loader: glob({
-    base: './i18n/zh-Hans/docusaurus-plugin-content-docs/current',
+    base: './src/content/knowledge-base/en',
     pattern: '**/*.{md,mdx}',
   }),
   schema: knowledgeBaseSchema,
 });
 
-export const collections = { kb, kbZh, writing, writingZh };
+const knowledgeBaseZh = defineCollection({
+  loader: glob({
+    base: './src/content/knowledge-base/zh-Hans',
+    pattern: '**/*.{md,mdx}',
+  }),
+  schema: knowledgeBaseSchema,
+});
+
+export const collections = {
+  knowledgeBase,
+  knowledgeBaseZh,
+  writing,
+  writingZh,
+};

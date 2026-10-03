@@ -1,17 +1,13 @@
 .idea
-static/ignored
 
 # Dependencies
 /node_modules
 
 # Production
-/build
 /dist
 
 # Generated files
-.docusaurus
 .astro
-.cache-loader
 .eslintcache
 
 # Misc

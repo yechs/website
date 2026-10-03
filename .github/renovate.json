@@ -6,16 +6,13 @@
   "packageRules": [
     {
       "matchPackageNames": [
-        "/^@babel\\//",
         "/^@eslint\\//",
-        "/^@tsconfig\\//",
-        "/^@types\\//",
         "/^eslint(?:-|$)/",
         "/^typescript(?:-eslint)?$/",
         "globals",
         "husky",
         "lint-staged",
-        "prettier"
+        "/^prettier(?:-|$)/"
       ],
       "matchDepTypes": ["devDependencies"],
       "matchUpdateTypes": ["patch", "minor"],
@@ -25,16 +22,13 @@
     },
     {
       "matchPackageNames": [
-        "/^@babel\\//",
         "/^@eslint\\//",
-        "/^@tsconfig\\//",
-        "/^@types\\//",
         "/^eslint(?:-|$)/",
         "/^typescript(?:-eslint)?$/",
         "globals",
         "husky",
         "lint-staged",
-        "prettier"
+        "/^prettier(?:-|$)/"
       ],
       "matchDepTypes": ["devDependencies"],
       "matchUpdateTypes": ["major"],
@@ -43,41 +37,16 @@
       "groupSlug": "dev-dependencies-major"
     },
     {
-      "matchPackageNames": ["@docusaurus/**"],
+      "matchPackageNames": ["astro", "@astrojs/**"],
       "schedule": ["before 3am on the first day of the month"],
-      "groupName": "Docusaurus monorepo",
-      "groupSlug": "docusaurus"
-    },
-    {
-      "matchPackageNames": [
-        "react",
-        "react-dom",
-        "@types/react",
-        "@types/react-dom"
-      ],
-      "schedule": ["before 3am on the first day of the month"],
-      "groupName": "React monorepo",
-      "groupSlug": "react"
-    },
-    {
-      "matchPackageNames": [
-        "react-masonry-css",
-        "react-photo-album",
-        "yet-another-react-lightbox"
-      ],
-      "schedule": ["before 3am on the first day of the month"],
-      "groupName": "gallery dependencies",
-      "groupSlug": "gallery-dependencies"
+      "groupName": "Astro ecosystem",
+      "groupSlug": "astro"
     },
     {
       "matchPackageNames": ["katex", "rehype-katex", "remark-math"],
       "schedule": ["before 3am on the first day of the month"],
-      "groupName": "Docusaurus math",
-      "groupSlug": "docusaurus-math"
-    },
-    {
-      "matchPackageNames": ["eslint"],
-      "allowedVersions": "<10.0.0"
+      "groupName": "Markdown math",
+      "groupSlug": "markdown-math"
     },
     {
       "matchPackageNames": ["typescript"],

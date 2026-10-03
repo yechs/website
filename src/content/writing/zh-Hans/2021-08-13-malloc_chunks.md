@@ -23,7 +23,7 @@ Stack Overflow 上的问题 ["How does delete[] 'know' the size of the operand a
 巧合的是，我和朋友 [@gzhding](https://guozhen.dev) 刚好在最近的一次 CTF 比赛中合作了一道 堆利用 (heap exploitation) 的题目。因为这份经历，我学会了如何使用 `gdb` 调试并查看堆上的内存，以借其管中窥豹。
 
 :::info
-注：我先写成了本文的英文版，之后才试图将其译回中文。因此如有可能的话，请[以英文阅读本文](https://shuye.dev/blog/malloc_chunk/)，以避免一些因为翻译质量导致的语句不顺与理解困难。
+注：我先写成了本文的英文版，之后才试图将其译回中文。因此如有可能的话，请[以英文阅读本文](https://shuye.dev/writing/malloc_chunk/)，以避免一些因为翻译质量导致的语句不顺与理解困难。
 :::
 
 ## 什么是内存泄漏 {#what-are-memory-leaks}

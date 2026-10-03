@@ -8,11 +8,8 @@ export default defineConfig(
   {
     ignores: [
       '**/.astro/**',
-      '**/.docusaurus/**',
-      '**/build/**',
       '**/dist/**',
       '**/node_modules/**',
-      'static/img/gallery/srcset.py',
     ],
   },
   {

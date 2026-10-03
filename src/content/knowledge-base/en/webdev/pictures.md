@@ -52,7 +52,7 @@ exiftool -all= -tagsfromfile @ -artist
 
 In modern web development, the concept of [responsive images](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images) help devices with different screen sizes and resolutions to load only what is necessary.
 
-For the gallery of this website, I have written a [python script](https://github.com/yechs/website/blob/main/static/img/gallery/srcset.py) to generate responsive images of different widths (1920, 1440, 1024, 640, 320 pixels). These values are inspired from a [blog post](https://medium.com/hceverything/applying-srcset-choosing-the-right-sizes-for-responsive-images-at-different-breakpoints-a0433450a4a3).
+For the gallery of this website, I have written a [Python script](https://github.com/yechs/website/blob/main/scripts/generate-gallery-srcset.py) to generate responsive images of different widths (1920, 1440, 1024, 640, 320 pixels). These values are inspired from a [blog post](https://medium.com/hceverything/applying-srcset-choosing-the-right-sizes-for-responsive-images-at-different-breakpoints-a0433450a4a3).
 
 Note that the script also removes EXIF and TIFF data. Also, it changes the color profile to sRGB (which may originally be Display P3 for iOS devices).
 

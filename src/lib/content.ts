@@ -1,7 +1,8 @@
 import type { CollectionEntry } from 'astro:content';
 
 type WritingEntry = CollectionEntry<'writing'> | CollectionEntry<'writingZh'>;
-type KnowledgeBaseEntry = CollectionEntry<'kb'> | CollectionEntry<'kbZh'>;
+type KnowledgeBaseEntry =
+  CollectionEntry<'knowledgeBase'> | CollectionEntry<'knowledgeBaseZh'>;
 
 export function writingDate(entry: WritingEntry): Date {
   if (entry.data.date) return entry.data.date;
@@ -31,7 +32,10 @@ export function kbSlug(entry: KnowledgeBaseEntry): string {
 
   const path = entry.filePath?.replaceAll('\\', '/');
   if (path) {
-    const base = entry.collection === 'kb' ? 'kb/' : 'current/';
+    const base =
+      entry.collection === 'knowledgeBase'
+        ? '/content/knowledge-base/en/'
+        : '/content/knowledge-base/zh-Hans/';
     const baseIndex = path.lastIndexOf(base);
     if (baseIndex >= 0) {
       return path.slice(baseIndex + base.length).replace(/\.(md|mdx)$/, '');

@@ -2,13 +2,10 @@
 /node_modules
 
 # Production
-/build
 /dist
 
 # Generated files
-.docusaurus
 .astro
-.cache-loader
 
 # Misc
 .vscode
@@ -20,7 +17,7 @@
 
 npm-debug.log*
 
-# Local planning and legacy notes with intentionally preserved formatting
+# Local planning and notes with intentionally preserved formatting
 shuye-astro-redesign-spec.md
-kb/sysadmin/ipykernel_venv.md
-kb/sysadmin/Windows_Thin_PC.md
+src/content/knowledge-base/en/sysadmin/ipykernel_venv.md
+src/content/knowledge-base/en/sysadmin/Windows_Thin_PC.md
