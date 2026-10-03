@@ -8,8 +8,8 @@
     'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
     sans-serif;
   --font-display: 'Source Serif 4', Georgia, 'Times New Roman', serif;
-  --color-canvas: #faf9f6;
-  --color-surface: #fffefa;
+  --color-canvas: #fff;
+  --color-surface: #fff;
   --color-ink: #20272f;
   --color-muted: #66717d;
   --color-border: #d9ddd9;
