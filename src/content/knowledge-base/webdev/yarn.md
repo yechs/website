@@ -32,16 +32,11 @@ src/components/Gallery/index.tsx:13:6 - error TS2786: 'Masonry' cannot be used a
 
 It turns out that I have multiple `@types/react` installed. Even though I have explicitly required `@types/react 17.0.47` in devDependencies, the `@types/react *` required by other dependencies (such as `@types/react-router-config` in this case) is still resolved to the latest v18.0.14.
 
-import CodeBlock from '@theme/CodeBlock';
-
 <details>
   <summary>See the <code>yarn.lock</code> file</summary>
-  {/** I'm now inside JSX, so must use this ugly syntax and escape everything with {``} **/}
-<CodeBlock
-  language="lock"
-  title="yarn.lock"
->
-{`"@types/react@*":
+
+```text title="yarn.lock"
+"@types/react@*":
   version "18.0.14"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-18.0.14.tgz#e016616ffff51dba01b04945610fe3671fdbe06d"
   integrity sha512-x4gGuASSiWmo0xjDLpm5mPb52syZHJx02VKbqUKdLmKtAwIh63XClGsiTI1K6DO5q7ox4xAsQrU+Gl3+gGXF9Q==
@@ -49,7 +44,7 @@ import CodeBlock from '@theme/CodeBlock';
     "@types/prop-types" "*"
     "@types/scheduler" "*"
     csstype "^3.0.2"
-`}{`
+
 "@types/react@17.0.47":
   version "17.0.47"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.47.tgz#4ee71aaf4c5a9e290e03aa4d0d313c5d666b3b78"
@@ -58,8 +53,7 @@ import CodeBlock from '@theme/CodeBlock';
     "@types/prop-types" "*"
     "@types/scheduler" "*"
     csstype "^3.0.2"
-`}
-</CodeBlock>
+```
 
 </details>
 

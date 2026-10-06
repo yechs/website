@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+
+import PageLayout from '../../layouts/PageLayout.astro';
+import { kbCategory, kbSlug, kbTitle } from '../../lib/content';
+
+const entries = (await getCollection('knowledgeBase')).sort((a, b) =>
+  kbTitle(a).localeCompare(kbTitle(b)),
+);
+const categories = [...new Set(entries.map(kbCategory))].sort();
+---
+
+<PageLayout
+  title="Technical Notes Archive"
+  description="An archive of Ye Shu's personal technical notes."
+>
+  <div class="page-shell">
+    <header class="page-heading">
+      <p class="eyebrow">Archive</p>
+      <h1>Technical Notes</h1>
+      <p class="archive-disclaimer">
+        These are personal technical notes accumulated over several years. Some
+        may be incomplete or outdated and are no longer actively maintained.
+      </p>
+    </header>
+    <div class="archive-groups">
+      {categories.map((category) => (
+        <section
+          aria-labelledby={`category-${category.replaceAll(' ', '-').toLowerCase()}`}
+        >
+          <h2 id={`category-${category.replaceAll(' ', '-').toLowerCase()}`}>
+            {category}
+          </h2>
+          <ul>
+            {entries
+              .filter((entry) => kbCategory(entry) === category)
+              .map((entry) => (
+                <li>
+                  <a href={`/kb/${kbSlug(entry)}/`}>{kbTitle(entry)}</a>
+                </li>
+              ))}
+          </ul>
+        </section>
+      ))}
+    </div>
+  </div>
+</PageLayout>

@@ -1,15 +1,10 @@
 ---
 slug: malloc_chunk
 title: Memory Leak & malloc chunks
-author: Ye Shu
-author_title: Studying how C++ allocates and frees chunks in memory
-author_url: https://github.com/yechs
-author_image_url: https://avatars.githubusercontent.com/u/49149993
-image: https://shuye.dev/img/yechs.jpeg
+titleId: memory-leak--malloc-chunks
+authors: [ye-shu]
 tags: [c++, pwn]
 ---
-
-# Memory Leak & malloc chunks
 
 ## How it all started {#how-it-all-started}
 
@@ -21,15 +16,9 @@ After some research & experiments, I wrote this blog post, which hopefully addre
 2. How are objects allocated on the heap? How does `delete[]` know which area of memory to be freed?
 3. How can we prevent memory leaks from happening?
 
-<!--truncate-->
-
 While the Stack Overflow question ["How does delete[] 'know' the size of the operand array?"](https://stackoverflow.com/questions/197675/how-does-delete-know-the-size-of-the-operand-array) sort of answers the second question, I decide to dig deeper into the actual memory area.
 
 Coincidentally, I have worked on a heap exploitation problem with my friend [@gzhding](https://guozhen.dev) in a past CTF event. Thanks to the experience, I learned how to use `gdb` to dump the heap memory and gain some insight into the problem.
-
-import TOCCollapsible from '@theme/TOCCollapsible';
-
-<TOCCollapsible toc={toc} />
 
 ## What are Memory Leaks? {#what-are-memory-leaks}
 
@@ -136,15 +125,6 @@ gef➤  x/8xw 0x55555556aeb0
 0x55555556aec0: 0x54535251      0x58575655      0x00005a59      0x00000000
 ```
 
-<!-- gef➤  heap chunks
-Chunk(addr=0x555555559010, size=0x290, flags=PREV_INUSE)
-    [0x0000555555559010     00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................]
-Chunk(addr=0x5555555592a0, size=0x11c10, flags=PREV_INUSE)
-    [0x00005555555592a0     00 1c 01 00 00 00 00 00 00 00 00 00 00 00 00 00    ................]
-Chunk(addr=0x55555556aeb0, size=0x30, flags=PREV_INUSE)
-    [0x000055555556aeb0     41 42 43 44 45 46 47 48 49 4a 4b 4c 4d 4e 4f 50    ABCDEFGHIJKLMNOP]
-Chunk(addr=0x55555556aee0, size=0xf130, flags=PREV_INUSE)  ←  top chunk -->
-
 Now that `memory_leak()` returns, we have lost the pointer `arr` pointing to the memory address `0x55555556aeb0`. However, as we print out the memory area, the data is still stored in the memory without being released, leading to a memory leak.
 
 ### Verification with Valgrind {#verification-with-valgrind}
@@ -244,8 +224,6 @@ operator delete(void* ptr) noexcept
   std::free(ptr);
 }
 ```
-
-<!-- ### How `malloc` and `free` works -->
 
 Hence it seems that we should dive all the way into C standard library's implementation of `malloc` and `free` and see what exactly is happening behind the creation and deletion of arrays.
 
