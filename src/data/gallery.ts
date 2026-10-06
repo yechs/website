@@ -1,6 +1,17 @@
-import type { Image } from '../components/Gallery';
+interface GalleryImageSource {
+  src: string;
+  width: number;
+  height: number;
+}
 
-const images: readonly Image[] = [
+interface GalleryImage extends GalleryImageSource {
+  title: string;
+  description?: string;
+  alt?: string;
+  srcSet?: readonly GalleryImageSource[];
+}
+
+const images: readonly GalleryImage[] = [
   {
     src: '/img/gallery/2022-06/20220602_162412-srcw.jpg',
     title: 'Inside High Museum of Art',
@@ -44,19 +55,8 @@ const images: readonly Image[] = [
   {
     src: '/img/gallery/2022-06/20220605_002625-srcw.jpg',
     title: 'A Mural near Tech Walkway in Georgia Tech',
-    description: (
-      <>
-        During a night walk with my friend Yifan. Read more about the mural{' '}
-        <a href="https://news.gatech.edu/features/2021/08/youve-been-gone">
-          here
-        </a>
-        .
-        <br />
-        2022/06/05. Atlanta, Georgia, USA. Taken with Oneplus 8T.
-        <br />
-        Copyright © 2022 Ye Shu.
-      </>
-    ),
+    description:
+      'During a night walk with my friend Yifan. The mural is documented by Georgia Tech at https://news.gatech.edu/features/2021/08/youve-been-gone.\n2022/06/05. Atlanta, Georgia, USA. Taken with Oneplus 8T.\nCopyright © 2022 Ye Shu.',
     width: 4000,
     height: 3000,
     srcSet: [
