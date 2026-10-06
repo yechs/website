@@ -2,13 +2,13 @@
 /node_modules
 
 # Production
-/build
+/dist
 
 # Generated files
-.docusaurus
-.cache-loader
+.astro
 
 # Misc
+.vscode
 .DS_Store
 .env.local
 .env.development.local
@@ -16,3 +16,8 @@
 .env.production.local
 
 npm-debug.log*
+
+# Local planning and notes with intentionally preserved formatting
+shuye-astro-redesign-spec.md
+src/content/knowledge-base/sysadmin/ipykernel_venv.md
+src/content/knowledge-base/sysadmin/Windows_Thin_PC.md
