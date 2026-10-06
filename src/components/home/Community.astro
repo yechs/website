@@ -1,0 +1,89 @@
+---
+import { recognition } from '../../data/awards';
+import { teaching, teachingAssistantCourses } from '../../data/teaching';
+import { service } from '../../data/service';
+---
+
+<section
+  id="community"
+  class="home-community home-shell"
+  aria-labelledby="community-heading"
+>
+  <header class="home-section-header">
+    <h2 id="community-heading" class="home-section-title">
+      Community &amp; Teaching
+    </h2>
+  </header>
+  <div class="home-academic-grid">
+    <section aria-labelledby="teaching-heading">
+      <h3 id="teaching-heading">Teaching</h3>
+      <h4 class="home-teaching-subheading">Teaching Assistant</h4>
+      <ul class="home-course-list">
+        {teachingAssistantCourses.map((item) => (
+          <li>
+            <span class="academic-record__date">{item.years}</span>
+            <span class="home-course-list__details">
+              {item.link ? (
+                <a href={item.link}>{item.title}</a>
+              ) : (
+                <span>{item.title}</span>
+              )}
+              <span class="home-course-list__institution">{item.context}</span>
+            </span>
+          </li>
+        ))}
+      </ul>
+
+      <h4 class="home-teaching-subheading">Instructor</h4>
+      <ul class="academic-records">
+        {teaching.map((item) => (
+          <li>
+            <div class="academic-record__heading">
+              <span class="academic-record__date">{item.years}</span>
+              <h4>
+                {item.link ? <a href={item.link}>{item.title}</a> : item.title}
+              </h4>
+            </div>
+            <p class="academic-record__context">{item.context}</p>
+            <p>{item.description}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section aria-labelledby="academic-service-heading">
+      <h3 id="academic-service-heading">Academic Service</h3>
+      <ul class="home-service-list">
+        {service.map((item) => (
+          <li>
+            <span class="academic-record__date">{item.years}</span>
+            <h4 class="home-service-list__organization">
+              {item.href ? (
+                <a href={item.href}>{item.organization}</a>
+              ) : (
+                item.organization || item.role
+              )}
+            </h4>
+            <span class="home-service-list__role">{item.role}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  </div>
+
+  <section class="home-recognition" aria-labelledby="recognition-heading">
+    <h3 id="recognition-heading">Selected Recognition</h3>
+    <ul>
+      {recognition.map((item) => (
+        <li>
+          <span class="academic-record__date">{item.years}</span>
+          <p>
+            <strong>{item.title}</strong>
+          </p>
+          <p>{item.context}</p>
+          {item.description && <p set:html={item.description} />}
+        </li>
+      ))}
+    </ul>
+  </section>
+</section>

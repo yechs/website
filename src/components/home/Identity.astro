@@ -1,0 +1,51 @@
+---
+import { profile } from '../../data/profile';
+---
+
+<section class="home-identity home-shell" aria-labelledby="profile-name">
+  <img
+    class="home-identity__portrait"
+    src="/img/portrait.webp"
+    alt="Portrait of Ye Shu"
+    width="600"
+    height="600"
+    decoding="async"
+    fetchpriority="high"
+  />
+  <div class="home-identity__details">
+    <h1 id="profile-name">Ye Shu</h1>
+    <p class="home-identity__role">
+      PhD student in Computer Science · UC San Diego
+    </p>
+    <p class="home-identity__advisors">
+      Advised by <a href="https://cseweb.ucsd.edu/~savage/">Stefan Savage</a>{' '}
+      and <a href="https://cseweb.ucsd.edu/~voelker/">Geoffrey Voelker</a>.
+    </p>
+    <p class="home-identity__affiliations">
+      <a href="https://cseweb.ucsd.edu/~sysnet/">Sysnet</a>
+      {' · '}
+      <a href="https://cryptosec.ucsd.edu/">CryptoSec</a>
+      {' · '}
+      <a href="https://cns.ucsd.edu/">Center for Networked Systems</a>
+      {' · '}
+      <a href="https://cyberhealth.ucsd.edu/">
+        Center for Healthcare Cybersecurity
+      </a>
+    </p>
+    <p class="home-identity__email">
+      <span class="home-identity__email-label">Email:</span>{' '}
+      {profile.emailDisplay}
+    </p>
+  </div>
+  <nav class="home-identity__links" aria-label="Contact Links">
+    <a href={profile.linkedin}>LinkedIn</a>
+    <a href={profile.github}>GitHub</a>
+    <a href={profile.scholar}>Google Scholar</a>
+  </nav>
+  <p class="home-identity__summary">
+    I study network security and Internet measurement, with interests in browser
+    and network fingerprinting, online abuse, and Internet infrastructure. I
+    build measurement and analysis methods to investigate messy real-world
+    systems with incomplete or indirect evidence.
+  </p>
+</section>

@@ -1,0 +1,75 @@
+---
+const links = [
+  { href: '#research', label: 'Research' },
+  { href: '#publications', label: 'Publications' },
+  { href: '#community', label: 'Community & Teaching' },
+  { href: '#experience', label: 'Technical Experience' },
+  { href: '#writing', label: 'Writing & Beyond' },
+];
+---
+
+<nav class="home-navigation home-shell" aria-label="Homepage sections">
+  <details class="home-navigation__menu" open>
+    <summary>Menu</summary>
+    <ul>
+      {links.map((link) => (
+        <li>
+          <a href={link.href}>{link.label}</a>
+        </li>
+      ))}
+    </ul>
+  </details>
+</nav>
+
+<script>
+  const menu = document.querySelector<HTMLDetailsElement>(
+    '.home-navigation__menu',
+  );
+  const navigation = menu?.closest('nav');
+  const summary = menu?.querySelector('summary');
+  if (menu && navigation && summary) {
+    navigation.classList.add('home-navigation--enhanced');
+    let compact = false;
+    let initialized = false;
+    const syncMenu = () => {
+      const nextCompact = getComputedStyle(summary).display !== 'none';
+      if (!initialized || nextCompact !== compact) {
+        compact = nextCompact;
+        initialized = true;
+        menu.open = !compact;
+      }
+      const offset = navigation.getBoundingClientRect().height;
+      document.documentElement.style.setProperty(
+        '--home-navigation-offset',
+        `${offset}px`,
+      );
+    };
+    syncMenu();
+    new ResizeObserver(syncMenu).observe(navigation);
+    document.fonts.ready.then(syncMenu);
+    menu.addEventListener('toggle', syncMenu);
+    menu.addEventListener('click', (event) => {
+      if (
+        compact &&
+        event.target instanceof Element &&
+        event.target.closest('a')
+      ) {
+        menu.open = false;
+        syncMenu();
+        const link = event.target.closest<HTMLAnchorElement>('a');
+        const target = link && document.getElementById(link.hash.slice(1));
+        const heading = target?.querySelector<HTMLElement>('h2, h3');
+        if (heading) {
+          heading.tabIndex = -1;
+          requestAnimationFrame(() => heading.focus({ preventScroll: true }));
+        }
+      }
+    });
+    menu.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && compact) {
+        menu.open = false;
+        menu.querySelector('summary')?.focus();
+      }
+    });
+  }
+</script>

@@ -1,0 +1,86 @@
+---
+import { getCollection } from 'astro:content';
+import { formatDate, writingDate, writingSlug } from '../../lib/content';
+
+const selectedWriting = (
+  await getCollection('writing', ({ data }) => !data.draft)
+)
+  .sort((a, b) => writingDate(b).valueOf() - writingDate(a).valueOf())
+  .slice(0, 3);
+---
+
+<section
+  id="writing"
+  class="home-closing home-shell"
+  aria-labelledby="writing-heading"
+>
+  <h2 id="writing-heading" class="home-section-title">
+    Beyond research
+  </h2>
+  <div class="home-closing__grid">
+    <section aria-labelledby="selected-writing-heading">
+      <h3 id="selected-writing-heading">Writing</h3>
+      <ol class="home-writing-list">
+        {selectedWriting.map((entry) => (
+          <li>
+            <time datetime={writingDate(entry).toISOString()}>
+              {formatDate(writingDate(entry))}
+            </time>
+            <a href={`/writing/${writingSlug(entry)}/`}>{entry.data.title}</a>
+          </li>
+        ))}
+      </ol>
+      <p class="home-closing__destinations">
+        <a href="/writing/">All writing</a>
+        <a href="/kb/">Archive of knowledge base</a>
+      </p>
+    </section>
+
+    <section id="more" aria-labelledby="beyond-heading">
+      <h3 id="beyond-heading">Interests</h3>
+      <p>
+        I received a B.A. in{' '}
+        <a href="https://csci.williams.edu/">Computer Science</a> and{' '}
+        <a href="https://philosophy.williams.edu/">Philosophy</a> at{' '}
+        <a href="https://www.williams.edu/">Williams College</a>, where I worked
+        with Prof.{' '}
+        <a href="https://www.cs.williams.edu/~dbarowy/">Daniel Barowy</a> on
+        programming languages and formal methods.
+      </p>
+      <p>
+        Within philosophy, I am especially interested in epistemology and
+        philosophy of science, and am drawn to the traditions of{' '}
+        <a href="https://plato.stanford.edu/entries/rationalism-empiricism/">
+          empiricism
+        </a>
+        ,{' '}
+        <a href="https://plato.stanford.edu/entries/skepticism/">skepticism</a>,{' '}
+        and{' '}
+        <a href="https://plato.stanford.edu/entries/scientific-pluralism/">
+          pluralism in scientific methods and explanations
+        </a>
+        . Some of my favorite philosophers include{' '}
+        <a href="https://plato.stanford.edu/entries/hume/">David Hume</a>,{' '}
+        <a href="https://plato.stanford.edu/entries/thomas-kuhn/">
+          Thomas Kuhn
+        </a>
+        ,{' '}
+        <a href="https://plato.stanford.edu/entries/feyerabend/">
+          Paul Feyerabend
+        </a>
+        , and{' '}
+        <a href="https://www.bruno-latour.fr/biography.html">Bruno Latour</a>.
+      </p>
+      <p>
+        I have played CTFs with{' '}
+        <a href="https://ctftime.org/team/155019/">Water Paddler</a> and{' '}
+        <a href="https://ctftime.org/team/130585/">Team 0x194</a>, focusing on
+        cryptography and miscellaneous challenges.
+      </p>
+      <p>
+        I also take <a href="/gallery/">photographs</a> from time to time, of
+        landscapes, places, and moments that stand out to me.
+      </p>
+    </section>
+  </div>
+</section>

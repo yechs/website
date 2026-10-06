@@ -1,0 +1,69 @@
+---
+import ResourceLinks from '../ResourceLinks.astro';
+import type { Publication } from '../../data/publications';
+
+interface Props {
+  publication: Publication;
+  compact?: boolean;
+}
+
+const { publication, compact = false } = Astro.props;
+const typeLabel = {
+  poster: 'Poster',
+  workshop: 'Workshop',
+  thesis: 'Honors thesis',
+  conference: '',
+}[publication.type];
+const venueLabel =
+  publication.venueShort ||
+  (publication.type === 'thesis' ? 'Williams College' : publication.venue);
+const distinguished = publication.award === 'Distinguished Paper Award';
+---
+
+<article
+  class:list={[
+    'home-publication',
+    {
+      'home-publication--compact': compact,
+      'home-publication--additional': !publication.selected,
+      'home-publication--selected': publication.selected,
+    },
+  ]}
+  data-publication-id={publication.id}
+  data-year={publication.year}
+>
+  <div class="home-publication__meta">
+    <p>{venueLabel}</p>
+    {distinguished && (
+      <p class="home-publication__award">{publication.award}</p>
+    )}
+    {!venueLabel.includes(String(publication.year)) && (
+      <p>{publication.year}</p>
+    )}
+    {typeLabel && <p>{typeLabel}</p>}
+  </div>
+  <div class="home-publication__body">
+    <h3>{publication.title}</h3>
+    <p class="home-publication__authors">
+      {publication.authors.map((author, index) => (
+        <>
+          {index > 0 && ', '}
+          {author === 'Ye Shu' ? <strong>{author}</strong> : author}
+        </>
+      ))}
+    </p>
+    {publication.award && !distinguished && (
+      <p class="home-publication__award">{publication.award}</p>
+    )}
+    {!compact && publication.tldr && (
+      <p class="home-publication__explanation">{publication.tldr}</p>
+    )}
+    {!compact && publication.highlight && (
+      <p class="home-publication__explanation">{publication.highlight}</p>
+    )}
+    <ResourceLinks
+      links={publication.links}
+      label={`Resources for ${publication.title}`}
+    />
+  </div>
+</article>
