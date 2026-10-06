@@ -1,0 +1,30 @@
+---
+const pathname = Astro.url.pathname;
+const links = [
+  { href: '/publications/', label: 'Publications' },
+  { href: '/writing/', label: 'Writing' },
+  { href: '/gallery/', label: 'Gallery' },
+];
+---
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="site-name" href="/" aria-label="Homepage">
+      Ye Shu
+    </a>
+    <nav aria-label="Primary navigation">
+      <ul>
+        {links.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              aria-current={pathname.startsWith(link.href) ? 'page' : undefined}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>

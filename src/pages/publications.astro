@@ -1,0 +1,38 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+
+import PublicationEntry from '../components/PublicationEntry.astro';
+import { publications } from '../data/publications';
+
+const years = [
+  ...new Set(publications.map((publication) => publication.year)),
+].sort((a, b) => b - a);
+---
+
+<PageLayout
+  title="Publications"
+  description="Publications and annotated research bibliography by Ye Shu."
+>
+  <div class="page-shell">
+    <header class="page-heading">
+      <p class="eyebrow">Research</p>
+      <h1>Publications</h1>
+      <p>
+        Papers, posters, and other work: what they establish and why they
+        matter.
+      </p>
+    </header>
+    {years.map((year) => (
+      <section class="year-group" aria-labelledby={`year-${year}`}>
+        <h2 id={`year-${year}`}>{year}</h2>
+        <div class="publication-list">
+          {publications
+            .filter((publication) => publication.year === year)
+            .map((publication) => (
+              <PublicationEntry publication={publication} annotated />
+            ))}
+        </div>
+      </section>
+    ))}
+  </div>
+</PageLayout>

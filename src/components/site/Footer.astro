@@ -1,0 +1,23 @@
+---
+interface Props {
+  home?: boolean;
+}
+const { home = false } = Astro.props;
+---
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <p>© {new Date().getFullYear()} Ye Shu. Some rights reserved.</p>
+    <nav aria-label="Footer navigation">
+      {home && (
+        <>
+          <a href="/publications/">Publications</a>
+          <a href="/writing/">Writing</a>
+          <a href="/gallery/">Gallery</a>
+        </>
+      )}
+      <a href="/kb/">Knowledge Base Archive</a>
+      <a href="/rss.xml">RSS</a>
+    </nav>
+  </div>
+</footer>

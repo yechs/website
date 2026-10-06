@@ -1,0 +1,23 @@
+---
+import katexStyles from 'katex/dist/katex.min.css?inline';
+import '../styles/content.css';
+
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  imageAlt?: string;
+  hasMath?: boolean;
+}
+
+const { hasMath = false, ...page } = Astro.props;
+---
+
+<BaseLayout {...page}>
+  <Fragment slot="head">
+    {hasMath && <style is:inline set:html={katexStyles} />}
+  </Fragment>
+  <slot />
+</BaseLayout>

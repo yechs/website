@@ -1,0 +1,87 @@
+---
+import '../styles/global.css';
+
+import Footer from '../components/site/Footer.astro';
+import Header from '../components/site/Header.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  imageAlt?: string;
+  home?: boolean;
+}
+
+const { title, description, home = false } = Astro.props;
+const pageTitle = title === 'Ye Shu' ? title : `${title} · Ye Shu`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const image = new URL(Astro.props.image ?? '/img/og-default.jpg', Astro.site);
+const isDefaultImage =
+  image.href === new URL('/img/og-default.jpg', Astro.site).href;
+const imageAlt =
+  Astro.props.imageAlt ??
+  (isDefaultImage
+    ? 'Ye Shu, PhD student in Computer Science at UC San Diego. Works in Network security and Internet measurement.'
+    : pageTitle);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Ye Shu — Writing"
+      href="/rss.xml"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:site_name" content="Ye Shu" />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:alt" content={imageAlt} />
+    {isDefaultImage && (
+      <>
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+      </>
+    )}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+    <meta name="twitter:image:alt" content={imageAlt} />
+    <title>{pageTitle}</title>
+    <slot name="head" />
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-M3X8PGC98D"
+    ></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-M3X8PGC98D');
+    </script>
+  </head>
+  <body class:list={{ 'is-home': home }}>
+    <a class="skip-link" href="#main-content">
+      Skip to main content
+    </a>
+    {!home && <Header />}
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer home={home} />
+  </body>
+</html>
