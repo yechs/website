@@ -1,0 +1,29 @@
+---
+import ResourceLinks from '../ResourceLinks.astro';
+import { researchThreads } from '../../data/research';
+---
+
+<section
+  id="research"
+  class="home-research home-shell"
+  aria-labelledby="research-heading"
+>
+  <h2 id="research-heading" class="home-section-title">
+    Research
+  </h2>
+  <p class="home-research__intro">
+    <!-- My work spans empirical security, Internet infrastructure, and methods for
+    measuring phenomena that are difficult to observe. -->
+  </p>
+  <div class="home-research__threads">
+    {researchThreads.map((thread) => (
+      <article>
+        <h3>{thread.title}</h3>
+        {thread.paragraphs.map((paragraph) => (
+          <p>{paragraph}</p>
+        ))}
+        {thread.links && <ResourceLinks links={thread.links} />}
+      </article>
+    ))}
+  </div>
+</section>

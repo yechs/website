@@ -1,0 +1,51 @@
+---
+import PageLayout from './PageLayout.astro';
+
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  title: string;
+  headings: Heading[];
+  showTitle: boolean;
+  hasMath?: boolean;
+}
+
+const { title, headings, showTitle, hasMath = false } = Astro.props;
+const toc = headings.filter(
+  (heading) => heading.depth === 2 || heading.depth === 3,
+);
+---
+
+<PageLayout
+  title={title}
+  description={`${title}, an archived technical note by Ye Shu.`}
+  hasMath={hasMath}
+>
+  <div class="kb-layout page-shell">
+    <article class="prose kb-article">
+      <p class="eyebrow">
+        <a href="/kb/">Technical Notes Archive</a>
+      </p>
+      {showTitle && <h1>{title}</h1>}
+      <slot />
+    </article>
+    {toc.length > 1 && (
+      <aside class="table-of-contents" aria-label="On this page">
+        <h2>On this page</h2>
+        <ol>
+          {toc.map((heading) => (
+            <li
+              class:list={[heading.depth === 3 && 'table-of-contents__nested']}
+            >
+              <a href={`#${heading.slug}`}>{heading.text}</a>
+            </li>
+          ))}
+        </ol>
+      </aside>
+    )}
+  </div>
+</PageLayout>

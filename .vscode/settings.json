@@ -1,0 +1,23 @@
+{
+    "cSpell.words": [
+        "Barowy",
+        "CAMAD",
+        "Deian",
+        "Emmie",
+        "Ensafi",
+        "Enze",
+        "Geoff",
+        "Hine",
+        "Kaoru",
+        "Mianxiong",
+        "Roya",
+        "Siyi",
+        "Sumanth",
+        "Voelker",
+        "Xplore"
+    ],
+    "chat.tools.terminal.autoApprove": {
+        "npx prettier": true,
+        "npx eslint": true
+    }
+}

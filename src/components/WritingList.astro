@@ -1,0 +1,28 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { formatDate, writingDate, writingSlug } from '../lib/content';
+
+interface Props {
+  entries: readonly CollectionEntry<'writing'>[];
+  descriptions?: boolean;
+}
+
+const { entries, descriptions = true } = Astro.props;
+---
+
+<ol class="writing-list">
+  {entries.map((entry) => {
+    const date = writingDate(entry);
+    return (
+      <li>
+        <time datetime={date.toISOString()}>{formatDate(date)}</time>
+        <div>
+          <a href={`/writing/${writingSlug(entry)}/`}>{entry.data.title}</a>
+          {descriptions && entry.data.description && (
+            <p>{entry.data.description}</p>
+          )}
+        </div>
+      </li>
+    );
+  })}
+</ol>

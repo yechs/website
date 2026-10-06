@@ -1,15 +1,13 @@
 .idea
-static/ignored
 
 # Dependencies
 /node_modules
 
 # Production
-/build
+/dist
 
 # Generated files
-.docusaurus
-.cache-loader
+.astro
 .eslintcache
 
 # Misc
@@ -20,3 +18,5 @@ static/ignored
 .env.production.local
 
 npm-debug.log*
+
+.impeccable

@@ -1,0 +1,29 @@
+---
+import { technicalExperience } from '../../data/experience';
+---
+
+<section
+  id="experience"
+  class="home-experience home-shell"
+  aria-labelledby="experience-heading"
+>
+  <h2 id="experience-heading" class="home-section-title">
+    Selected Technical Experience
+  </h2>
+  <dl class="home-experience-list">
+    {technicalExperience.map((item) => (
+      <div>
+        <dt>
+          <span class="home-experience-list__date academic-record__date">
+            {item.years}
+          </span>
+          <span class="home-experience-list__identity">
+            <strong>{item.title}</strong>
+            <span>{item.context}</span>
+          </span>
+        </dt>
+        <dd>{item.description}</dd>
+      </div>
+    ))}
+  </dl>
+</section>

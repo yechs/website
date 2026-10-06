@@ -1,0 +1,48 @@
+---
+import PageLayout from './PageLayout.astro';
+
+interface Props {
+  title: string;
+  titleId?: string;
+  description: string;
+  image?: string;
+  imageAlt?: string;
+  date: Date;
+  hasMath?: boolean;
+}
+
+const {
+  title,
+  titleId,
+  description,
+  image,
+  imageAlt,
+  date,
+  hasMath = false,
+} = Astro.props;
+const formattedDate = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  timeZone: 'UTC',
+}).format(date);
+---
+
+<PageLayout
+  title={title}
+  description={description}
+  image={image}
+  imageAlt={imageAlt}
+  hasMath={hasMath}
+>
+  <article class="prose page-shell writing-entry">
+    <header class="page-heading">
+      <p class="eyebrow">
+        <a href="/writing/">Writing</a>
+      </p>
+      <h1 id={titleId}>{title}</h1>
+      <time datetime={date.toISOString()}>{formattedDate}</time>
+    </header>
+    <slot />
+  </article>
+</PageLayout>

@@ -1,0 +1,144 @@
+---
+import images from '../data/gallery';
+import PageLayout from '../layouts/PageLayout.astro';
+
+const thumbnailSource = (image: (typeof images)[number]) =>
+  image.srcSet?.find((source) => source.width === 640)?.src || image.src;
+const srcset = (image: (typeof images)[number]) =>
+  image.srcSet?.map((source) => `${source.src} ${source.width}w`).join(', ');
+const galleryPayload = images.map((image) => ({
+  src: image.src,
+  title: image.title,
+  description: image.description || '',
+  alt: image.alt || image.title,
+}));
+---
+
+<PageLayout
+  title="Gallery"
+  description="Photography by Ye Shu: landscapes, street scenes, wildlife, travel, and personal moments."
+>
+  <div class="page-shell">
+    <header class="page-heading gallery-intro">
+      <p class="eyebrow">Elsewhere</p>
+      <h1>Photography</h1>
+      <p>
+        Random photographs. I haven't updated this in a while, more to come...
+      </p>
+      <p>
+        All images are protected by copyright. Please request permission before
+        reuse.
+      </p>
+    </header>
+    <div class="gallery-grid">
+      {images.map((image, index) => (
+        <figure>
+          <button
+            type="button"
+            data-gallery-index={index}
+            aria-label={`Open ${image.title} in the image viewer`}
+          >
+            <img
+              src={thumbnailSource(image)}
+              srcset={srcset(image)}
+              sizes="(max-width: 544px) 48vw, (max-width: 900px) 33vw, 21rem"
+              width={image.width}
+              height={image.height}
+              alt={image.alt || image.title}
+              loading="lazy"
+              decoding="async"
+            />
+          </button>
+          <figcaption>{image.title}</figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+
+  <dialog class="lightbox" aria-labelledby="lightbox-title">
+    <div class="lightbox__inner">
+      <img src="" alt="" />
+      <div class="lightbox__caption">
+        <h2 id="lightbox-title"></h2>
+        <p></p>
+      </div>
+      <button
+        class="lightbox__close"
+        type="button"
+        aria-label="Close image viewer"
+      >
+        ×
+      </button>
+      <button
+        class="lightbox__previous"
+        type="button"
+        aria-label="Previous photograph"
+      >
+        ‹
+      </button>
+      <button class="lightbox__next" type="button" aria-label="Next photograph">
+        ›
+      </button>
+    </div>
+  </dialog>
+
+  <script define:vars={{ galleryPayload }}>
+    const dialog = document.querySelector('.lightbox');
+    const lightboxImage = dialog.querySelector('img');
+    const lightboxTitle = dialog.querySelector('h2');
+    const lightboxDescription = dialog.querySelector('.lightbox__caption p');
+    let activeIndex = 0;
+    let trigger = null;
+
+    const renderImage = () => {
+      const image = galleryPayload[activeIndex];
+      lightboxImage.src = image.src;
+      lightboxImage.alt = image.alt;
+      lightboxTitle.textContent = image.title;
+      lightboxDescription.textContent = image.description;
+    };
+
+    const openImage = (index, button) => {
+      activeIndex = index;
+      trigger = button;
+      renderImage();
+      dialog.showModal();
+    };
+
+    document.querySelectorAll('[data-gallery-index]').forEach((button) => {
+      button.addEventListener('click', () => {
+        openImage(Number(button.dataset.galleryIndex), button);
+      });
+    });
+
+    dialog
+      .querySelector('.lightbox__close')
+      .addEventListener('click', () => dialog.close());
+    dialog
+      .querySelector('.lightbox__previous')
+      .addEventListener('click', () => {
+        activeIndex =
+          (activeIndex - 1 + galleryPayload.length) % galleryPayload.length;
+        renderImage();
+      });
+    dialog.querySelector('.lightbox__next').addEventListener('click', () => {
+      activeIndex = (activeIndex + 1) % galleryPayload.length;
+      renderImage();
+    });
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+    dialog.addEventListener('close', () => trigger?.focus());
+    dialog.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowLeft') {
+        activeIndex =
+          (activeIndex - 1 + galleryPayload.length) % galleryPayload.length;
+        renderImage();
+      }
+      if (event.key === 'ArrowRight') {
+        activeIndex = (activeIndex + 1) % galleryPayload.length;
+        renderImage();
+      }
+    });
+  </script>
+</PageLayout>

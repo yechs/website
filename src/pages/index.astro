@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/home.css';
+
+import PersonSchema from '../components/home/PersonSchema.astro';
+import Identity from '../components/home/Identity.astro';
+import Navigation from '../components/home/Navigation.astro';
+import Research from '../components/home/Research.astro';
+import Publications from '../components/home/Publications.astro';
+import Community from '../components/home/Community.astro';
+import Experience from '../components/home/Experience.astro';
+import Beyond from '../components/home/Beyond.astro';
+---
+
+<BaseLayout
+  title="Ye Shu"
+  description="Ye Shu is a computer science PhD student at UC San Diego researching network security, Internet measurement, fingerprinting, and online abuse."
+  home
+>
+  <PersonSchema slot="head" />
+  <Identity />
+  <Navigation />
+  <Research />
+  <Publications />
+  <Community />
+  <Experience />
+  <Beyond />
+</BaseLayout>

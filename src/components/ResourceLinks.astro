@@ -1,0 +1,22 @@
+---
+/** Shared resource-link presentation; callers decide whether empty lists render. */
+interface Props {
+  links: readonly { label: string; href?: string }[];
+  label?: string;
+}
+
+const { links, label } = Astro.props;
+---
+
+<p class="resource-links" aria-label={label}>
+  {links.map((link, index) => (
+    <>
+      {index > 0 && <span aria-hidden="true"> · </span>}
+      {link.href ? (
+        <a href={link.href}>{link.label}</a>
+      ) : (
+        <span>{link.label}</span>
+      )}
+    </>
+  ))}
+</p>

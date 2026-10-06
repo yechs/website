@@ -1,58 +1,37 @@
 import js from '@eslint/js';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import { defineConfig } from 'eslint/config';
-import jsxA11y from 'eslint-plugin-jsx-a11y';
-import react from 'eslint-plugin-react';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
-const sourceFiles = ['**/*.{js,jsx,ts,tsx}'];
-
 export default defineConfig(
   {
-    ignores: ['**/.docusaurus/**', '**/build/**', '**/node_modules/**'],
+    ignores: [
+      '**/.astro/**',
+      '**/dist/**',
+      '**/node_modules/**',
+    ],
   },
   {
     ...js.configs.recommended,
-    files: sourceFiles,
-  },
-  ...tseslint.configs.recommended,
-  {
-    files: sourceFiles,
+    files: ['**/*.{js,mjs,ts}'],
     languageOptions: {
       ecmaVersion: 'latest',
       globals: {
         ...globals.browser,
         ...globals.node,
       },
-      parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
-        },
-      },
       sourceType: 'module',
     },
-    plugins: {
-      'jsx-a11y': jsxA11y,
-      react,
-    },
-    rules: {
-      ...react.configs.flat.recommended.rules,
-      ...react.configs.flat['jsx-runtime'].rules,
-      ...jsxA11y.flatConfigs.recommended.rules,
-    },
-    settings: {
-      react: {
-        version: 'detect',
-      },
-    },
   },
+  ...tseslint.configs.recommended,
   {
-    files: ['**/*.{ts,tsx}'],
+    files: ['**/*.ts'],
     rules: {
-      // Docusaurus supports require() for static assets.
-      '@typescript-eslint/no-require-imports': 'off',
-      '@typescript-eslint/no-unused-vars': 'warn',
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
+      ],
     },
   },
   eslintConfigPrettier,
