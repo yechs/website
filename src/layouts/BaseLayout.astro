@@ -2,9 +2,7 @@
 import '../styles/global.css';
 import homeStyles from '../styles/home.css?inline';
 
-import plexSansVariable from '@fontsource-variable/ibm-plex-sans/files/ibm-plex-sans-latin-wght-normal.woff2?url';
-import sourceSansVariable from '@fontsource-variable/source-sans-3/files/source-sans-3-latin-wght-normal.woff2?url';
-import sourceSerif600 from '@fontsource/source-serif-4/files/source-serif-4-latin-600-normal.woff2?url';
+import { Font } from 'astro:assets';
 
 import Footer from '../components/site/Footer.astro';
 import Header from '../components/site/Header.astro';
@@ -45,31 +43,12 @@ const imageAlt =
       href="/rss.xml"
     />
     {home && <style is:inline set:html={homeStyles} />}
-    {home && (
-      <>
-        <link
-          rel="preload"
-          href={sourceSerif600}
-          as="font"
-          type="font/woff2"
-          crossorigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href={sourceSansVariable}
-          as="font"
-          type="font/woff2"
-          crossorigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href={plexSansVariable}
-          as="font"
-          type="font/woff2"
-          crossorigin="anonymous"
-        />
-      </>
-    )}
+    <Font cssVariable="--font-source-serif" preload={false} />
+    <Font
+      cssVariable="--font-source-sans"
+      preload={home ? [{ weight: 400, style: 'normal' }] : false}
+    />
+    <Font cssVariable="--font-plex-sans" preload={false} />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:site_name" content="Ye Shu" />

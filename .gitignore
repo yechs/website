@@ -17,6 +17,11 @@
 .env.test.local
 .env.production.local
 
+misc_do_not_commit
+
 npm-debug.log*
 
+AGENTS.md
+PRODUCT.md
+DESIGN.md
 .impeccable
