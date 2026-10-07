@@ -2,34 +2,39 @@
 import { profile } from '../../data/profile';
 
 const homepage = new URL('/', Astro.site).href;
-const personSchema = {
+const profilePageSchema = {
   '@context': 'https://schema.org',
-  '@type': 'Person',
-  '@id': `${homepage}#person`,
-  name: 'Ye Shu',
+  '@type': 'ProfilePage',
+  '@id': homepage,
   url: homepage,
-  image: new URL('/img/portrait.webp', Astro.site).href,
-  jobTitle: 'PhD student in Computer Science',
-  affiliation: {
-    '@type': 'CollegeOrUniversity',
-    name: 'University of California San Diego',
-    url: 'https://ucsd.edu/',
+  mainEntity: {
+    '@type': 'Person',
+    '@id': `${homepage}#person`,
+    name: 'Ye Shu',
+    url: homepage,
+    image: new URL('/img/portrait.webp', Astro.site).href,
+    jobTitle: 'PhD student in Computer Science',
+    affiliation: {
+      '@type': 'CollegeOrUniversity',
+      name: 'University of California San Diego',
+      url: 'https://ucsd.edu/',
+    },
+    alumniOf: {
+      '@type': 'CollegeOrUniversity',
+      name: 'Williams College',
+      url: 'https://www.williams.edu/',
+    },
+    sameAs: [profile.orcid, profile.scholar, profile.github, profile.linkedin],
+    knowsAbout: [
+      'Network security',
+      'Internet measurement',
+      'Browser fingerprinting',
+      'Online abuse',
+    ],
   },
-  alumniOf: {
-    '@type': 'CollegeOrUniversity',
-    name: 'Williams College',
-    url: 'https://www.williams.edu/',
-  },
-  sameAs: [profile.orcid, profile.scholar, profile.github, profile.linkedin],
-  knowsAbout: [
-    'Network security',
-    'Internet measurement',
-    'Browser fingerprinting',
-    'Online abuse',
-  ],
 };
 // Keep future text values from closing the script element during HTML parsing.
-const json = JSON.stringify(personSchema).replace(/</g, '\\u003c');
+const json = JSON.stringify(profilePageSchema).replace(/</g, '\\u003c');
 ---
 
 <script is:inline type="application/ld+json" set:html={json} />
