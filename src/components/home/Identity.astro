@@ -1,16 +1,20 @@
 ---
 import { profile } from '../../data/profile';
+import { Image } from 'astro:assets';
+import portrait from '../../images/portrait.webp';
 ---
 
 <section class="home-identity home-shell" aria-labelledby="profile-name">
-  <img
+  <Image
     class="home-identity__portrait"
-    src="/img/portrait.webp"
+    src={portrait}
     alt="Portrait of Ye Shu"
     width="600"
     height="600"
-    decoding="async"
-    fetchpriority="high"
+    widths={[96, 176, 288, 376, 600]}
+    sizes="(max-width: 42rem) 5.5rem, (max-width: 68rem) 9rem, 11.8125rem"
+    quality={80}
+    priority
   />
   <div class="home-identity__details">
     <h1 id="profile-name">Ye Shu</h1>

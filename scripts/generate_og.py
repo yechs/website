@@ -4,7 +4,7 @@
 # dependencies = ["pillow==12.3.0"]
 # ///
 
-"""Render the default social image with the site's fonts and homepage portrait."""
+"""Render the default social image from the site's identity portrait."""
 
 import argparse
 from io import BytesIO
@@ -15,6 +15,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parent.parent
 OUTPUT = ROOT / 'public/og-image.jpg'
+PORTRAIT_SOURCE = ROOT / 'src/images/portrait.webp'
 SIZE = (1200, 630)
 SCALE = 2
 # Match global.css and the homepage's stronger muted-text value.
@@ -34,11 +35,19 @@ DOMAIN = 'shuye.dev'
 
 
 def font(family: str, weight: int, size: int) -> ImageFont.FreeTypeFont:
-    filename = f'{family}-latin-{weight}-normal.woff'
-    path = ROOT / 'node_modules/@fontsource' / family / 'files' / filename
+    if family == 'source-serif-4':
+        filename = f'{family}-latin-{weight}-normal.woff'
+        package = '@fontsource'
+    else:
+        filename = f'{family}-latin-wght-normal.woff2'
+        package = '@fontsource-variable'
+    path = ROOT / 'node_modules' / package / family / 'files' / filename
     if not path.is_file():
         raise SystemExit(f'Missing site font: {path}. Run npm ci first.')
-    return ImageFont.truetype(str(path), size * SCALE)
+    face = ImageFont.truetype(str(path), size * SCALE)
+    if package == '@fontsource-variable':
+        face.set_variation_by_axes([weight])
+    return face
 
 
 def render() -> bytes:
@@ -61,7 +70,7 @@ def render() -> bytes:
         draw.text((x, y), value, font=face, fill=color, anchor='lt')
 
     # Reuse the already approved crop, without another crop or retouch.
-    with Image.open(ROOT / 'public/img/portrait.webp') as source:
+    with Image.open(PORTRAIT_SOURCE) as source:
         if source.width != source.height:
             raise ValueError('The homepage portrait must remain square.')
         portrait = source.convert('RGB').resize(
@@ -87,8 +96,9 @@ def render() -> bytes:
     image.save(
         output, format='JPEG', quality=94, subsampling=0, optimize=True,
         comment=(
-            b'Deterministic Pillow composition; portrait: public/img/portrait.webp; '
-            b'fonts: @fontsource Source Serif 4, Source Sans 3, IBM Plex Sans; '
+            b'Deterministic Pillow composition; portrait: src/images/portrait.webp; '
+            b'fonts: @fontsource Source Serif 4; @fontsource-variable Source Sans 3 '
+            b'and IBM Plex Sans; '
             b'no AI generation.'
         ),
     )
@@ -115,8 +125,10 @@ def main() -> None:
             parser.exit(1, 'OG image is stale; run uv run scripts/generate_og.py\n')
     else:
         args.output.write_bytes(contents)
-    print(f'{"Verified" if args.check else "Generated"} {args.output} '
-          f'(1200×630 JPEG, {len(contents):,} bytes)')
+    print(
+        f'{"Verified" if args.check else "Generated"} {args.output}'
+        f' (1200×630 JPEG, {len(contents):,} bytes)'
+    )
 
 
 if __name__ == '__main__':

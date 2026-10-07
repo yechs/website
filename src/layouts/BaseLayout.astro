@@ -1,5 +1,10 @@
 ---
 import '../styles/global.css';
+import homeStyles from '../styles/home.css?inline';
+
+import plexSansVariable from '@fontsource-variable/ibm-plex-sans/files/ibm-plex-sans-latin-wght-normal.woff2?url';
+import sourceSansVariable from '@fontsource-variable/source-sans-3/files/source-sans-3-latin-wght-normal.woff2?url';
+import sourceSerif600 from '@fontsource/source-serif-4/files/source-serif-4-latin-600-normal.woff2?url';
 
 import Footer from '../components/site/Footer.astro';
 import Header from '../components/site/Header.astro';
@@ -39,6 +44,32 @@ const imageAlt =
       title="Ye Shu — Writing"
       href="/rss.xml"
     />
+    {home && <style is:inline set:html={homeStyles} />}
+    {home && (
+      <>
+        <link
+          rel="preload"
+          href={sourceSerif600}
+          as="font"
+          type="font/woff2"
+          crossorigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href={sourceSansVariable}
+          as="font"
+          type="font/woff2"
+          crossorigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href={plexSansVariable}
+          as="font"
+          type="font/woff2"
+          crossorigin="anonymous"
+        />
+      </>
+    )}
     <meta property="og:type" content="website" />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:site_name" content="Ye Shu" />
@@ -62,6 +93,7 @@ const imageAlt =
     <slot name="head" />
     <script
       async
+      fetchpriority="low"
       src="https://www.googletagmanager.com/gtag/js?id=G-M3X8PGC98D"
     ></script>
     <script is:inline>
