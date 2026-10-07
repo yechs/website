@@ -1,4 +1,3 @@
-import mdx from '@astrojs/mdx';
 import { unified } from '@astrojs/markdown-remark';
 import sitemap from '@astrojs/sitemap';
 import { defineConfig } from 'astro/config';
@@ -15,7 +14,7 @@ export default defineConfig({
   site: 'https://shuye.dev',
   output: 'static',
   trailingSlash: 'always',
-  integrations: [mdx(), sitemap()],
+  integrations: [sitemap()],
   markdown: {
     processor: unified({
       remarkPlugins: [

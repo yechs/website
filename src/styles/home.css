@@ -48,6 +48,7 @@
 }
 
 .home-identity__role {
+  font-family: var(--font-meta);
   margin: 0 0 0.65rem;
   font-size: 1.5rem;
   line-height: 1.4;
@@ -55,11 +56,13 @@
 
 .home-identity__advisors,
 .home-identity__affiliations {
+  font-family: var(--font-meta);
   margin: 0.2rem 0;
   font-size: 1.25rem;
 }
 
 .home-identity__email {
+  font-family: var(--font-meta);
   margin: 0.85rem 0 0;
   font-size: 1rem;
 }
@@ -69,6 +72,7 @@
 }
 
 .home-identity__links {
+  font-family: var(--font-meta);
   display: grid;
   justify-self: start;
   gap: 0.2rem;
@@ -84,11 +88,13 @@
 .home-identity__summary {
   grid-column: 1 / -1;
   margin: 0;
+  font-family: var(--font-text);
   font-size: 1.25rem;
   line-height: 1.65;
 }
 
 .home-navigation {
+  font-family: var(--font-meta);
   container: home-navigation / inline-size;
   position: static;
   z-index: 20;
@@ -184,6 +190,7 @@
 }
 
 .home-publications__destinations {
+  font-family: var(--font-meta);
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem 1.25rem;
@@ -196,6 +203,7 @@
 }
 
 .home-publication__meta {
+  font-family: var(--font-meta);
   margin: 0.2rem 0 0;
   color: var(--color-muted);
   font-size: 0.92rem;
@@ -221,17 +229,20 @@
 }
 
 .home-publication__authors {
+  font-family: var(--font-text);
   color: var(--color-muted);
   font-size: 0.9rem;
   line-height: 1.5;
 }
 
 .home-publication__explanation {
+  font-family: var(--font-text);
   max-width: var(--home-reading-measure);
   margin: 0.65rem 0 0;
 }
 
 .home-publication__award {
+  font-family: var(--font-meta);
   color: var(--color-award);
   font-size: 0.9rem;
   font-weight: 600;
@@ -273,6 +284,7 @@
   display: inline-flex;
   align-items: center;
   min-height: 2.75rem;
+  font-family: var(--font-text);
   font-size: 1rem;
   cursor: pointer;
 }
@@ -305,7 +317,7 @@
 }
 
 .home-publication--compact h3 {
-  font-family: var(--font-body);
+  font-family: var(--font-text);
   font-size: 1rem;
   line-height: 1.45;
 }
@@ -374,7 +386,7 @@
   grid-column: 2;
   grid-row: 1;
   margin: 0;
-  font-family: var(--font-body);
+  font-family: var(--font-text);
   font-size: inherit;
   line-height: inherit;
 }
@@ -385,12 +397,14 @@
 }
 
 .academic-record__date {
+  font-family: var(--font-meta);
   color: var(--color-muted);
   font-size: 0.84rem;
   font-variant-numeric: tabular-nums;
 }
 
 .academic-records p {
+  font-family: var(--font-text);
   margin: 0.2rem 0 0;
   margin-left: calc(var(--home-record-rail) + var(--home-record-gap));
   max-width: var(--home-reading-measure);
@@ -402,7 +416,7 @@
 
 .home-teaching-subheading {
   margin: 1.75rem 0 0.65rem;
-  font-family: var(--font-body);
+  font-family: var(--font-meta);
   font-size: 0.95rem;
 }
 
@@ -420,6 +434,7 @@
 }
 
 .home-course-list__details {
+  font-family: var(--font-text);
   grid-column: 2;
   grid-row: 1;
   max-width: var(--home-reading-measure);
@@ -458,12 +473,13 @@
   grid-row: 1;
   max-width: var(--home-reading-measure);
   margin: 0;
-  font-family: var(--font-body);
+  font-family: var(--font-text);
   font-size: inherit;
   line-height: inherit;
 }
 
 .home-service-list__role {
+  font-family: var(--font-text);
   grid-column: 2;
   grid-row: 2;
   color: var(--color-muted);
@@ -509,6 +525,7 @@
 }
 
 .home-recognition p + p {
+  font-family: var(--font-text);
   margin-top: 0.25rem;
   color: var(--color-muted);
   font-size: 0.85rem;
@@ -538,6 +555,7 @@
 
 .home-experience-list__identity,
 .home-experience-list dd {
+  font-family: var(--font-text);
   grid-column: 2;
 }
 
@@ -550,11 +568,13 @@
 }
 
 .home-experience-list__date {
+  font-family: var(--font-meta);
   grid-column: 1;
   grid-row: 1;
 }
 
 .home-experience-list__identity > span {
+  font-family: var(--font-meta);
   display: block;
   margin-top: 0.2rem;
   color: var(--color-muted);
@@ -583,6 +603,7 @@
 }
 
 .home-closing__grid p {
+  font-family: var(--font-text);
   margin-top: 0;
   max-width: var(--home-reading-measure);
 }
@@ -601,6 +622,7 @@
 }
 
 .home-writing-list time {
+  font-family: var(--font-meta);
   color: var(--color-muted);
   font-size: 0.85rem;
   font-variant-numeric: tabular-nums;
@@ -612,6 +634,7 @@
 }
 
 .home-closing__destinations {
+  font-family: var(--font-meta);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -640,6 +663,7 @@
 }
 
 .is-home .site-footer nav a {
+  font-family: var(--font-meta);
   display: inline-flex;
   align-items: center;
   min-height: 2.75rem;

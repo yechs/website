@@ -5,7 +5,7 @@ body:not(.is-home) {
 
 code,
 pre {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-family: var(--font-mono);
 }
 
 code:not(pre code) {
@@ -73,6 +73,7 @@ body:not(.is-home) .site-footer a {
 }
 
 .site-header nav a {
+  font-family: var(--font-meta);
   color: var(--color-muted);
   font-size: 0.92rem;
   text-decoration: none;
@@ -115,7 +116,13 @@ body:not(.is-home) .site-footer a {
   color: var(--color-muted);
 }
 
+.page-heading time {
+  font-family: var(--font-meta);
+  font-variant-numeric: tabular-nums;
+}
+
 .eyebrow {
+  font-family: var(--font-meta);
   margin: 0 0 0.45rem;
   color: var(--color-accent);
   font-size: 0.76rem;
@@ -145,6 +152,7 @@ body:not(.is-home) .site-footer a {
 }
 
 .profile__role {
+  font-family: var(--font-meta);
   margin: 0;
   color: var(--color-muted);
   font-size: 1.08rem;
@@ -172,6 +180,7 @@ body:not(.is-home) .site-footer a {
 }
 
 .external-links {
+  font-family: var(--font-meta);
   display: flex;
   flex-wrap: wrap;
   gap: 0.25rem 0.65rem;
@@ -263,10 +272,17 @@ body:not(.is-home) .site-footer a {
 }
 
 .publication__venue {
+  font-family: var(--font-meta);
   color: var(--color-muted);
 }
 
+.publication__venue,
 .publication__award {
+  font-variant-numeric: tabular-nums;
+}
+
+.publication__award {
+  font-family: var(--font-meta);
   color: var(--color-award);
   font-weight: 600;
 }
@@ -278,7 +294,7 @@ body:not(.is-home) .site-footer a {
 
 .publication__annotation h4 {
   margin: 0 0 0.2rem;
-  font-family: var(--font-body);
+  font-family: var(--font-meta);
   font-size: 0.78rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -286,6 +302,12 @@ body:not(.is-home) .site-footer a {
 
 .publication__annotation p {
   margin: 0;
+}
+
+.publication--compact h3 {
+  font-family: var(--font-text);
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
 .year-group + .year-group {
@@ -296,7 +318,7 @@ body:not(.is-home) .site-footer a {
   margin: 0 0 1.8rem;
   padding-bottom: 0.55rem;
   border-bottom: 1px solid var(--color-border);
-  font-family: var(--font-body);
+  font-family: var(--font-meta);
   font-size: 1rem;
   letter-spacing: 0.08em;
 }
@@ -317,8 +339,10 @@ body:not(.is-home) .site-footer a {
 }
 
 .writing-list time {
+  font-family: var(--font-meta);
   color: var(--color-muted);
   font-size: 0.86rem;
+  font-variant-numeric: tabular-nums;
 }
 
 .writing-list a {
@@ -347,8 +371,10 @@ body:not(.is-home) .site-footer a {
 }
 
 .service-list dt {
+  font-family: var(--font-meta);
   color: var(--color-muted);
   font-size: 0.86rem;
+  font-variant-numeric: tabular-nums;
 }
 
 .service-list dd {
@@ -408,7 +434,7 @@ body:not(.is-home) .site-footer a {
 
 .writing-entry > pre {
   /* Measure the outer block in the same typeface as the surrounding prose. */
-  font-family: var(--font-body);
+  font-family: var(--font-text);
   font-size: inherit;
 }
 
@@ -440,6 +466,7 @@ body:not(.is-home) .site-footer a {
 }
 
 .table-of-contents {
+  font-family: var(--font-meta);
   position: sticky;
   top: 1.5rem;
   align-self: start;
@@ -452,7 +479,7 @@ body:not(.is-home) .site-footer a {
 
 .table-of-contents h2 {
   margin: 0 0 0.75rem;
-  font-family: var(--font-body);
+  font-family: var(--font-meta);
   font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.07em;
@@ -484,6 +511,7 @@ body:not(.is-home) .site-footer a {
 
 .archive-groups h2 {
   margin: 0 0 0.75rem;
+  font-family: var(--font-meta);
   font-size: 1.3rem;
 }
 
@@ -523,6 +551,7 @@ body:not(.is-home) .site-footer a {
 }
 
 .gallery-grid figcaption {
+  font-family: var(--font-text);
   margin-top: 0.35rem;
   color: var(--color-muted);
   font-size: 0.75rem;
@@ -570,6 +599,10 @@ body:not(.is-home) .site-footer a {
   white-space: pre-line;
   color: #c9c9c4;
   font-size: 0.85rem;
+}
+
+.lightbox__caption h2 {
+  font-family: var(--font-display);
 }
 
 .lightbox__close,
