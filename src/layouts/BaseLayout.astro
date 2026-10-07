@@ -15,9 +15,8 @@ interface Props {
 const { title, description, home = false } = Astro.props;
 const pageTitle = title === 'Ye Shu' ? title : `${title} · Ye Shu`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const image = new URL(Astro.props.image ?? '/img/og-default.jpg', Astro.site);
-const isDefaultImage =
-  image.href === new URL('/img/og-default.jpg', Astro.site).href;
+const image = new URL(Astro.props.image ?? '/og-image.jpg', Astro.site);
+const isDefaultImage = image.href === new URL('/og-image.jpg', Astro.site).href;
 const imageAlt =
   Astro.props.imageAlt ??
   (isDefaultImage
