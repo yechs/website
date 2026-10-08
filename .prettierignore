@@ -1,11 +1,13 @@
 # Dependencies
 /node_modules
+.venv
 
 # Production
 /dist
 
 # Generated files
 .astro
+.impeccable
 
 # Misc
 .vscode
@@ -14,6 +16,7 @@
 .env.development.local
 .env.test.local
 .env.production.local
+misc_do_not_commit
 
 npm-debug.log*
 
