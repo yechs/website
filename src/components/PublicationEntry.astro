@@ -10,15 +10,7 @@ interface Props {
 const { publication, annotated = false } = Astro.props;
 ---
 
-<article
-  class:list={[
-    'publication',
-    {
-      'publication--representative': publication.selected,
-      'publication--compact': !publication.selected,
-    },
-  ]}
->
+<article class="publication">
   <h3>{publication.title}</h3>
   <p class="publication__authors">
     {publication.authors.map((author, index) => (

@@ -17,6 +17,9 @@
   --content-wide: 85.25rem;
   --site-gutter: clamp(1.25rem, 4.65vw, 4.375rem);
   --content-prose: 48rem;
+  --font-size-reading: 1.125rem;
+  --font-size-record: 1rem;
+  --font-size-meta: 0.9rem;
   --space-section: clamp(3.75rem, 8vw, 6.5rem);
   font-family: var(--font-text);
   font-synthesis: none;

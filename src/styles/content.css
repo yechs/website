@@ -116,6 +116,10 @@ body:not(.is-home) .site-footer a {
   color: var(--color-muted);
 }
 
+.page-heading > p {
+  font-size: var(--font-size-reading);
+}
+
 .page-heading time {
   font-family: var(--font-meta);
   font-variant-numeric: tabular-nums;
@@ -263,6 +267,7 @@ body:not(.is-home) .site-footer a {
 
 .publication h3 {
   margin: 0 0 0.45rem;
+  font-size: 1.22rem;
 }
 
 .publication__authors,
@@ -288,8 +293,9 @@ body:not(.is-home) .site-footer a {
 }
 
 .publication__annotation {
-  max-width: var(--content-prose);
+  max-width: 70ch;
   margin-top: 1rem;
+  font-size: var(--font-size-reading);
 }
 
 .publication__annotation h4 {
@@ -302,12 +308,6 @@ body:not(.is-home) .site-footer a {
 
 .publication__annotation p {
   margin: 0;
-}
-
-.publication--compact h3 {
-  font-family: var(--font-text);
-  font-size: 1rem;
-  line-height: 1.5;
 }
 
 .year-group + .year-group {
@@ -341,20 +341,20 @@ body:not(.is-home) .site-footer a {
 .writing-list time {
   font-family: var(--font-meta);
   color: var(--color-muted);
-  font-size: 0.86rem;
+  font-size: var(--font-size-meta);
   font-variant-numeric: tabular-nums;
 }
 
 .writing-list a {
   font-family: var(--font-display);
-  font-size: 1.08rem;
+  font-size: var(--font-size-reading);
   font-weight: 600;
 }
 
 .writing-list p {
   margin: 0.3rem 0 0;
   color: var(--color-muted);
-  font-size: 0.92rem;
+  font-size: var(--font-size-record);
 }
 
 .service-list {
@@ -400,6 +400,7 @@ body:not(.is-home) .site-footer a {
 
 .prose {
   max-width: var(--content-prose);
+  font-size: var(--font-size-reading);
 }
 
 .prose :where(h2, h3, h4) {

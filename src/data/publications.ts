@@ -43,7 +43,7 @@ export const publications: readonly Publication[] = [
     ],
     tldr: 'We develop and validate inference techniques for measuring current and historical U.S. federal court case sealing practices.',
     highlight:
-      'The techniques make scaled investigations of a secretive judicial process possible with free data and reveal previously hidden patterns with civil and magistrate judge cases.',
+      'These techniques enable large-scale studies of a secretive judicial process using free data, revealing hidden patterns with civil and magistrate judge cases.',
   },
   {
     id: 'sms-spoof-oakland-2026',
@@ -127,7 +127,7 @@ export const publications: readonly Publication[] = [
     venue: 'Williams College undergraduate honors thesis',
     year: 2024,
     type: 'thesis',
-    selected: true,
+    selected: false,
     award: 'Highest Honors and Sam Goldberg Colloquium Prize',
     links: [
       {
