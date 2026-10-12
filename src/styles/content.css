@@ -261,19 +261,18 @@ body:not(.is-home) .site-footer a {
   gap: 2.25rem;
 }
 
-.publication {
-  max-width: 54rem;
-}
-
 .publication h3 {
   margin: 0 0 0.45rem;
   font-size: 1.22rem;
+  line-height: 1.35;
+  text-wrap: pretty;
 }
 
 .publication__authors,
 .publication__venue,
 .publication .resource-links {
   margin: 0.25rem 0;
+  max-width: 54rem;
 }
 
 .publication__venue {
