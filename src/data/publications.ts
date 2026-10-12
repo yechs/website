@@ -40,6 +40,7 @@ export const publications: readonly Publication[] = [
         href: 'https://dl.acm.org/doi/10.1145/3777912.3839786',
       },
       { label: 'Paper', href: '/papers/IMC26-Sealed.pdf' },
+      { label: 'Recorded Talk', href: 'https://youtu.be/tyMrJFy5nfo' },
     ],
     tldr: 'We develop and validate inference techniques for measuring current and historical U.S. federal court case sealing practices.',
     highlight:
