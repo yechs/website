@@ -945,10 +945,6 @@
     line-height: 1.45;
   }
 
-  .home-publication .resource-links > span[aria-hidden='true'] {
-    display: none;
-  }
-
   .home-identity__links a,
   .home-publication .resource-links a,
   .home-closing__destinations a,

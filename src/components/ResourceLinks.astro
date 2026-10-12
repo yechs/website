@@ -9,9 +9,8 @@ const { links, label } = Astro.props;
 ---
 
 <p class="resource-links" aria-label={label}>
-  {links.map((link, index) => (
+  {links.map((link) => (
     <>
-      {index > 0 && <span aria-hidden="true"> · </span>}
       {link.href ? (
         <a href={link.href}>{link.label}</a>
       ) : (
