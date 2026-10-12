@@ -41,7 +41,7 @@ const galleryPayload = images.map((image) => ({
             <img
               src={thumbnailSource(image)}
               srcset={srcset(image)}
-              sizes="(max-width: 544px) 48vw, (max-width: 900px) 33vw, 21rem"
+              sizes="(max-width: 544px) calc((100vw - 2 * clamp(20px, 4.65vw, 70px) - 16px) / 2), (max-width: 652px) calc(100vw - 2 * clamp(20px, 4.65vw, 70px)), (max-width: 987px) calc((100vw - 2 * clamp(20px, 4.65vw, 70px) - 16px) / 2), calc((min(100vw - 2 * clamp(20px, 4.65vw, 70px), 1364px) - 32px) / 3)"
               width={image.width}
               height={image.height}
               alt={image.alt || image.title}
