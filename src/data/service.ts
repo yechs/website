@@ -1,4 +1,5 @@
 interface ServiceItem {
+  // Trusted inline HTML
   role: string;
   organization?: string;
   years: string;
@@ -7,7 +8,7 @@ interface ServiceItem {
 
 export const service: readonly ServiceItem[] = [
   {
-    role: 'Shadow Technical Program Committee',
+    role: 'Shadow Technical Program Committee <strong>(Distinguished Reviewer)</strong>',
     organization: 'ACM Internet Measurement Conference',
     years: '2026',
   },

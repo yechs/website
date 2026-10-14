@@ -501,6 +501,11 @@
   color: var(--color-muted);
 }
 
+.home-service-list__role strong {
+  color: var(--color-ink);
+  font-weight: 600;
+}
+
 .home-service-list .academic-record__date {
   grid-column: 1;
   grid-row: 1;

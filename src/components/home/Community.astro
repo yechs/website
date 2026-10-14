@@ -64,7 +64,7 @@ import { service } from '../../data/service';
                 item.organization || item.role
               )}
             </h4>
-            <span class="home-service-list__role">{item.role}</span>
+            <span class="home-service-list__role" set:html={item.role} />
           </li>
         ))}
       </ul>
