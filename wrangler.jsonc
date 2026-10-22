@@ -3,6 +3,7 @@
   "name": "shuye-website",
   // Update deliberately after reviewing compatibility changes and testing.
   "compatibility_date": "2026-10-22",
+  "previews": {},
   "assets": {
     "directory": "./dist",
     "html_handling": "force-trailing-slash",

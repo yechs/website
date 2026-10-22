@@ -70,6 +70,13 @@ Edit permission for the target account) and `CLOUDFLARE_ACCOUNT_ID` before using
 it. Do not also enable Workers Builds for the same branch unless you disable
 the GitHub deployment workflow.
 
+Pull requests from this repository also deploy a Cloudflare Preview named
+`pr-<number>` after quality checks. The workflow updates one PR comment with the
+preview URL and deletes the Preview when the PR closes. Fork PRs run quality
+checks without deploying previews. Dependabot PRs also deploy previews; add
+`CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` as Dependabot secrets with the
+same names as the Actions secrets. Cloudflare Workers Builds is not required.
+
 After verifying the initial deployment at its `workers.dev` URL, attach
 `shuye.dev` as a Custom Domain in the Worker's Cloudflare settings to switch
 production traffic.

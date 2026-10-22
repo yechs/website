@@ -1,7 +1,11 @@
-name: Pull request checks
+name: Pull request checks and preview
 
 on:
   pull_request:
+    types: [opened, synchronize, reopened, closed]
+
+permissions:
+  contents: read
 
 concurrency:
   group: pull-request-${{ github.event.pull_request.number }}
@@ -9,4 +13,92 @@ concurrency:
 
 jobs:
   quality:
+    if: github.event.action != 'closed'
     uses: ./.github/workflows/quality.yaml
+
+  preview:
+    name: Deploy PR preview
+    needs: quality
+    if: >-
+      github.event.action != 'closed' &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    env:
+      PR_NUMBER: ${{ github.event.pull_request.number }}
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7.0.1
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Build
+        run: npm run build
+      - name: Create or update preview
+        id: preview
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          npx --no-install wrangler preview --name "pr-$PR_NUMBER" --json > "$RUNNER_TEMP/preview.json"
+          preview_url="$(jq -er '.preview.urls[0] | select(type == "string" and startswith("https://"))' "$RUNNER_TEMP/preview.json")"
+          echo "url=$preview_url" >> "$GITHUB_OUTPUT"
+          echo "[PR preview]($preview_url)" >> "$GITHUB_STEP_SUMMARY"
+      - name: Update preview comment
+        env:
+          PREVIEW_URL: ${{ steps.preview.outputs.url }}
+        run: |
+          comment_id="$(gh api --paginate --slurp "repos/$GH_REPO/issues/$PR_NUMBER/comments" \
+            --jq '[.[][] | select(.user.login == "github-actions[bot]" and (.body | startswith("<!-- cloudflare-preview -->")))] | first | .id // empty')"
+          jq -n --arg url "$PREVIEW_URL" \
+            '{body: ("<!-- cloudflare-preview -->\nCloudflare preview: " + $url)}' > "$RUNNER_TEMP/preview-comment.json"
+          if [ -n "$comment_id" ]; then
+            gh api --method PATCH "repos/$GH_REPO/issues/comments/$comment_id" \
+              --input "$RUNNER_TEMP/preview-comment.json" --silent
+          else
+            gh api --method POST "repos/$GH_REPO/issues/$PR_NUMBER/comments" \
+              --input "$RUNNER_TEMP/preview-comment.json" --silent
+          fi
+
+  cleanup:
+    name: Delete PR preview
+    if: >-
+      github.event.action == 'closed' &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    env:
+      PR_NUMBER: ${{ github.event.pull_request.number }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - name: Check out default branch
+        uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Delete preview if it exists
+        run: |
+          worker_name="$(node --input-type=module -e 'import { unstable_readConfig } from "wrangler"; console.log(unstable_readConfig({}).name)')"
+          status="$(curl --silent --show-error \
+            --output "$RUNNER_TEMP/preview-status.json" --write-out '%{http_code}' \
+            --header "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+            "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/workers/workers/$worker_name/previews/pr-$PR_NUMBER")"
+          case "$status" in
+            200) npx --no-install wrangler preview delete --name "pr-$PR_NUMBER" --skip-confirmation ;;
+            404) echo "No preview exists for PR #$PR_NUMBER." ;;
+            *) echo "Preview lookup failed (HTTP $status)." >&2; exit 1 ;;
+          esac
