@@ -167,11 +167,6 @@
   gap: var(--home-subsection-gap) 3rem;
 }
 
-.home-research__threads h3 {
-  margin: 0 0 var(--home-subsection-heading-gap);
-  font-size: 1.6rem;
-}
-
 .home-research__threads p {
   margin: 0;
   max-width: var(--measure-reading);
@@ -229,8 +224,8 @@
 
 .home-publication h3 {
   margin: 0 0 0.45rem;
-  font-size: 1.25rem;
-  line-height: 1.35;
+  font-size: 1.375rem;
+  line-height: 1.3;
   text-wrap: pretty;
 }
 
@@ -245,6 +240,16 @@
 
 .home-publication__meta p {
   margin: 0 0 0.25rem;
+}
+
+/* The venue and year anchor each row; the award, type, and year stay quiet. */
+.home-publication__meta p:first-child {
+  color: var(--color-ink);
+  font-weight: 500;
+}
+
+.home-publication__authors strong {
+  color: var(--color-ink);
 }
 
 .home-publication__authors {
@@ -338,6 +343,7 @@
 .home-publication--compact h3 {
   font-family: var(--font-display);
   font-size: 1.125rem;
+  line-height: 1.35;
 }
 
 .home-publication--compact .home-publication__meta {
@@ -364,6 +370,7 @@
   gap: var(--home-subsection-gap);
 }
 
+.home-research__threads h3,
 .home-academic-grid h3,
 .home-closing__grid h3 {
   margin: 0 0 var(--home-subsection-heading-gap);
@@ -811,6 +818,7 @@
   }
 
   .is-home {
+    --home-type-prose: 1.0625rem;
     font-size: var(--home-type-prose);
   }
 
@@ -910,10 +918,6 @@
     font-size: 2rem;
   }
 
-  .home-research__threads h3 {
-    font-size: 1.4rem;
-  }
-
   .home-publication {
     grid-template-columns: minmax(0, 1fr);
     gap: 0.45rem;
@@ -928,6 +932,10 @@
 
   .home-publication__meta p {
     margin: 0;
+  }
+
+  .home-publication:not(.home-publication--compact) h3 {
+    font-size: 1.2rem;
   }
 
   .home-publication__authors {
