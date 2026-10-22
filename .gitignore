@@ -5,6 +5,7 @@
 
 # Production
 /dist
+/.wrangler
 
 # Generated files
 .astro

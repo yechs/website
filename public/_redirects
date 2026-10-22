@@ -1,0 +1,25 @@
+# Legacy blog URLs, with and without trailing slashes.
+/blog /writing/ 301
+/blog/ /writing/ 301
+/blog/archive /writing/ 301
+/blog/archive/ /writing/ 301
+/blog/authors /writing/ 301
+/blog/authors/ /writing/ 301
+/blog/tags /writing/ 301
+/blog/tags/ /writing/ 301
+/blog/tags/c /writing/malloc_chunk/ 301
+/blog/tags/c/ /writing/malloc_chunk/ 301
+/blog/tags/pwn /writing/malloc_chunk/ 301
+/blog/tags/pwn/ /writing/malloc_chunk/ 301
+/blog/tags/essays /writing/welcome/ 301
+/blog/tags/essays/ /writing/welcome/ 301
+/blog/tags/events /writing/welcome/ 301
+/blog/tags/events/ /writing/welcome/ 301
+/blog/welcome /writing/welcome/ 301
+/blog/welcome/ /writing/welcome/ 301
+/blog/malloc_chunk /writing/malloc_chunk/ 301
+/blog/malloc_chunk/ /writing/malloc_chunk/ 301
+
+# Strip the former locale prefix from any path.
+/zh-CN / 301
+/zh-CN/* /:splat 301

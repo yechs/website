@@ -15,7 +15,7 @@
     "build": "ASTRO_TELEMETRY_DISABLED=1 astro check && ASTRO_TELEMETRY_DISABLED=1 astro build",
     "serve": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
     "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
-    "deploy": "bash scripts/deploy.sh",
+    "deploy": "npm run build && wrangler deploy",
     "generate:favicon": "uv run scripts/generate-favicon.py",
     "generate:og": "uv run scripts/generate_og.py",
     "typecheck": "ASTRO_TELEMETRY_DISABLED=1 astro check",
@@ -59,13 +59,15 @@
     "prettier": "3.9.9",
     "prettier-plugin-astro": "1.1.0",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.71.0"
+    "typescript-eslint": "8.71.0",
+    "wrangler": "4.152.0"
   },
   "engines": {
     "node": ">=24"
   },
   "packageManager": "npm@11.21.0",
   "allowScripts": {
-    "esbuild@0.28.2": true
+    "esbuild@0.28.2": true,
+    "workerd@1.20261019.1": true
   }
 }

@@ -1,4 +1,4 @@
-name: Deploy to yechs.github.io
+name: Deploy to Cloudflare Workers
 
 on:
   push:
@@ -17,15 +17,12 @@ jobs:
     uses: ./.github/workflows/quality.yaml
 
   deploy:
-    name: Deploy to yechs.github.io
+    name: Deploy to Cloudflare Workers
     needs: quality
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
         uses: actions/checkout@v7.0.1
-        with:
-          # fetch all commit history so "Last Updated" field will be accurate
-          fetch-depth: 0
       - name: Set up Node.js
         uses: actions/setup-node@v7
         with:
@@ -33,16 +30,8 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm ci
-      - name: Configure SSH agent
-        uses: webfactory/ssh-agent@v0.10.0
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-      - name: Deploy to GitHub Pages
+      - name: Deploy to Cloudflare Workers
         env:
-          USE_SSH: true
-          GIT_USER: git
-          DEPLOYMENT_BRANCH: master
-        run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-          npm run deploy
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npm run deploy

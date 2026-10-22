@@ -1,0 +1,11 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "shuye-website",
+  // Update deliberately after reviewing compatibility changes and testing.
+  "compatibility_date": "2026-10-22",
+  "assets": {
+    "directory": "./dist",
+    "html_handling": "force-trailing-slash",
+    "not_found_handling": "404-page",
+  },
+}
