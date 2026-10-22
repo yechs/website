@@ -61,7 +61,7 @@ Let us compile the program with `g++ -g3 memory_leak.cpp -o memory_leak` (the `-
 
 We'll add a breakpoint at the end of function `memory_leak()` and run the program until it hits the breakpoint.
 
-```console
+```console nowrap
 $ gdb memory_leak
 
 gef➤  b 11
@@ -100,7 +100,7 @@ After the program hits the breakpoint, we print out the address of pointer `arr`
 
 Now, let us continue running the program until `memory_leak()` returns back to `main()`.
 
-```gdb
+```gdb nowrap
 gef➤  finish
 [...]
 ─────────────────────────────────────────────────────────────── source:memory_leak.cpp+15 ────
@@ -251,7 +251,7 @@ The following content comes from the comments in `malloc/malloc.c` of glibc ([so
 >
 > An allocated chunk looks like this:
 >
-> ```
+> ```text nowrap
 >     chunk-> +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 >             |             Size of previous chunk, if unallocated (P clear)  |
 >             +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -278,7 +278,7 @@ The following content comes from the comments in `malloc/malloc.c` of glibc ([so
 >
 > Free chunks are stored in circular doubly-linked lists, and look like this:
 >
-> ```
+> ```text nowrap
 >     chunk-> +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 >             |             Size of previous chunk, if unallocated (P clear)  |
 >             +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+

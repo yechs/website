@@ -8,6 +8,20 @@ pre {
   font-family: var(--font-mono);
 }
 
+/* Code wraps by default. Except for code blocks marked `nowrap` */
+pre.astro-code {
+  white-space: pre-wrap;
+}
+
+pre.astro-code.code-nowrap {
+  white-space: pre;
+}
+
+pre:focus-visible {
+  outline: 0.18rem solid var(--color-accent);
+  outline-offset: 0.2rem;
+}
+
 code:not(pre code) {
   padding: 0.1em 0.28em;
   border-radius: 0.2rem;
@@ -343,6 +357,32 @@ body:not(.is-home) .site-footer a {
   /* Measure the box in the prose typeface so it matches the text column. */
   font-family: var(--font-text);
   font-size: inherit;
+}
+
+/* Blocks that never wrap scroll sideways. Edge shading shows which side has
+   more: the canvas-colored covers (attached to the content) hide the shading
+   once the block is scrolled to that end. Applies at any nesting depth. */
+.article-body pre.code-nowrap {
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) transparent;
+  background-image:
+    linear-gradient(to right, var(--color-canvas) 40%, transparent),
+    linear-gradient(to left, var(--color-canvas) 40%, transparent),
+    linear-gradient(to right, rgb(36 42 48 / 14%), transparent),
+    linear-gradient(to left, rgb(36 42 48 / 14%), transparent);
+  background-position:
+    left center,
+    right center,
+    left center,
+    right center;
+  background-size:
+    2rem 100%,
+    2rem 100%,
+    0.75rem 100%,
+    0.75rem 100%;
+  background-repeat: no-repeat;
+  background-attachment: local, local, scroll, scroll;
 }
 
 .article-body > pre code {

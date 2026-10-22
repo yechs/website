@@ -103,7 +103,18 @@ export default defineConfig({
         gdb: 'text',
         'shell-session': 'shellscript',
       },
-      wrap: true,
+      // Code wraps by default except for code blocks marked `nowrap`
+      wrap: false,
+      transformers: [
+        {
+          name: 'nowrap-meta',
+          pre(node) {
+            if (/\bnowrap\b/.test(this.options.meta?.__raw ?? '')) {
+              this.addClassToHast(node, 'code-nowrap');
+            }
+          },
+        },
+      ],
     },
   },
 });
