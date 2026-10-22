@@ -1,0 +1,93 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+---
+
+<PageLayout
+  title="Page not found"
+  description="This page couldn’t be found. Return to Ye Shu’s homepage or explore publications and writing."
+>
+  <section class="page-shell not-found" aria-labelledby="not-found-title">
+    <div class="not-found__message">
+      <h1 id="not-found-title">Page not found.</h1>
+      <p>
+        There’s nothing at this address. The link may be out of date, or the
+        address may have a typo.
+      </p>
+      <a class="not-found__home" href="/">
+        Back to home
+      </a>
+      <p class="not-found__alternatives">
+        Or explore my <a href="/publications/">publications</a> and{' '}
+        <a href="/writing/">writing</a>.
+      </p>
+    </div>
+    <figure>
+      <img
+        src="/img/http-cat-404.jpg"
+        width="750"
+        height="600"
+        alt="A cat hiding beneath papers and a patterned bag, with the caption '404 Not Found'."
+      />
+      <figcaption>
+        Picture from <a href="https://http.cat/status/404">http.cat</a>.
+      </figcaption>
+    </figure>
+  </section>
+</PageLayout>
+
+<style>
+  .not-found {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: clamp(2.5rem, 6vw, 6rem);
+    padding-bottom: 1rem;
+  }
+
+  h1 {
+    margin: 0 0 1.5rem;
+  }
+
+  .not-found__message > p {
+    max-width: 42ch;
+    margin: 0;
+    font-size: var(--font-size-reading);
+  }
+
+  .not-found__home {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    margin-top: 1.75rem;
+    font-size: var(--font-size-reading);
+    font-weight: 600;
+  }
+
+  .not-found__message > .not-found__alternatives {
+    margin-top: 0.75rem;
+    font-size: 1rem;
+  }
+
+  figure {
+    width: 100%;
+    max-width: 37.5rem;
+    margin: 0;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  figcaption {
+    margin-top: 0.75rem;
+    color: var(--color-muted);
+    font-size: var(--font-size-meta);
+  }
+
+  @media (max-width: 48rem) {
+    .not-found {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
