@@ -1,0 +1,59 @@
+---
+import TableOfContents from '../components/TableOfContents.astro';
+import { contentsHeadings, type ArticleHeading } from '../lib/content';
+
+import PageLayout from './PageLayout.astro';
+
+interface Props {
+  title: string;
+  titleId?: string;
+  description: string;
+  image?: string;
+  imageAlt?: string;
+  eyebrow: { label: string; href: string };
+  date?: Date;
+  headings?: ArticleHeading[];
+  hasMath?: boolean;
+}
+
+const {
+  title,
+  titleId,
+  eyebrow,
+  date,
+  headings = [],
+  hasMath = false,
+  ...page
+} = Astro.props;
+const toc = contentsHeadings(headings);
+const formattedDate = date
+  ? new Intl.DateTimeFormat('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      timeZone: 'UTC',
+    }).format(date)
+  : undefined;
+---
+
+<PageLayout title={title} hasMath={hasMath} {...page}>
+  <article class="prose page-shell article">
+    <header class="page-heading">
+      <p class="eyebrow">
+        <a href={eyebrow.href}>{eyebrow.label}</a>
+      </p>
+      <slot name="title">
+        <h1 id={titleId}>{title}</h1>
+      </slot>
+      {date && <time datetime={date.toISOString()}>{formattedDate}</time>}
+    </header>
+    <div
+      class:list={['article-layout', toc.length > 0 && 'article-layout--toc']}
+    >
+      <TableOfContents headings={toc} />
+      <div class="article-body">
+        <slot />
+      </div>
+    </div>
+  </article>
+</PageLayout>

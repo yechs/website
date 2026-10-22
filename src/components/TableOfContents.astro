@@ -1,0 +1,39 @@
+---
+import type { ArticleHeading } from '../lib/content';
+
+interface Props {
+  headings: ArticleHeading[];
+}
+
+const { headings } = Astro.props;
+---
+
+{headings.length > 0 && (
+  <aside class="table-of-contents" aria-label="On this page">
+    <details open>
+      <summary>On this page</summary>
+      <ol>
+        {headings.map((heading) => (
+          <li class:list={[heading.depth === 3 && 'table-of-contents__nested']}>
+            <a href={`#${heading.slug}`}>{heading.text}</a>
+          </li>
+        ))}
+      </ol>
+    </details>
+  </aside>
+)}
+
+<script>
+  // Open on wide screens, collapsed on narrow ones. Without JavaScript the
+  // list stays open at every size.
+  const narrow = window.matchMedia('(max-width: 54rem)');
+  const sync = () => {
+    document
+      .querySelectorAll<HTMLDetailsElement>('.table-of-contents details')
+      .forEach((details) => {
+        details.open = !narrow.matches;
+      });
+  };
+  sync();
+  narrow.addEventListener('change', sync);
+</script>

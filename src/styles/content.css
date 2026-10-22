@@ -21,7 +21,7 @@ pre {
   padding: 1rem;
   border: 1px solid var(--color-border);
   border-radius: 0.35rem;
-  font-size: 0.88rem;
+  font-size: var(--font-size-code);
 }
 
 .site-header {
@@ -58,7 +58,6 @@ pre {
 body:not(.is-home) .site-footer a {
   display: inline-flex;
   align-items: center;
-  min-width: 2.75rem;
   min-height: 2.75rem;
   max-width: 100%;
 }
@@ -75,7 +74,7 @@ body:not(.is-home) .site-footer a {
 .site-header nav a {
   font-family: var(--font-meta);
   color: var(--color-muted);
-  font-size: 0.92rem;
+  font-size: var(--font-size-meta);
   text-decoration: none;
 }
 
@@ -91,20 +90,21 @@ body:not(.is-home) .site-footer a {
   text-underline-offset: 0.45rem;
 }
 
-.page-shell,
-.home-section,
-.profile {
+.page-shell {
   width: min(calc(100% - 2 * var(--site-gutter)), var(--content-wide));
   margin-inline: auto;
-}
-
-.page-shell {
   padding-top: clamp(3rem, 8vw, 5.5rem);
 }
 
+/* Titles may use the full shell; running text under them keeps the reading
+   measure. */
 .page-heading {
-  max-width: var(--measure-reading);
+  max-width: var(--content-wide);
   margin-bottom: 3.5rem;
+}
+
+.page-heading > p {
+  max-width: var(--measure-reading);
 }
 
 .page-heading h1 {
@@ -120,8 +120,18 @@ body:not(.is-home) .site-footer a {
   font-size: var(--font-size-reading);
 }
 
+/* The gallery's lead matches the other pages; its copyright note is quieter. */
+.gallery-intro > p:not(.eyebrow) {
+  color: var(--color-muted);
+}
+
+.gallery-intro > p:last-child {
+  font-size: var(--font-size-record);
+}
+
 .page-heading time {
   font-family: var(--font-meta);
+  font-size: var(--font-size-reading);
   font-variant-numeric: tabular-nums;
 }
 
@@ -129,140 +139,27 @@ body:not(.is-home) .site-footer a {
   font-family: var(--font-meta);
   margin: 0 0 0.45rem;
   color: var(--color-accent);
-  font-size: 0.76rem;
+  font-size: var(--font-size-label);
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
-.profile {
-  display: grid;
-  grid-template-columns: 11rem minmax(0, 1fr);
-  grid-template-areas:
-    'portrait identity'
-    'portrait summary';
-  column-gap: clamp(2rem, 6vw, 4.5rem);
-  row-gap: 1.25rem;
-  align-items: start;
-  padding-top: clamp(3.5rem, 9vw, 7rem);
-}
-
-.profile__identity {
-  grid-area: identity;
-}
-
-.profile__identity h1 {
-  margin: 0 0 0.6rem;
-}
-
-.profile__role {
-  font-family: var(--font-meta);
-  margin: 0;
-  color: var(--color-muted);
-  font-size: 1.08rem;
-  line-height: 1.5;
-}
-
-.profile__portrait {
-  grid-area: portrait;
-  width: 11rem;
-  height: 11rem;
-  align-self: start;
-  border-radius: 0.35rem;
-  object-fit: cover;
-  box-shadow: 0 0.8rem 2.25rem rgb(31 39 47 / 12%);
-}
-
-.profile__summary {
-  grid-area: summary;
-  max-width: 44rem;
-}
-
-.profile__summary > p:first-child {
-  margin-top: 0;
-  font-size: 1.08rem;
-}
-
-.external-links {
-  font-family: var(--font-meta);
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.25rem 0.65rem;
-}
-
-.external-links {
-  margin-top: 1.25rem;
-}
-
-.external-links a:not(:last-child)::after {
-  content: '·';
-  margin-left: 0.65rem;
-  color: var(--color-border);
-  text-decoration: none;
-}
-
-.home-section {
-  padding-top: var(--space-major);
-}
-
-.home-section__heading {
-  max-width: var(--measure-reading);
-  margin-bottom: 2rem;
-}
-
-.home-section__heading h2 {
-  margin: 0;
-}
-
-.home-section__heading p {
-  margin-bottom: 0;
-  color: var(--color-muted);
-}
-
-.theme-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.75rem;
-  margin-bottom: 3rem;
-}
-
-.theme-grid article {
-  border-top: 0.18rem solid var(--color-accent);
-  padding-top: 1rem;
-}
-
-.theme-grid h3,
-.research-project h3 {
-  margin: 0 0 0.5rem;
-}
-
-.theme-grid p,
-.research-project p {
-  margin: 0;
-}
-
-.research-projects {
-  display: grid;
-  gap: 1.5rem;
-  max-width: var(--measure-reading);
-}
-
-.research-project {
-  padding-left: 1.25rem;
-  border-left: 1px solid var(--color-border);
-}
-
-.research-project .resource-links {
-  margin-top: 0.45rem;
-}
-
 .publication-list {
   display: grid;
-  gap: 2.25rem;
+}
+
+/* Entries are separated by space alone; the serif title marks each start. */
+.publication {
+  max-width: var(--measure-record);
+}
+
+.publication + .publication {
+  margin-top: var(--space-sub);
 }
 
 .publication h3 {
-  margin: 0 0 0.45rem;
+  margin: 0 0 0.5rem;
   font-size: 1.22rem;
   line-height: 1.35;
   text-wrap: pretty;
@@ -272,7 +169,7 @@ body:not(.is-home) .site-footer a {
 .publication__venue,
 .publication .resource-links {
   margin: 0.25rem 0;
-  max-width: 54rem;
+  max-width: var(--measure-record);
 }
 
 .publication__venue {
@@ -292,15 +189,21 @@ body:not(.is-home) .site-footer a {
 }
 
 .publication__annotation {
-  max-width: 70ch;
+  max-width: var(--measure-reading);
   margin-top: 1rem;
   font-size: var(--font-size-reading);
 }
 
+/* The first annotation starts a new block after the citation. */
+.publication .resource-links + .publication__annotation {
+  margin-top: 1.25rem;
+}
+
 .publication__annotation h4 {
   margin: 0 0 0.2rem;
+  color: var(--color-muted);
   font-family: var(--font-meta);
-  font-size: 0.78rem;
+  font-size: var(--font-size-label);
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -310,22 +213,23 @@ body:not(.is-home) .site-footer a {
 }
 
 .year-group + .year-group {
-  margin-top: 4rem;
+  margin-top: var(--space-major);
 }
 
 .year-group > h2 {
-  margin: 0 0 1.8rem;
-  padding-bottom: 0.55rem;
+  margin: 0 0 var(--space-heading);
+  padding-bottom: 0.5rem;
   border-bottom: 1px solid var(--color-border);
-  font-family: var(--font-meta);
   font-size: 1rem;
+  font-family: var(--font-meta);
   letter-spacing: 0.08em;
+  font-variant-numeric: tabular-nums;
 }
 
 .writing-list {
   display: grid;
-  gap: 1.3rem;
-  max-width: var(--measure-reading);
+  gap: var(--space-record);
+  max-width: var(--measure-record);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -334,6 +238,7 @@ body:not(.is-home) .site-footer a {
 .writing-list li {
   display: grid;
   grid-template-columns: 7rem minmax(0, 1fr);
+  align-items: baseline;
   gap: 1rem;
 }
 
@@ -351,57 +256,17 @@ body:not(.is-home) .site-footer a {
 }
 
 .writing-list p {
+  max-width: var(--measure-reading);
   margin: 0.3rem 0 0;
   color: var(--color-muted);
   font-size: var(--font-size-record);
-}
-
-.service-list {
-  display: grid;
-  gap: 0.85rem;
-  max-width: var(--measure-reading);
-  margin: 0;
-}
-
-.service-list > div {
-  display: grid;
-  grid-template-columns: 7rem minmax(0, 1fr);
-  gap: 1rem;
-}
-
-.service-list dt {
-  font-family: var(--font-meta);
-  color: var(--color-muted);
-  font-size: 0.86rem;
-  font-variant-numeric: tabular-nums;
-}
-
-.service-list dd {
-  margin: 0;
-}
-
-.beyond-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(2rem, 5vw, 4rem);
-  max-width: 54rem;
-}
-
-.beyond-grid h3 {
-  margin-top: 0;
-}
-
-.section-action {
-  display: inline-block;
-  margin-top: 1.75rem;
-  font-weight: 600;
 }
 
 .prose {
   --article-section-gap: 3rem;
   --article-subsection-gap: 2rem;
   --article-heading-gap: 1rem;
-  max-width: var(--measure-reading);
+  max-width: var(--content-wide);
   font-size: var(--font-size-reading);
 }
 
@@ -419,13 +284,12 @@ body:not(.is-home) .site-footer a {
   margin-top: var(--article-heading-gap);
 }
 
-.prose > .page-heading + :where(h2, h3, h4),
-.kb-article > :where(h2, h3, h4):first-child {
+.article-body > :where(h2, h3, h4):first-child {
   margin-top: 0;
 }
 
 .prose :where(p, li) {
-  line-height: 1.75;
+  line-height: var(--leading-reading);
 }
 
 .prose blockquote {
@@ -440,24 +304,51 @@ body:not(.is-home) .site-footer a {
   margin-block: 1.5rem;
 }
 
-.writing-entry,
-.writing-entry .page-heading {
-  max-width: var(--content-wide);
+/* Articles (writing and technical notes) share one layout: a full-width
+   title, then the body beside a contents rail. The body keeps ordinary block
+   flow so paragraph margins collapse. Running text uses a narrower reading
+   measure at the article size (about 83 characters per line). Code blocks
+   line up with the text and wrap; blocks marked `nowrap` scroll sideways
+   instead. The contents rail sits right beside the text column. */
+.article {
+  --measure-reading: 72ch;
 }
 
-.writing-entry > :where(p, ul, ol, blockquote, pre, .admonition) {
-  max-width: 70ch;
+.article-layout {
+  display: grid;
+  grid-template-columns: minmax(0, var(--measure-reading));
 }
 
-.writing-entry > pre {
-  /* Measure the outer block in the same typeface as the surrounding prose. */
+.article-layout--toc {
+  grid-template-columns: minmax(0, var(--measure-reading)) 13rem;
+  column-gap: 3rem;
+}
+
+.article-body {
+  min-width: 0;
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.article-layout .table-of-contents {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.article-body > :where(p, ul, ol, blockquote, pre, .admonition) {
+  max-width: var(--measure-reading);
+}
+
+.article-body > pre {
+  /* Measure the box in the prose typeface so it matches the text column. */
   font-family: var(--font-text);
   font-size: inherit;
 }
 
-.writing-entry > pre code {
+.article-body > pre code {
   display: block;
-  font-size: 0.88rem;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-code);
 }
 
 .admonition {
@@ -472,25 +363,7 @@ body:not(.is-home) .site-footer a {
   margin-top: 0;
 }
 
-.kb-layout {
-  display: grid;
-  grid-template-columns: minmax(0, var(--measure-reading)) 13rem;
-  gap: 2rem 4rem;
-}
-
-.kb-heading {
-  grid-column: 1;
-  margin-bottom: 0;
-}
-
-.kb-article {
-  min-width: 0;
-  grid-column: 1;
-}
-
 .table-of-contents {
-  grid-column: 2;
-  grid-row: 1 / span 2;
   font-family: var(--font-meta);
   position: sticky;
   top: 1.5rem;
@@ -499,15 +372,22 @@ body:not(.is-home) .site-footer a {
   overflow-y: auto;
   border-left: 1px solid var(--color-border);
   padding-left: 1rem;
-  font-size: 0.78rem;
+  font-size: var(--font-size-meta);
 }
 
-.table-of-contents h2 {
-  margin: 0 0 0.75rem;
+.table-of-contents summary {
+  margin-bottom: 0.75rem;
   font-family: var(--font-meta);
-  font-size: 0.78rem;
+  font-size: var(--font-size-label);
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.07em;
+  list-style: none;
+  cursor: default;
+}
+
+.table-of-contents summary::-webkit-details-marker {
+  display: none;
 }
 
 .table-of-contents ol {
@@ -530,23 +410,18 @@ body:not(.is-home) .site-footer a {
 .archive-groups {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 2.5rem 4rem;
+  gap: var(--space-sub) 4rem;
   margin-top: 3rem;
 }
 
 .archive-groups h2 {
-  margin: 0 0 0.75rem;
-  font-family: var(--font-meta);
-  font-size: 1.3rem;
+  margin: 0 0 var(--space-sub-heading);
+  font-size: 1.5rem;
 }
 
 .archive-groups ul {
   margin: 0;
   padding-left: 1.15rem;
-}
-
-.gallery-intro {
-  max-width: var(--measure-reading);
 }
 
 .gallery-grid {
@@ -587,7 +462,9 @@ body:not(.is-home) .site-footer a {
   max-width: none;
   padding: 0;
   border: 0;
-  color: #f8f8f5;
+  --lightbox-ink: #f8f8f5;
+  --lightbox-muted: #c9c9c4;
+  color: var(--lightbox-ink);
   background: #111;
 }
 
@@ -622,8 +499,8 @@ body:not(.is-home) .site-footer a {
 .lightbox__caption p {
   margin-top: 0.35rem;
   white-space: pre-line;
-  color: #c9c9c4;
-  font-size: 0.85rem;
+  color: var(--lightbox-muted);
+  font-size: var(--font-size-meta);
 }
 
 .lightbox__caption h2 {
@@ -662,11 +539,60 @@ body:not(.is-home) .site-footer a {
   right: 0.5rem;
 }
 
-@media (max-width: 48rem) {
+/* Breakpoints match the homepage: 54rem stacks multi-column grids, 42rem is
+   the phone layout. */
+@media (max-width: 54rem) {
+  .archive-groups,
+  .article-layout--toc {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .article-layout .table-of-contents {
+    position: static;
+    grid-column: 1;
+    grid-row: auto;
+    max-height: none;
+    margin-bottom: 2rem;
+  }
+
+  .article-body {
+    grid-row: auto;
+  }
+
+  /* Collapsible on narrow screens: a full-size target with a visible marker. */
+  .table-of-contents summary {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    margin-bottom: 0;
+    cursor: pointer;
+  }
+
+  .table-of-contents summary::before {
+    content: '';
+    width: 0.45rem;
+    height: 0.45rem;
+    border-right: 0.12rem solid currentColor;
+    border-bottom: 0.12rem solid currentColor;
+    transform: rotate(-45deg);
+  }
+
+  .table-of-contents details[open] summary::before {
+    transform: rotate(45deg);
+  }
+
+  .table-of-contents details[open] summary {
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media (max-width: 42rem) {
   .prose {
     --article-section-gap: 2.5rem;
     --article-subsection-gap: 1.75rem;
   }
+
   .site-header__inner {
     align-items: flex-start;
     flex-direction: column;
@@ -678,48 +604,21 @@ body:not(.is-home) .site-footer a {
     gap: 0.5rem 1.1rem;
   }
 
-  .profile {
+  .writing-list li {
     grid-template-columns: 1fr;
-    grid-template-areas:
-      'identity'
-      'portrait'
-      'summary';
-  }
-
-  .profile__portrait {
-    width: 9.5rem;
-    height: 9.5rem;
-  }
-
-  .theme-grid,
-  .beyond-grid,
-  .archive-groups,
-  .kb-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .table-of-contents {
-    position: static;
-    grid-column: 1;
-    grid-row: auto;
-    max-height: none;
-  }
-}
-
-@media (max-width: 34rem) {
-  .site-footer__inner,
-  .writing-list li,
-  .service-list > div {
-    grid-template-columns: 1fr;
-  }
-
-  .site-footer__inner {
-    display: grid;
-  }
-
-  .writing-list li,
-  .service-list > div {
     gap: 0.15rem;
+  }
+
+  .publication h3 {
+    font-size: 1.22rem;
+  }
+
+  .writing-list a {
+    font-size: var(--font-size-reading);
+  }
+
+  .year-group > h2 {
+    font-size: 1rem;
   }
 
   .gallery-grid {
@@ -730,8 +629,7 @@ body:not(.is-home) .site-footer a {
 @media print {
   .site-header,
   .site-footer,
-  .table-of-contents,
-  .external-links {
+  .table-of-contents {
     display: none;
   }
 

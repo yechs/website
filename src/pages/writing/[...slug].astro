@@ -17,7 +17,7 @@ interface Props {
 }
 
 const { entry } = Astro.props;
-const { Content } = await render(entry);
+const { Content, headings } = await render(entry);
 const description =
   entry.data.description || `An article by Ye Shu: ${entry.data.title}.`;
 ---
@@ -29,6 +29,7 @@ const description =
   image={entry.data.image}
   imageAlt={entry.data.imageAlt}
   date={writingDate(entry)}
+  headings={headings}
   hasMath={entry.rendered?.html.includes('class="katex') ?? false}
 >
   <Content />

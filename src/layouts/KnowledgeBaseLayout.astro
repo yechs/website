@@ -1,24 +1,17 @@
 ---
-import PageLayout from './PageLayout.astro';
+import type { ArticleHeading } from '../lib/content';
 
-interface Heading {
-  depth: number;
-  slug: string;
-  text: string;
-}
+import ArticleLayout from './ArticleLayout.astro';
 
 interface Props {
   title: string;
-  headings: Heading[];
+  headings: ArticleHeading[];
   showTitle: boolean;
   hasMath?: boolean;
 }
 
 const { title, headings, showTitle, hasMath = false } = Astro.props;
-const toc = headings.filter(
-  (heading) => heading.depth === 2 || heading.depth === 3,
-);
-// Keep the authored title (including its anchor) before navigation without
+// Keep the authored title (including its anchor) in the header without
 // duplicating it. Content is trusted, repository-owned rendered Markdown.
 const content = await Astro.slots.render('default');
 const authoredTitle = !showTitle
@@ -27,35 +20,13 @@ const authoredTitle = !showTitle
 const body = authoredTitle ? content.replace(authoredTitle[0], '') : content;
 ---
 
-<PageLayout
+<ArticleLayout
   title={title}
   description={`${title}, an archived technical note by Ye Shu.`}
+  eyebrow={{ label: 'Technical Notes Archive', href: '/kb/' }}
+  headings={headings}
   hasMath={hasMath}
 >
-  <div class="kb-layout page-shell">
-    <header class="page-heading kb-heading">
-      <p class="eyebrow">
-        <a href="/kb/">Technical Notes Archive</a>
-      </p>
-      {showTitle && <h1>{title}</h1>}
-      {authoredTitle && <Fragment set:html={authoredTitle[0]} />}
-    </header>
-    {toc.length > 1 && (
-      <aside class="table-of-contents" aria-label="On this page">
-        <h2>On this page</h2>
-        <ol>
-          {toc.map((heading) => (
-            <li
-              class:list={[heading.depth === 3 && 'table-of-contents__nested']}
-            >
-              <a href={`#${heading.slug}`}>{heading.text}</a>
-            </li>
-          ))}
-        </ol>
-      </aside>
-    )}
-    <article class="prose kb-article">
-      <Fragment set:html={body} />
-    </article>
-  </div>
-</PageLayout>
+  {authoredTitle && <Fragment slot="title" set:html={authoredTitle[0]} />}
+  <Fragment set:html={body} />
+</ArticleLayout>

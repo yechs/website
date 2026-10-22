@@ -74,3 +74,19 @@ export function kbCategory(entry: KnowledgeBaseEntry): string {
 
   return labels[category] || category.replace(/[-_]/g, ' ');
 }
+
+export interface ArticleHeading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+// Headings worth listing in an article's "On this page" contents.
+export function contentsHeadings(
+  headings: readonly ArticleHeading[],
+): ArticleHeading[] {
+  const toc = headings.filter(
+    (heading) => heading.depth === 2 || heading.depth === 3,
+  );
+  return toc.length > 1 ? toc : [];
+}
