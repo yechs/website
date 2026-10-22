@@ -65,10 +65,12 @@ npm run deploy             # Build and deploy
 ```
 
 The GitHub Actions deployment workflow runs after quality checks on pushes to
-`main`. Configure repository secrets `CLOUDFLARE_API_TOKEN` (with Workers Scripts
-Edit permission for the target account) and `CLOUDFLARE_ACCOUNT_ID` before using
-it. Do not also enable Workers Builds for the same branch unless you disable
-the GitHub deployment workflow.
+`main`. Production deployment, PR previews, and preview cleanup use the GitHub
+environment `Cloudflare Worker API Token`. Configure its environment secrets
+`CLOUDFLARE_API_TOKEN` (with Workers Scripts Edit permission for the target
+account) and `CLOUDFLARE_ACCOUNT_ID` before using it. Any protection rules on
+that environment apply to all three jobs. Do not also enable Workers Builds
+for the same branch unless you disable the GitHub deployment workflow.
 
 Pull requests from this repository also deploy a Cloudflare Preview named
 `pr-<number>` after quality checks. The workflow updates one PR comment with the

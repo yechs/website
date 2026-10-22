@@ -20,6 +20,7 @@ jobs:
     name: Deploy to Cloudflare Workers
     needs: quality
     runs-on: ubuntu-latest
+    environment: Cloudflare Worker API Token
     steps:
       - name: Check out repository
         uses: actions/checkout@v7.0.1
