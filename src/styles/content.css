@@ -11,7 +11,7 @@ pre {
 code:not(pre code) {
   padding: 0.1em 0.28em;
   border-radius: 0.2rem;
-  background: #eceeea;
+  background: var(--color-tint);
   color: var(--color-ink);
   font-size: 0.9em;
 }
@@ -103,7 +103,7 @@ body:not(.is-home) .site-footer a {
 }
 
 .page-heading {
-  max-width: var(--content-prose);
+  max-width: var(--measure-reading);
   margin-bottom: 3.5rem;
 }
 
@@ -202,11 +202,11 @@ body:not(.is-home) .site-footer a {
 }
 
 .home-section {
-  padding-top: var(--space-section);
+  padding-top: var(--space-major);
 }
 
 .home-section__heading {
-  max-width: var(--content-prose);
+  max-width: var(--measure-reading);
   margin-bottom: 2rem;
 }
 
@@ -244,7 +244,7 @@ body:not(.is-home) .site-footer a {
 .research-projects {
   display: grid;
   gap: 1.5rem;
-  max-width: var(--content-prose);
+  max-width: var(--measure-reading);
 }
 
 .research-project {
@@ -325,7 +325,7 @@ body:not(.is-home) .site-footer a {
 .writing-list {
   display: grid;
   gap: 1.3rem;
-  max-width: var(--content-prose);
+  max-width: var(--measure-reading);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -359,7 +359,7 @@ body:not(.is-home) .site-footer a {
 .service-list {
   display: grid;
   gap: 0.85rem;
-  max-width: var(--content-prose);
+  max-width: var(--measure-reading);
   margin: 0;
 }
 
@@ -401,7 +401,7 @@ body:not(.is-home) .site-footer a {
   --article-section-gap: 3rem;
   --article-subsection-gap: 2rem;
   --article-heading-gap: 1rem;
-  max-width: var(--content-prose);
+  max-width: var(--measure-reading);
   font-size: var(--font-size-reading);
 }
 
@@ -464,7 +464,7 @@ body:not(.is-home) .site-footer a {
   margin-block: 1.5rem;
   padding: 1rem 1.15rem;
   border-left: 0.25rem solid var(--color-accent);
-  background: #f2eff2;
+  background: var(--color-tint);
 }
 
 .admonition__title,
@@ -474,7 +474,7 @@ body:not(.is-home) .site-footer a {
 
 .kb-layout {
   display: grid;
-  grid-template-columns: minmax(0, var(--content-prose)) 13rem;
+  grid-template-columns: minmax(0, var(--measure-reading)) 13rem;
   gap: 2rem 4rem;
 }
 
@@ -523,7 +523,7 @@ body:not(.is-home) .site-footer a {
 }
 
 .archive-disclaimer {
-  max-width: var(--content-prose);
+  max-width: var(--measure-reading);
   color: var(--color-muted);
 }
 
@@ -546,7 +546,7 @@ body:not(.is-home) .site-footer a {
 }
 
 .gallery-intro {
-  max-width: var(--content-prose);
+  max-width: var(--measure-reading);
 }
 
 .gallery-grid {
@@ -572,7 +572,7 @@ body:not(.is-home) .site-footer a {
 .gallery-grid img {
   width: 100%;
   height: auto;
-  background: #ecece8;
+  background: var(--color-tint);
 }
 
 .gallery-grid figcaption {

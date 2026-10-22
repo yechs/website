@@ -16,11 +16,22 @@
   --color-selection: #dbe7f4;
   --content-wide: 85.25rem;
   --site-gutter: clamp(1.25rem, 4.65vw, 4.375rem);
-  --content-prose: 48rem;
+  --measure-reading: 70ch;
+  --measure-record: 54rem;
   --font-size-reading: 1.125rem;
+  --font-size-article: 1.25rem;
   --font-size-record: 1rem;
   --font-size-meta: 0.9rem;
-  --space-section: clamp(3.75rem, 8vw, 6.5rem);
+  --font-size-label: 0.76rem;
+  --font-size-code: 0.88rem;
+  --leading-reading: 1.65;
+  --color-tint: #eef1f4;
+  --space-major: 4.5rem;
+  --space-heading: 1.5rem;
+  --space-sub: 2.25rem;
+  --space-sub-heading: 0.75rem;
+  --space-paragraph: 1rem;
+  --space-record: 1.25rem;
   font-family: var(--font-text);
   font-synthesis: none;
   line-height: 1.65;
@@ -123,16 +134,18 @@ dd {
 }
 
 .site-footer {
-  margin-top: var(--space-section);
+  margin-top: var(--space-major);
   padding-block: 2rem;
   border-top: 1px solid var(--color-border);
   color: var(--color-muted);
-  font-size: 0.86rem;
+  font-size: var(--font-size-meta);
 }
 
 .site-footer__inner {
   display: flex;
   justify-content: space-between;
+  /* Align the copyright and the links by their text, not their box tops. */
+  align-items: baseline;
   gap: 1rem 2rem;
 }
 
@@ -154,7 +167,22 @@ dd {
   gap: 0.25rem 0.65rem;
 }
 
-@media (max-width: 34rem) {
+@media (max-width: 68rem) {
+  :root {
+    --space-major: 3.75rem;
+    --space-heading: 1.25rem;
+    --space-sub: 2rem;
+    --space-paragraph: 0.875rem;
+  }
+}
+
+@media (max-width: 42rem) {
+  :root {
+    --font-size-article: var(--font-size-reading);
+    --space-major: 3rem;
+    --space-paragraph: 0.75rem;
+  }
+
   .site-footer__inner {
     display: grid;
     grid-template-columns: 1fr;

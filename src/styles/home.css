@@ -8,19 +8,19 @@
   --content-wide: 85.25rem;
   --home-record-rail: 9.5rem;
   --home-record-gap: 2rem;
-  --home-reading-measure: 70ch;
-  --home-section-gap: 4.5rem;
-  --home-section-heading-gap: 1.5rem;
-  --home-subsection-gap: 2.25rem;
-  --home-subsection-heading-gap: 0.75rem;
-  --home-paragraph-gap: 1rem;
+  --home-reading-measure: var(--measure-reading);
+  --home-section-gap: var(--space-major);
+  --home-section-heading-gap: var(--space-heading);
+  --home-subsection-gap: var(--space-sub);
+  --home-subsection-heading-gap: var(--space-sub-heading);
+  --home-paragraph-gap: var(--space-paragraph);
   --home-record-group-gap: 1.5rem;
   min-width: 0;
   --home-type-prose: var(--font-size-reading);
   --home-type-record: var(--font-size-record);
   --home-type-meta: var(--font-size-meta);
   font-size: var(--home-type-prose);
-  line-height: 1.6;
+  line-height: var(--leading-reading);
 }
 
 .home-shell {
@@ -174,7 +174,7 @@
 
 .home-research__threads p {
   margin: 0;
-  max-width: 75ch;
+  max-width: var(--measure-reading);
 }
 
 .home-research__threads p + p {
@@ -597,7 +597,7 @@
   max-width: var(--home-reading-measure);
   margin: 0;
   font-size: var(--home-type-prose);
-  line-height: 1.6;
+  line-height: var(--leading-reading);
 }
 
 .home-closing__grid {
@@ -615,7 +615,7 @@
 
 .home-closing__interests > p {
   font-size: var(--home-type-prose);
-  line-height: 1.6;
+  line-height: var(--leading-reading);
 }
 
 .home-closing__interests > p + p {
@@ -657,7 +657,6 @@
 
 .is-home .site-footer {
   margin-top: 3rem;
-  font-size: var(--home-type-record);
 }
 
 .is-home a {
@@ -681,7 +680,6 @@
   display: inline-flex;
   align-items: center;
   min-height: 2.75rem;
-  min-width: 2.75rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -735,13 +733,6 @@
 }
 
 @media (max-width: 68rem) {
-  .is-home {
-    --home-section-gap: 3.75rem;
-    --home-section-heading-gap: 1.25rem;
-    --home-subsection-gap: 2rem;
-    --home-paragraph-gap: 0.875rem;
-  }
-
   .home-identity {
     grid-template-columns: min(9rem, 25%) minmax(0, 1fr) min(9.5rem, 25%);
     column-gap: 2rem;
@@ -820,8 +811,6 @@
   }
 
   .is-home {
-    --home-section-gap: 3rem;
-    --home-paragraph-gap: 0.75rem;
     font-size: var(--home-type-prose);
   }
 
@@ -1008,10 +997,6 @@
   .home-writing-list li {
     grid-template-columns: minmax(0, 1fr);
     gap: 0;
-  }
-
-  .is-home .site-footer__inner {
-    display: grid;
   }
 
   .is-home .site-footer nav {
