@@ -20,6 +20,8 @@
 /blog/malloc_chunk /writing/malloc_chunk/ 301
 /blog/malloc_chunk/ /writing/malloc_chunk/ 301
 
-# Strip the former locale prefix from any path.
+# Strip former locale prefixes from any path.
 /zh-CN / 301
 /zh-CN/* /:splat 301
+/zh-Hans / 301
+/zh-Hans/* /:splat 301
